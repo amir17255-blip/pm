@@ -16,98 +16,59 @@
   --bg:#0d1117; --bg2:#161b22; --bg3:#1f2630; --bg4:#262d38;
   --border:#2d333b; --text:#e6edf3; --muted:#8b949e;
   --primary:#58a6ff; --success:#3fb950; --warning:#d29922;
-  --danger:#f85149; --purple:#bc8cff; --cyan:#39c5cf; --pink:#f778ba;
+  --danger:#f85149; --purple:#bc8cff; --cyan:#39c5cf;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif;}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-
-/* ===== LAYOUT ===== */
 .app{display:flex;min-height:100vh;}
 
 /* SIDEBAR */
-.sidebar{
-  width:230px;background:var(--bg2);border-left:1px solid var(--border);
-  display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;
-  z-index:100;transition:transform .3s;
-}
-.sidebar-header{
-  padding:20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-}
+.sidebar{width:230px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:100;transition:transform .3s;}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
 .sidebar-header i{font-size:22px;color:var(--primary);}
 .sidebar-header h2{font-size:15px;font-weight:700;}
 .sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto;}
-.nav-item{
-  display:flex;align-items:center;gap:12px;
-  padding:11px 14px;border-radius:10px;
-  color:var(--muted);cursor:pointer;
-  font-size:13px;transition:.2s;margin-bottom:3px;
-}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;margin-bottom:3px;}
 .nav-item:hover{background:var(--bg3);color:var(--text);}
 .nav-item.active{background:var(--primary);color:#0d1117;font-weight:600;}
 .nav-item i{width:18px;text-align:center;font-size:14px;}
 
 /* MAIN */
-.main{
-  flex:1;margin-right:230px;padding:20px;
-  min-height:100vh;
-}
+.main{flex:1;margin-right:230px;padding:20px;min-height:100vh;}
 
 /* PAGE */
 .page{display:none;animation:fadeIn .3s;}
 .page.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-.page-header{
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;margin-bottom:20px;
-}
+.page-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
 .page-header h1{font-size:20px;display:flex;align-items:center;gap:10px;}
 .page-header h1 i{color:var(--primary);}
 .page-header .actions{display:flex;gap:8px;flex-wrap:wrap;}
 
 /* BUTTONS */
-.btn{
-  padding:9px 16px;border-radius:9px;border:1px solid var(--border);
-  background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;
-  display:inline-flex;align-items:center;gap:7px;transition:.2s;
-}
+.btn{padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:7px;transition:.2s;font-family:inherit;}
 .btn:hover{background:var(--bg4);border-color:var(--primary);}
 .btn.primary{background:var(--primary);color:#0d1117;border:none;font-weight:600;}
 .btn.primary:hover{background:#4493f8;}
 .btn.success{background:var(--success);color:#0d1117;border:none;}
 .btn.danger{background:var(--danger);color:#fff;border:none;}
-.btn.sm{padding:6px 10px;font-size:11px;}
+.btn.sm{padding:5px 9px;font-size:11px;border-radius:7px;}
 
 /* CARD */
-.card{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:14px;padding:18px;margin-bottom:16px;
-}
-.card h3{
-  font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;
-}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;}
+.card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
 .card h3 i{color:var(--primary);}
 
 /* TIME FILTER */
-.time-filter{
-  display:flex;gap:6px;flex-wrap:wrap;
-  background:var(--bg2);padding:6px;border-radius:11px;
-  border:1px solid var(--border);width:fit-content;margin-bottom:16px;
-}
-.time-filter button{
-  padding:8px 18px;border-radius:8px;border:none;background:transparent;
-  color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;
-}
+.time-filter{display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);padding:6px;border-radius:11px;border:1px solid var(--border);width:fit-content;margin-bottom:16px;}
+.time-filter button{padding:8px 18px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;font-family:inherit;}
 .time-filter button:hover{color:var(--text);background:var(--bg3);}
 .time-filter button.active{background:var(--primary);color:#0d1117;font-weight:600;}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px;}
-.kpi{
-  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
-  padding:18px;position:relative;overflow:hidden;transition:.25s;
-}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;}
 .kpi:hover{transform:translateY(-3px);border-color:var(--primary);}
 .kpi::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--primary);}
 .kpi.green::before{background:var(--success);}
@@ -115,11 +76,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .kpi.red::before{background:var(--danger);}
 .kpi.purple::before{background:var(--purple);}
 .kpi.cyan::before{background:var(--cyan);}
-.kpi .icon{
-  width:38px;height:38px;border-radius:10px;display:flex;align-items:center;
-  justify-content:center;background:rgba(88,166,255,.15);color:var(--primary);
-  font-size:16px;margin-bottom:10px;
-}
+.kpi .icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(88,166,255,.15);color:var(--primary);font-size:16px;margin-bottom:10px;}
 .kpi.green .icon{background:rgba(63,185,80,.15);color:var(--success);}
 .kpi.orange .icon{background:rgba(210,153,34,.15);color:var(--warning);}
 .kpi.red .icon{background:rgba(248,81,73,.15);color:var(--danger);}
@@ -135,39 +92,24 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .chart-box{position:relative;height:260px;}
 
 /* KANBAN */
-.kanban{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
-  min-height:400px;
-}
-.kanban-col{
-  background:var(--bg2);border:1px solid var(--border);
-  border-radius:14px;padding:14px;display:flex;flex-direction:column;
-}
-.kanban-col-header{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);
-}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;min-height:400px;}
+.kanban-col{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;}
+.kanban-col-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 .kanban-col-header h4{font-size:13px;display:flex;align-items:center;gap:8px;}
-.kanban-col-header .count{
-  background:var(--bg3);padding:2px 8px;border-radius:20px;
-  font-size:11px;color:var(--muted);
-}
+.kanban-col-header .count{background:var(--bg3);padding:2px 8px;border-radius:20px;font-size:11px;color:var(--muted);}
 .kanban-list{flex:1;min-height:100px;display:flex;flex-direction:column;gap:8px;}
-.kanban-card{
-  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
-  padding:12px;cursor:grab;transition:.2s;
-}
+.kanban-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:grab;transition:.2s;position:relative;}
 .kanban-card:hover{border-color:var(--primary);transform:translateY(-2px);}
 .kanban-card.dragging{opacity:.5;transform:rotate(2deg);}
-.kanban-card .title{font-size:12px;font-weight:600;margin-bottom:6px;}
-.kanban-card .meta{
-  font-size:10px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;
-}
+.kanban-card .title{font-size:12px;font-weight:600;margin-bottom:6px;padding-left:50px;}
+.kanban-card .meta{font-size:10px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;}
 .kanban-card .tags{margin-top:8px;display:flex;gap:5px;flex-wrap:wrap;}
-.tag{
-  padding:2px 8px;border-radius:5px;font-size:10px;
-  background:var(--bg4);color:var(--muted);
-}
+.kanban-card .card-actions{position:absolute;top:8px;left:8px;display:flex;gap:4px;opacity:0;transition:.2s;}
+.kanban-card:hover .card-actions{opacity:1;}
+.card-actions button{background:var(--bg4);border:none;color:var(--muted);width:22px;height:22px;border-radius:5px;cursor:pointer;font-size:10px;transition:.2s;}
+.card-actions button:hover{background:var(--primary);color:#0d1117;}
+.card-actions button.del:hover{background:var(--danger);color:#fff;}
+.tag{padding:2px 8px;border-radius:5px;font-size:10px;background:var(--bg4);color:var(--muted);}
 .tag.high{background:rgba(248,81,73,.2);color:var(--danger);}
 .tag.medium{background:rgba(210,153,34,.2);color:var(--warning);}
 .tag.low{background:rgba(63,185,80,.2);color:var(--success);}
@@ -175,10 +117,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 /* GANTT */
 .gantt-container{overflow-x:auto;padding-bottom:10px;}
 .gantt-grid{min-width:900px;}
-.gantt-header{
-  display:flex;border-bottom:2px solid var(--border);
-  padding-bottom:10px;margin-bottom:10px;
-}
+.gantt-header{display:flex;border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:10px;}
 .gantt-header .label-col{width:220px;flex-shrink:0;font-size:12px;color:var(--muted);font-weight:600;}
 .gantt-header .timeline{flex:1;display:flex;}
 .gantt-header .timeline span{flex:1;text-align:center;font-size:11px;color:var(--muted);}
@@ -188,71 +127,35 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .gantt-row .label-col .name{font-size:12px;font-weight:600;}
 .gantt-row .label-col .manager{font-size:10px;color:var(--muted);}
 .gantt-row .timeline{flex:1;height:26px;position:relative;background:var(--bg3);border-radius:6px;overflow:hidden;}
-.gantt-bar{
-  position:absolute;height:100%;border-radius:6px;
-  background:linear-gradient(90deg,var(--primary),var(--cyan));
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;color:#fff;font-weight:600;
-  min-width:20px;cursor:pointer;transition:.2s;
-}
+.gantt-bar{position:absolute;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;min-width:20px;cursor:pointer;transition:.2s;}
 .gantt-bar:hover{filter:brightness(1.2);}
 .gantt-bar.done{background:linear-gradient(90deg,var(--success),#2ea043);}
 .gantt-bar.late{background:linear-gradient(90deg,var(--danger),#da3633);}
 .gantt-bar.pending{background:linear-gradient(90deg,var(--warning),#bb8009);}
-.gantt-baseline{
-  position:absolute;height:4px;border-radius:2px;
-  background:rgba(255,255,255,.3);top:50%;transform:translateY(-50%);
-}
 
-/* RISK TABLE */
-.risk-score{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:28px;height:28px;border-radius:50%;font-size:12px;font-weight:700;
-}
+/* RISK */
+.risk-score{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:12px;font-weight:700;}
 .risk-score.low{background:rgba(63,185,80,.2);color:var(--success);}
 .risk-score.medium{background:rgba(210,153,34,.2);color:var(--warning);}
 .risk-score.high{background:rgba(248,81,73,.2);color:var(--danger);}
 
-/* RESOURCE HEATMAP */
+/* HEATMAP */
 .heatmap{overflow-x:auto;}
 .heatmap table{width:100%;border-collapse:collapse;font-size:11px;}
-.heatmap th{
-  background:var(--bg3);padding:8px 6px;color:var(--muted);
-  font-weight:600;border-bottom:1px solid var(--border);
-  position:sticky;top:0;text-align:center;white-space:nowrap;
-}
-.heatmap td{
-  padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);
-}
-.heatmap .resource-name{
-  text-align:right;font-weight:600;position:sticky;right:0;background:var(--bg2);
-  padding-right:12px;z-index:2;
-}
-.heat-cell{
-  display:inline-block;width:100%;height:24px;border-radius:5px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:10px;font-weight:600;
-}
+.heatmap th{background:var(--bg3);padding:8px 6px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);text-align:center;white-space:nowrap;}
+.heatmap td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);}
+.heatmap .resource-name{text-align:right;font-weight:600;background:var(--bg2);padding-right:12px;}
+.heat-cell{width:100%;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;}
 .heat-cell.green{background:rgba(63,185,80,.25);color:var(--success);}
 .heat-cell.blue{background:rgba(88,166,255,.25);color:var(--primary);}
 .heat-cell.red{background:rgba(248,81,73,.25);color:var(--danger);}
 
 /* TABLE */
-.table-controls{
-  display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
-  align-items:center;margin-bottom:14px;
-}
-.table-controls input,.table-controls select{
-  background:var(--bg3);border:1px solid var(--border);color:var(--text);
-  padding:8px 14px;border-radius:9px;font-size:12px;outline:none;
-}
+.table-controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.table-controls input,.table-controls select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:9px;font-size:12px;outline:none;font-family:inherit;}
 .table-controls input:focus,.table-controls select:focus{border-color:var(--primary);}
 table.data-table{width:100%;border-collapse:collapse;font-size:12px;}
-table.data-table thead th{
-  background:var(--bg3);padding:10px;text-align:right;color:var(--muted);
-  font-weight:600;cursor:pointer;border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
+table.data-table thead th{background:var(--bg3);padding:10px;text-align:right;color:var(--muted);font-weight:600;cursor:pointer;border-bottom:1px solid var(--border);white-space:nowrap;}
 table.data-table thead th:hover{color:var(--primary);}
 table.data-table tbody td{padding:10px;border-bottom:1px solid var(--border);}
 table.data-table tbody tr:hover{background:var(--bg3);}
@@ -263,34 +166,69 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 .badge.late{background:rgba(248,81,73,.15);color:var(--danger);}
 .progress-bar{width:100%;height:5px;border-radius:3px;background:var(--bg3);overflow:hidden;min-width:60px;}
 .progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--primary),var(--cyan));}
-
 .pagination{display:flex;justify-content:center;gap:5px;margin-top:14px;flex-wrap:wrap;}
-.pagination button{
-  padding:6px 11px;border-radius:7px;background:var(--bg3);color:var(--text);
-  border:1px solid var(--border);cursor:pointer;font-size:12px;min-width:32px;
-}
+.pagination button{padding:6px 11px;border-radius:7px;background:var(--bg3);color:var(--text);border:1px solid var(--border);cursor:pointer;font-size:12px;min-width:32px;font-family:inherit;}
 .pagination button:hover{background:var(--primary);color:#0d1117;}
 .pagination button.active{background:var(--primary);color:#0d1117;font-weight:600;}
 .pagination button:disabled{opacity:.4;cursor:not-allowed;}
 
 /* SETTINGS */
-.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.setting-item{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px;background:var(--bg3);border-radius:10px;margin-bottom:10px;
-}
+.setting-item{display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg3);border-radius:10px;margin-bottom:10px;}
 .setting-item .info h4{font-size:13px;margin-bottom:4px;}
 .setting-item .info p{font-size:11px;color:var(--muted);}
-.toggle{
-  width:44px;height:24px;border-radius:12px;background:var(--bg4);
-  position:relative;cursor:pointer;transition:.2s;
-}
-.toggle::after{
-  content:'';position:absolute;width:18px;height:18px;border-radius:50%;
-  background:var(--muted);top:3px;right:3px;transition:.2s;
-}
+.toggle{width:44px;height:24px;border-radius:12px;background:var(--bg4);position:relative;cursor:pointer;transition:.2s;}
+.toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:var(--muted);top:3px;right:3px;transition:.2s;}
 .toggle.on{background:var(--primary);}
 .toggle.on::after{background:#fff;transform:translateX(-20px);}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;
+  animation:fadeIn .2s;
+}
+.modal-overlay.show{display:flex;}
+.modal{
+  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
+  width:100%;max-width:620px;max-height:90vh;overflow-y:auto;
+  animation:slideUp .3s;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.modal-header{
+  padding:18px 22px;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.modal-header h3{font-size:16px;display:flex;align-items:center;gap:10px;}
+.modal-header h3 i{color:var(--primary);}
+.modal-close{
+  background:transparent;border:none;color:var(--muted);cursor:pointer;
+  width:32px;height:32px;border-radius:8px;font-size:16px;transition:.2s;
+}
+.modal-close:hover{background:var(--bg3);color:var(--danger);}
+.modal-body{padding:20px 22px;}
+.modal-footer{
+  padding:16px 22px;border-top:1px solid var(--border);
+  display:flex;justify-content:flex-end;gap:10px;
+}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-grid.full{grid-template-columns:1fr;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{font-size:12px;color:var(--muted);font-weight:600;}
+.form-group label .req{color:var(--danger);}
+.form-group input,.form-group select,.form-group textarea{
+  background:var(--bg3);border:1px solid var(--border);color:var(--text);
+  padding:10px 12px;border-radius:9px;font-size:13px;outline:none;
+  font-family:inherit;transition:.2s;width:100%;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);}
+.form-group textarea{resize:vertical;min-height:60px;}
+.form-hint{font-size:10px;color:var(--muted);}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.5;}
 
 /* RESPONSIVE */
 @media(max-width:1024px){
@@ -304,15 +242,10 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   .main{padding:12px;}
   .kanban{grid-template-columns:1fr;}
   .kpi-grid{grid-template-columns:1fr 1fr;}
-  .kpi .value{font-size:18px;}
-  .settings-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
   .gantt-header .label-col,.gantt-row .label-col{width:120px;}
 }
-.menu-toggle{
-  display:none;background:var(--bg3);border:1px solid var(--border);
-  color:var(--text);width:40px;height:40px;border-radius:10px;
-  cursor:pointer;font-size:16px;
-}
+.menu-toggle{display:none;background:var(--bg3);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:16px;margin-bottom:12px;}
 @media(max-width:1024px){.menu-toggle{display:flex;align-items:center;justify-content:center;}}
 </style>
 </head>
@@ -327,27 +260,13 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <h2>مدیریت پروژه</h2>
     </div>
     <nav class="sidebar-nav" id="sidebarNav">
-      <div class="nav-item active" data-page="dashboard">
-        <i class="fa-solid fa-gauge"></i> داشبورد
-      </div>
-      <div class="nav-item" data-page="projects">
-        <i class="fa-solid fa-folder"></i> پروژه‌ها
-      </div>
-      <div class="nav-item" data-page="kanban">
-        <i class="fa-solid fa-table-columns"></i> وظایف (کانبان)
-      </div>
-      <div class="nav-item" data-page="gantt">
-        <i class="fa-solid fa-chart-gantt"></i> گانت
-      </div>
-      <div class="nav-item" data-page="risks">
-        <i class="fa-solid fa-triangle-exclamation"></i> ریسک‌ها
-      </div>
-      <div class="nav-item" data-page="resources">
-        <i class="fa-solid fa-users"></i> منابع
-      </div>
-      <div class="nav-item" data-page="settings">
-        <i class="fa-solid fa-gear"></i> تنظیمات
-      </div>
+      <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-gauge"></i> داشبورد</div>
+      <div class="nav-item" data-page="projects"><i class="fa-solid fa-folder"></i> پروژه‌ها</div>
+      <div class="nav-item" data-page="kanban"><i class="fa-solid fa-table-columns"></i> وظایف (کانبان)</div>
+      <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
+      <div class="nav-item" data-page="risks"><i class="fa-solid fa-triangle-exclamation"></i> ریسک‌ها</div>
+      <div class="nav-item" data-page="resources"><i class="fa-solid fa-users"></i> منابع</div>
+      <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> تنظیمات</div>
     </nav>
   </aside>
 
@@ -355,13 +274,14 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   <main class="main">
     <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
 
-    <!-- ========== PAGE: DASHBOARD ========== -->
+    <!-- ============ DASHBOARD ============ -->
     <div class="page active" id="page-dashboard">
       <div class="page-header">
         <h1><i class="fa-solid fa-gauge"></i> داشبورد کلی</h1>
         <div class="actions">
           <button class="btn primary" id="sampleBtn"><i class="fa-solid fa-database"></i> داده نمونه</button>
           <button class="btn" id="exportBtn"><i class="fa-solid fa-download"></i> خروجی CSV</button>
+          <button class="btn danger" id="clearBtn"><i class="fa-solid fa-trash"></i> پاک‌سازی</button>
         </div>
       </div>
 
@@ -373,7 +293,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <button data-range="all"><i class="fa-solid fa-infinity"></i> همه</button>
       </div>
 
-      <div class="kpi-grid" id="kpiGrid">
+      <div class="kpi-grid">
         <div class="kpi"><div class="icon"><i class="fa-solid fa-folder-open"></i></div><div class="label">کل پروژه‌ها</div><div class="value" id="kpiTotal">0</div><div class="sub">در بازه انتخابی</div></div>
         <div class="kpi green"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><div class="label">تکمیل‌شده</div><div class="value" id="kpiDone">0</div><div class="sub" id="kpiDonePct">0%</div></div>
         <div class="kpi orange"><div class="icon"><i class="fa-solid fa-spinner"></i></div><div class="label">در حال اجرا</div><div class="value" id="kpiActive">0</div><div class="sub">پروژه فعال</div></div>
@@ -392,7 +312,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ========== PAGE: PROJECTS ========== -->
+    <!-- ============ PROJECTS ============ -->
     <div class="page" id="page-projects">
       <div class="page-header">
         <h1><i class="fa-solid fa-folder"></i> پروژه‌ها</h1>
@@ -400,7 +320,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
           <button class="btn primary" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button>
         </div>
       </div>
-
       <div class="card">
         <div class="table-controls">
           <input type="text" id="searchInput" placeholder="🔍 جستجو...">
@@ -413,6 +332,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
               <th data-key="date">تاریخ</th><th data-key="project">پروژه</th><th data-key="manager">مدیر</th>
               <th data-key="team">تیم</th><th data-key="status">وضعیت</th><th data-key="priority">اولویت</th>
               <th data-key="progress">پیشرفت</th><th data-key="budget">بودجه</th><th data-key="cost">هزینه</th>
+              <th>عملیات</th>
             </tr></thead>
             <tbody id="tableBody"></tbody>
           </table>
@@ -421,16 +341,16 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ========== PAGE: KANBAN ========== -->
+    <!-- ============ KANBAN ============ -->
     <div class="page" id="page-kanban">
       <div class="page-header">
         <h1><i class="fa-solid fa-table-columns"></i> تخته کانبان وظایف</h1>
-        <div class="actions"><button class="btn primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> وظیفه جدید</button></div>
+        <div class="actions"><button class="btn primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> تسک جدید</button></div>
       </div>
       <div class="kanban" id="kanbanBoard"></div>
     </div>
 
-    <!-- ========== PAGE: GANTT ========== -->
+    <!-- ============ GANTT ============ -->
     <div class="page" id="page-gantt">
       <div class="page-header"><h1><i class="fa-solid fa-chart-gantt"></i> نمودار گانت</h1></div>
       <div class="card">
@@ -446,7 +366,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ========== PAGE: RISKS ========== -->
+    <!-- ============ RISKS ============ -->
     <div class="page" id="page-risks">
       <div class="page-header">
         <h1><i class="fa-solid fa-triangle-exclamation"></i> مدیریت ریسک‌ها</h1>
@@ -458,19 +378,20 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
       <div class="card">
         <div style="overflow-x:auto;">
-          <table class="data-table" id="riskTable">
-            <thead><tr>
-              <th>پروژه</th><th>ریسک</th><th>احتمال</th><th>تأثیر</th><th>امتیاز</th><th>سطح</th><th>وضعیت</th>
-            </tr></thead>
+          <table class="data-table">
+            <thead><tr><th>پروژه</th><th>ریسک</th><th>احتمال</th><th>تأثیر</th><th>امتیاز</th><th>سطح</th><th>وضعیت</th><th>عملیات</th></tr></thead>
             <tbody id="riskTableBody"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ========== PAGE: RESOURCES ========== -->
+    <!-- ============ RESOURCES ============ -->
     <div class="page" id="page-resources">
-      <div class="page-header"><h1><i class="fa-solid fa-users"></i> مدیریت منابع و ظرفیت</h1></div>
+      <div class="page-header">
+        <h1><i class="fa-solid fa-users"></i> مدیریت منابع و ظرفیت</h1>
+        <div class="actions"><button class="btn primary" id="addResourceBtn"><i class="fa-solid fa-user-plus"></i> منبع جدید</button></div>
+      </div>
       <div class="card">
         <h3><i class="fa-solid fa-fire"></i> هیت‌مپ ظرفیت منابع</h3>
         <div class="heatmap" id="heatmapContainer"></div>
@@ -481,68 +402,179 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ========== PAGE: SETTINGS ========== -->
+    <!-- ============ SETTINGS ============ -->
     <div class="page" id="page-settings">
       <div class="page-header"><h1><i class="fa-solid fa-gear"></i> تنظیمات</h1></div>
-
       <div class="charts-2x">
         <div class="card">
           <h3><i class="fa-solid fa-upload"></i> منابع داده</h3>
-          <label style="display:flex;align-items:center;gap:10px;background:var(--bg3);padding:12px;border-radius:10px;border:1px dashed var(--border);cursor:pointer;margin-bottom:10px;">
+          <label class="btn" style="width:100%;justify-content:center;margin-bottom:10px;cursor:pointer;">
             <i class="fa-solid fa-file-csv" style="color:var(--success);"></i> بارگذاری CSV
             <input type="file" id="csvInput" accept=".csv" style="display:none;">
           </label>
-          <label style="display:flex;align-items:center;gap:10px;background:var(--bg3);padding:12px;border-radius:10px;border:1px dashed var(--border);cursor:pointer;margin-bottom:10px;">
+          <label class="btn" style="width:100%;justify-content:center;margin-bottom:10px;cursor:pointer;">
             <i class="fa-solid fa-file-excel" style="color:var(--success);"></i> بارگذاری Excel
             <input type="file" id="xlsxInput" accept=".xlsx,.xls" style="display:none;">
           </label>
-          <button class="btn" id="apiBtn" style="width:100%;justify-content:center;margin-bottom:10px;">
-            <i class="fa-solid fa-cloud-arrow-down"></i> دریافت از سرور (API)
-          </button>
-          <button class="btn" id="sampleBtn2" style="width:100%;justify-content:center;">
-            <i class="fa-solid fa-database"></i> بارگذاری داده نمونه
-          </button>
+          <button class="btn" id="apiBtn" style="width:100%;justify-content:center;margin-bottom:10px;"><i class="fa-solid fa-cloud-arrow-down"></i> دریافت از سرور (API)</button>
+          <button class="btn" id="sampleBtn2" style="width:100%;justify-content:center;"><i class="fa-solid fa-database"></i> بارگذاری داده نمونه</button>
         </div>
-
         <div class="card">
           <h3><i class="fa-solid fa-shield-halved"></i> سطوح دسترسی (RBAC)</h3>
-          <div class="setting-item">
-            <div class="info"><h4>مدیر سیستم (Admin)</h4><p>دسترسی کامل به همه بخش‌ها</p></div>
-            <div class="toggle on" data-role="admin"></div>
-          </div>
-          <div class="setting-item">
-            <div class="info"><h4>مدیر پروژه</h4><p>مدیریت پروژه‌های خود</p></div>
-            <div class="toggle on" data-role="manager"></div>
-          </div>
-          <div class="setting-item">
-            <div class="info"><h4>عضو تیم</h4><p>فقط وظایف خود</p></div>
-            <div class="toggle" data-role="member"></div>
-          </div>
-          <div class="setting-item">
-            <div class="info"><h4>مهمان (Viewer)</h4><p>فقط مشاهده</p></div>
-            <div class="toggle" data-role="guest"></div>
-          </div>
+          <div class="setting-item"><div class="info"><h4>مدیر سیستم</h4><p>دسترسی کامل</p></div><div class="toggle on" data-role="admin"></div></div>
+          <div class="setting-item"><div class="info"><h4>مدیر پروژه</h4><p>مدیریت پروژه‌های خود</p></div><div class="toggle on" data-role="manager"></div></div>
+          <div class="setting-item"><div class="info"><h4>عضو تیم</h4><p>فقط وظایف خود</p></div><div class="toggle" data-role="member"></div></div>
+          <div class="setting-item"><div class="info"><h4>مهمان</h4><p>فقط مشاهده</p></div><div class="toggle" data-role="guest"></div></div>
         </div>
       </div>
-
       <div class="card">
         <h3><i class="fa-solid fa-robot"></i> اتوماسیون</h3>
-        <div class="setting-item">
-          <div class="info"><h4>تغییر وضعیت خودکار</h4><p>وقتی پیشرفت ۱۰۰٪ شد، وضعیت «تکمیل‌شده» شود</p></div>
-          <div class="toggle on" data-auto="status"></div>
-        </div>
-        <div class="setting-item">
-          <div class="info"><h4>هشدار مهلت</h4><p>اطلاع‌رسانی هنگام نزدیک شدن به مهلت</p></div>
-          <div class="toggle on" data-auto="deadline"></div>
-        </div>
-        <div class="setting-item">
-          <div class="info"><h4>هشدار بودجه</h4><p>اطلاع‌رسانی هنگام عبور هزینه از بودجه</p></div>
-          <div class="toggle on" data-auto="budget"></div>
-        </div>
+        <div class="setting-item"><div class="info"><h4>تغییر وضعیت خودکار</h4><p>وقتی پیشرفت ۱۰۰٪ شد، تکمیل‌شده شود</p></div><div class="toggle on" data-auto="status"></div></div>
+        <div class="setting-item"><div class="info"><h4>هشدار مهلت</h4><p>اطلاع‌رسانی نزدیک شدن مهلت</p></div><div class="toggle on" data-auto="deadline"></div></div>
+        <div class="setting-item"><div class="info"><h4>هشدار بودجه</h4><p>اطلاع‌رسانی عبور هزینه از بودجه</p></div><div class="toggle on" data-auto="budget"></div></div>
       </div>
     </div>
 
   </main>
+</div>
+
+<!-- ================================
+     MODAL: PROJECT
+================================ -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-folder-plus"></i> <span id="projectModalTitle">پروژه جدید</span></h3>
+      <button class="modal-close" data-close="projectModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pEditIdx" value="-1">
+      <div class="form-grid">
+        <div class="form-group"><label>نام پروژه <span class="req">*</span></label><input type="text" id="pProject" placeholder="مثلاً سایت فروشگاهی"></div>
+        <div class="form-group"><label>مدیر پروژه <span class="req">*</span></label><input type="text" id="pManager" placeholder="مثلاً احمدی"></div>
+        <div class="form-group"><label>تیم</label>
+          <select id="pTeam">
+            <option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option>
+            <option>دواپس</option><option>طراحی</option><option>تست</option>
+          </select>
+        </div>
+        <div class="form-group"><label>وضعیت</label>
+          <select id="pStatus">
+            <option>در انتظار</option><option>در حال اجرا</option>
+            <option>تأخیردار</option><option>تکمیل‌شده</option>
+          </select>
+        </div>
+        <div class="form-group"><label>اولویت</label>
+          <select id="pPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select>
+        </div>
+        <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="pProgress" min="0" max="100" value="0"></div>
+        <div class="form-group"><label>بودجه (تومان)</label><input type="number" id="pBudget" value="0"></div>
+        <div class="form-group"><label>هزینه (تومان)</label><input type="number" id="pCost" value="0"></div>
+        <div class="form-group"><label>تاریخ شروع</label><input type="date" id="pStart"></div>
+        <div class="form-group"><label>تاریخ پایان</label><input type="date" id="pEnd"></div>
+        <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee" placeholder="نام مسئول"></div>
+        <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="pEstHours" value="0"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="projectModal">انصراف</button>
+      <button class="btn primary" id="saveProjectBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================
+     MODAL: TASK
+================================ -->
+<div class="modal-overlay" id="taskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-list-check"></i> <span id="taskModalTitle">تسک جدید</span></h3>
+      <button class="modal-close" data-close="taskModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="tEditIdx" value="-1">
+      <div class="form-grid">
+        <div class="form-group"><label>عنوان تسک <span class="req">*</span></label><input type="text" id="tProject" placeholder="نام تسک/پروژه"></div>
+        <div class="form-group"><label>مدیر</label><input type="text" id="tManager" placeholder="مدیر"></div>
+        <div class="form-group"><label>تیم</label>
+          <select id="tTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select>
+        </div>
+        <div class="form-group"><label>وضعیت (ستون کانبان)</label>
+          <select id="tStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select>
+        </div>
+        <div class="form-group"><label>اولویت</label>
+          <select id="tPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select>
+        </div>
+        <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="tProgress" min="0" max="100" value="0"></div>
+        <div class="form-group"><label>مسئول</label><input type="text" id="tAssignee"></div>
+        <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="tEst" value="0"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="taskModal">انصراف</button>
+      <button class="btn primary" id="saveTaskBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================
+     MODAL: RISK
+================================ -->
+<div class="modal-overlay" id="riskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-triangle-exclamation"></i> <span id="riskModalTitle">ریسک جدید</span></h3>
+      <button class="modal-close" data-close="riskModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="rEditIdx" value="-1">
+      <div class="form-grid">
+        <div class="form-group"><label>پروژه مرتبط <span class="req">*</span></label>
+          <select id="rProject"></select>
+        </div>
+        <div class="form-group"><label>عنوان ریسک <span class="req">*</span></label><input type="text" id="rRisk" placeholder="مثلاً کمبود منابع"></div>
+        <div class="form-group"><label>احتمال (۱-۵)</label><input type="number" id="rProb" min="1" max="5" value="3"></div>
+        <div class="form-group"><label>تأثیر (۱-۵)</label><input type="number" id="rImpact" min="1" max="5" value="3"></div>
+        <div class="form-group full" style="grid-column:1/-1;">
+          <label>امتیاز ریسک (خودکار)</label>
+          <div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div>
+          <div class="form-hint">امتیاز = احتمال × تأثیر (۱-۵ کم، ۶-۱۴ متوسط، ۱۵-۲۵ بالا)</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="riskModal">انصراف</button>
+      <button class="btn primary" id="saveRiskBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================
+     MODAL: RESOURCE
+================================ -->
+<div class="modal-overlay" id="resourceModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-user-plus"></i> <span id="resourceModalTitle">منبع جدید</span></h3>
+      <button class="modal-close" data-close="resourceModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="resEditName" value="">
+      <div class="form-grid">
+        <div class="form-group"><label>نام منبع <span class="req">*</span></label><input type="text" id="resName" placeholder="نام عضو تیم"></div>
+        <div class="form-group"><label>نقش</label>
+          <select id="resRole"><option>توسعه‌دهنده</option><option>طراح</option><option>مدیر پروژه</option><option>تستر</option><option>دواپس</option></select>
+        </div>
+        <div class="form-group"><label>ظرفیت هفتگی (ساعت)</label><input type="number" id="resCapacity" value="40"></div>
+        <div class="form-group"><label>ساعت تخصیص‌یافته</label><input type="number" id="resHours" value="0"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="resourceModal">انصراف</button>
+      <button class="btn primary" id="saveResourceBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -575,6 +607,7 @@ const SAMPLE_DATA = [
 ============================================================ */
 let rawData = [];
 let filteredData = [];
+let resources = [];
 let currentRange = 'monthly';
 let sortKey = null, sortAsc = true;
 let currentPage = 1;
@@ -582,7 +615,26 @@ const PAGE_SIZE = 8;
 const charts = { line:null, pie:null, bar:null, manager:null, riskMatrix:null, riskPie:null, workload:null };
 
 /* ============================================================
-   UTILITIES
+   PERSISTENCE
+============================================================ */
+function saveLocal(){
+  try{
+    localStorage.setItem('pm_data', JSON.stringify(rawData));
+    localStorage.setItem('pm_resources', JSON.stringify(resources));
+  }catch(e){}
+}
+function loadLocal(){
+  try{
+    const d = localStorage.getItem('pm_data');
+    const r = localStorage.getItem('pm_resources');
+    if(d) rawData = JSON.parse(d);
+    if(r) resources = JSON.parse(r);
+    return !!d;
+  }catch(e){ return false; }
+}
+
+/* ============================================================
+   UTILS
 ============================================================ */
 const fmtNum = n => Number(n||0).toLocaleString('fa-IR');
 const fmtMoney = n => {
@@ -600,6 +652,23 @@ const statusClass = s => {
   return '';
 };
 const riskLevel = score => score >= 15 ? 'high' : score >= 8 ? 'medium' : 'low';
+const today = () => new Date().toISOString().split('T')[0];
+
+/* ============================================================
+   MODAL HELPERS
+============================================================ */
+function openModal(id){ document.getElementById(id).classList.add('show'); }
+function closeModal(id){ document.getElementById(id).classList.remove('show'); }
+
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.addEventListener('click', () => closeModal(btn.dataset.close));
+});
+document.querySelectorAll('.modal-overlay').forEach(ov => {
+  ov.addEventListener('click', e => { if(e.target === ov) ov.classList.remove('show'); });
+});
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
+});
 
 /* ============================================================
    NAVIGATION
@@ -628,6 +697,7 @@ document.getElementById('menuToggle').addEventListener('click', () => {
 document.getElementById('csvInput').addEventListener('change', e => {
   const f = e.target.files[0]; if(!f) return;
   Papa.parse(f, {header:true, skipEmptyLines:true, complete: res => setData(normalize(res.data))});
+  e.target.value = '';
 });
 document.getElementById('xlsxInput').addEventListener('change', e => {
   const f = e.target.files[0]; if(!f) return;
@@ -638,6 +708,7 @@ document.getElementById('xlsxInput').addEventListener('change', e => {
     setData(normalize(XLSX.utils.sheet_to_json(ws, {defval:''})));
   };
   reader.readAsBinaryString(f);
+  e.target.value = '';
 });
 document.getElementById('apiBtn').addEventListener('click', async () => {
   const url = prompt('آدرس API:', 'https://jsonplaceholder.typicode.com/posts');
@@ -648,8 +719,31 @@ document.getElementById('apiBtn').addEventListener('click', async () => {
     setData(normalize(Array.isArray(json) ? json : [json]));
   } catch(err) { alert('خطا: ' + err.message); }
 });
-document.getElementById('sampleBtn').addEventListener('click', () => setData(SAMPLE_DATA.map(d => ({...d}))));
-document.getElementById('sampleBtn2').addEventListener('click', () => setData(SAMPLE_DATA.map(d => ({...d}))));
+
+document.getElementById('sampleBtn').addEventListener('click', () => {
+  if(rawData.length && !confirm('داده‌های فعلی جایگزین شوند؟')) return;
+  setData(SAMPLE_DATA.map(d => ({...d})));
+  initResourcesIfEmpty();
+});
+document.getElementById('sampleBtn2').addEventListener('click', () => {
+  if(rawData.length && !confirm('داده‌های فعلی جایگزین شوند؟')) return;
+  setData(SAMPLE_DATA.map(d => ({...d})));
+  initResourcesIfEmpty();
+});
+document.getElementById('clearBtn').addEventListener('click', () => {
+  if(!confirm('همه داده‌ها حذف شوند؟')) return;
+  rawData = []; filteredData = []; resources = [];
+  localStorage.removeItem('pm_data');
+  localStorage.removeItem('pm_resources');
+  renderAll();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+});
+
+function initResourcesIfEmpty(){
+  if(resources.length) return;
+  const names = [...new Set(rawData.map(d => d.assignee).filter(Boolean))];
+  resources = names.map(n => ({name:n, role:'توسعه‌دهنده', capacity:40, hours:0}));
+}
 
 function normalize(rows){
   const map = {
@@ -678,9 +772,11 @@ function normalize(rows){
 function setData(data){
   rawData = data;
   if(!rawData.length){ alert('داده‌ای یافت نشد'); return; }
+  saveLocal();
   updateTeamFilter();
   applyTimeFilter();
   renderAll();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
 }
 
 /* ============================================================
@@ -699,7 +795,6 @@ function applyTimeFilter(){
   else if(currentRange === 'weekly'){ from = new Date(now); from.setDate(now.getDate() - 7); }
   else if(currentRange === 'monthly') from = new Date(now.getFullYear(), now.getMonth(), 1);
   else if(currentRange === 'yearly') from = new Date(now.getFullYear(), 0, 1);
-
   filteredData = rawData.filter(r => {
     if(!from) return true;
     const d = new Date(r.date);
@@ -715,9 +810,6 @@ function applyTimeFilter(){
 ============================================================ */
 function renderAll(){ renderKPIs(); renderCharts(); renderTable(); }
 
-/* ============================================================
-   KPI
-============================================================ */
 function renderKPIs(){
   const data = filteredData;
   const total = data.length;
@@ -726,7 +818,6 @@ function renderKPIs(){
   const late = data.filter(d => d.status === 'تأخیردار').length;
   const budget = data.reduce((s,d) => s + d.budget, 0);
   const cost = data.reduce((s,d) => s + d.cost, 0);
-
   document.getElementById('kpiTotal').textContent = fmtNum(total);
   document.getElementById('kpiDone').textContent = fmtNum(done);
   document.getElementById('kpiDonePct').textContent = total ? Math.round(done/total*100)+'% تکمیل' : '0%';
@@ -737,9 +828,6 @@ function renderKPIs(){
   document.getElementById('kpiUsage').textContent = 'مصرف: ' + (budget ? Math.round(cost/budget*100) : 0) + '%';
 }
 
-/* ============================================================
-   CHARTS (Dashboard)
-============================================================ */
 function renderCharts(){
   Chart.defaults.color = '#8b949e';
   Chart.defaults.borderColor = '#2d333b';
@@ -793,12 +881,12 @@ function periodKey(dateStr){
 }
 
 /* ============================================================
-   TABLE (Projects)
+   TABLE
 ============================================================ */
 document.getElementById('searchInput').addEventListener('input', () => {currentPage=1;renderTable();});
 document.getElementById('statusFilter').addEventListener('change', () => {currentPage=1;renderTable();});
 document.getElementById('teamFilter').addEventListener('change', () => {currentPage=1;renderTable();});
-document.querySelectorAll('#dataTable thead th').forEach(th => {
+document.querySelectorAll('#dataTable thead th[data-key]').forEach(th => {
   th.addEventListener('click', () => {
     const key = th.dataset.key; if(!key) return;
     if(sortKey === key) sortAsc = !sortAsc; else {sortKey = key; sortAsc = true;}
@@ -838,16 +926,23 @@ function renderTable(){
   const start = (currentPage-1)*PAGE_SIZE;
   const page = data.slice(start, start+PAGE_SIZE);
   if(!page.length){
-    tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--muted);"><i class="fa-solid fa-inbox" style="font-size:30px;display:block;margin-bottom:10px;opacity:.5;"></i>داده‌ای یافت نشد</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" class="empty-state"><i class="fa-solid fa-inbox"></i>داده‌ای یافت نشد</td></tr>`;
   } else {
-    tbody.innerHTML = page.map(d => `
+    tbody.innerHTML = page.map(d => {
+      const idx = rawData.indexOf(d);
+      return `
       <tr>
         <td>${d.date}</td><td>${d.project}</td><td>${d.manager}</td><td>${d.team}</td>
         <td><span class="badge ${statusClass(d.status)}">${d.status}</span></td>
         <td>${d.priority}</td>
         <td><div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar"><div class="progress-fill" style="width:${d.progress}%"></div></div><span style="font-size:10px;color:var(--muted);">${d.progress}%</span></div></td>
         <td>${fmtMoney(d.budget)}</td><td>${fmtMoney(d.cost)}</td>
-      </tr>`).join('');
+        <td>
+          <button class="btn sm" onclick="editProject(${idx})"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn sm danger" onclick="deleteProject(${idx})"><i class="fa-solid fa-trash"></i></button>
+        </td>
+      </tr>`;
+    }).join('');
   }
   renderPagination(totalPages);
 }
@@ -863,6 +958,148 @@ function renderPagination(totalPages){
   el.innerHTML = html;
   el.querySelectorAll('button[data-page]').forEach(b => b.addEventListener('click', () => { currentPage = Number(b.dataset.page); renderTable(); }));
 }
+
+/* ============================================================
+   PROJECT: ADD/EDIT/DELETE
+============================================================ */
+document.getElementById('addProjectBtn').addEventListener('click', () => {
+  document.getElementById('projectModalTitle').textContent = 'پروژه جدید';
+  document.getElementById('pEditIdx').value = -1;
+  ['pProject','pManager','pAssignee'].forEach(id => document.getElementById(id).value = '');
+  ['pProgress','pBudget','pCost','pEstHours'].forEach(id => document.getElementById(id).value = 0);
+  document.getElementById('pTeam').value = 'فرانت‌اند';
+  document.getElementById('pStatus').value = 'در انتظار';
+  document.getElementById('pPriority').value = 'متوسط';
+  document.getElementById('pStart').value = today();
+  document.getElementById('pEnd').value = today();
+  openModal('projectModal');
+});
+
+function editProject(idx){
+  const d = rawData[idx]; if(!d) return;
+  document.getElementById('projectModalTitle').textContent = 'ویرایش پروژه';
+  document.getElementById('pEditIdx').value = idx;
+  document.getElementById('pProject').value = d.project || '';
+  document.getElementById('pManager').value = d.manager || '';
+  document.getElementById('pTeam').value = d.team || 'فرانت‌اند';
+  document.getElementById('pStatus').value = d.status || 'در انتظار';
+  document.getElementById('pPriority').value = d.priority || 'متوسط';
+  document.getElementById('pProgress').value = d.progress || 0;
+  document.getElementById('pBudget').value = d.budget || 0;
+  document.getElementById('pCost').value = d.cost || 0;
+  document.getElementById('pStart').value = d.start_date || today();
+  document.getElementById('pEnd').value = d.end_date || today();
+  document.getElementById('pAssignee').value = d.assignee || '';
+  document.getElementById('pEstHours').value = d.estimated_hours || 0;
+  openModal('projectModal');
+}
+window.editProject = editProject;
+
+function deleteProject(idx){
+  if(!confirm('این پروژه حذف شود؟')) return;
+  rawData.splice(idx, 1);
+  saveLocal();
+  applyTimeFilter();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+}
+window.deleteProject = deleteProject;
+
+document.getElementById('saveProjectBtn').addEventListener('click', () => {
+  const project = document.getElementById('pProject').value.trim();
+  const manager = document.getElementById('pManager').value.trim();
+  if(!project){ alert('نام پروژه الزامی است'); return; }
+  if(!manager){ alert('مدیر پروژه الزامی است'); return; }
+
+  const obj = {
+    date: today(),
+    project, manager,
+    team: document.getElementById('pTeam').value,
+    status: document.getElementById('pStatus').value,
+    priority: document.getElementById('pPriority').value,
+    progress: Number(document.getElementById('pProgress').value) || 0,
+    budget: Number(document.getElementById('pBudget').value) || 0,
+    cost: Number(document.getElementById('pCost').value) || 0,
+    start_date: document.getElementById('pStart').value,
+    end_date: document.getElementById('pEnd').value,
+    assignee: document.getElementById('pAssignee').value.trim(),
+    estimated_hours: Number(document.getElementById('pEstHours').value) || 0,
+    actual_hours: 0, risk:'', risk_probability:1, risk_impact:1, dependencies:''
+  };
+  if(obj.status === 'تکمیل‌شده') obj.progress = 100;
+
+  const idx = Number(document.getElementById('pEditIdx').value);
+  if(idx >= 0) rawData[idx] = {...rawData[idx], ...obj};
+  else rawData.push(obj);
+
+  saveLocal();
+  closeModal('projectModal');
+  applyTimeFilter();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+});
+
+/* ============================================================
+   TASK: ADD/EDIT/DELETE
+============================================================ */
+document.getElementById('addTaskBtn').addEventListener('click', () => {
+  document.getElementById('taskModalTitle').textContent = 'تسک جدید';
+  document.getElementById('tEditIdx').value = -1;
+  ['tProject','tManager','tAssignee'].forEach(id => document.getElementById(id).value = '');
+  ['tProgress','tEst'].forEach(id => document.getElementById(id).value = 0);
+  document.getElementById('tTeam').value = 'فرانت‌اند';
+  document.getElementById('tStatus').value = 'در انتظار';
+  document.getElementById('tPriority').value = 'متوسط';
+  openModal('taskModal');
+});
+
+document.getElementById('saveTaskBtn').addEventListener('click', () => {
+  const project = document.getElementById('tProject').value.trim();
+  if(!project){ alert('عنوان تسک الزامی است'); return; }
+  const obj = {
+    date: today(),
+    project,
+    manager: document.getElementById('tManager').value.trim(),
+    team: document.getElementById('tTeam').value,
+    status: document.getElementById('tStatus').value,
+    priority: document.getElementById('tPriority').value,
+    progress: Number(document.getElementById('tProgress').value) || 0,
+    assignee: document.getElementById('tAssignee').value.trim(),
+    estimated_hours: Number(document.getElementById('tEst').value) || 0,
+    actual_hours: 0, budget:0, cost:0,
+    start_date: today(), end_date: today(),
+    risk:'', risk_probability:1, risk_impact:1, dependencies:''
+  };
+  if(obj.status === 'تکمیل‌شده') obj.progress = 100;
+  rawData.push(obj);
+  saveLocal();
+  closeModal('taskModal');
+  applyTimeFilter();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+});
+
+function editTask(idx){
+  const d = rawData[idx]; if(!d) return;
+  document.getElementById('taskModalTitle').textContent = 'ویرایش تسک';
+  document.getElementById('tEditIdx').value = idx;
+  document.getElementById('tProject').value = d.project || '';
+  document.getElementById('tManager').value = d.manager || '';
+  document.getElementById('tTeam').value = d.team || 'فرانت‌اند';
+  document.getElementById('tStatus').value = d.status || 'در انتظار';
+  document.getElementById('tPriority').value = d.priority || 'متوسط';
+  document.getElementById('tProgress').value = d.progress || 0;
+  document.getElementById('tAssignee').value = d.assignee || '';
+  document.getElementById('tEst').value = d.estimated_hours || 0;
+  openModal('taskModal');
+}
+window.editTask = editTask;
+
+function deleteTask(idx){
+  if(!confirm('این تسک حذف شود؟')) return;
+  rawData.splice(idx, 1);
+  saveLocal();
+  applyTimeFilter();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+}
+window.deleteTask = deleteTask;
 
 /* ============================================================
    KANBAN
@@ -884,28 +1121,38 @@ function renderKanban(){
           <span class="count">${tasks.length}</span>
         </div>
         <div class="kanban-list" data-status="${col.key}">
-          ${tasks.map(t => `
-            <div class="kanban-card" draggable="true" data-project="${t.project}">
+          ${tasks.map(t => {
+            const idx = rawData.indexOf(t);
+            return `
+            <div class="kanban-card" draggable="true" data-idx="${idx}">
+              <div class="card-actions">
+                <button onclick="editTask(${idx})" title="ویرایش"><i class="fa-solid fa-pen"></i></button>
+                <button class="del" onclick="deleteTask(${idx})" title="حذف"><i class="fa-solid fa-trash"></i></button>
+              </div>
               <div class="title">${t.project}</div>
-              <div class="meta"><span><i class="fa-solid fa-user"></i> ${t.manager}</span><span><i class="fa-solid fa-users"></i> ${t.team}</span></div>
+              <div class="meta"><span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span><span><i class="fa-solid fa-users"></i> ${t.team}</span></div>
               <div class="tags">
                 <span class="tag ${t.priority==='بالا'?'high':t.priority==='متوسط'?'medium':'low'}">${t.priority}</span>
                 <span class="tag">${t.progress}%</span>
               </div>
-            </div>`).join('')}
+            </div>`;
+          }).join('')}
         </div>
       </div>`;
   }).join('');
+
   board.querySelectorAll('.kanban-list').forEach(list => {
     new Sortable(list, {
-      group:'kanban', animation:150,
-      ghostClass:'dragging',
+      group:'kanban', animation:150, ghostClass:'dragging',
       onEnd: evt => {
-        const project = evt.item.dataset.project;
+        const idx = Number(evt.item.dataset.idx);
         const newStatus = evt.to.dataset.status;
-        const item = rawData.find(d => d.project === project);
-        if(item){ item.status = newStatus; if(newStatus === 'تکمیل‌شده') item.progress = 100; }
-        renderKanban(); renderKPIs(); renderCharts();
+        if(rawData[idx]){
+          rawData[idx].status = newStatus;
+          if(newStatus === 'تکمیل‌شده') rawData[idx].progress = 100;
+          saveLocal();
+          renderKanban(); renderKPIs(); renderCharts(); renderTable();
+        }
       }
     });
   });
@@ -917,13 +1164,14 @@ function renderKanban(){
 function renderGantt(){
   const timeline = document.getElementById('ganttTimeline');
   const months = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-  timeline.innerHTML = months.slice(0,12).map(m => `<span>${m}</span>`).join('');
+  timeline.innerHTML = months.map(m => `<span>${m}</span>`).join('');
 
   const rows = document.getElementById('ganttRows');
-  const data = filteredData.slice(0, 20);
-  if(!data.length){ rows.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted);">داده‌ای برای نمایش وجود ندارد</div>'; return; }
+  const data = filteredData.slice(0, 30);
+  if(!data.length){ rows.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox"></i>داده‌ای برای نمایش وجود ندارد</div>'; return; }
 
   const allDates = data.flatMap(d => [new Date(d.start_date), new Date(d.end_date)]).filter(d => !isNaN(d));
+  if(!allDates.length){ rows.innerHTML = '<div class="empty-state">تاریخ شروع/پایان ثبت نشده</div>'; return; }
   const minDate = new Date(Math.min(...allDates));
   const maxDate = new Date(Math.max(...allDates));
   const totalMs = maxDate - minDate || 1;
@@ -950,11 +1198,76 @@ function renderGantt(){
 /* ============================================================
    RISKS
 ============================================================ */
+document.getElementById('addRiskBtn').addEventListener('click', () => {
+  document.getElementById('riskModalTitle').textContent = 'ریسک جدید';
+  document.getElementById('rEditIdx').value = -1;
+  document.getElementById('rRisk').value = '';
+  document.getElementById('rProb').value = 3;
+  document.getElementById('rImpact').value = 3;
+  const sel = document.getElementById('rProject');
+  sel.innerHTML = rawData.map((d,i) => `<option value="${i}">${d.project}</option>`).join('');
+  if(!sel.innerHTML){ alert('ابتدا یک پروژه ایجاد کنید'); return; }
+  updateRiskPreview();
+  openModal('riskModal');
+});
+
+function updateRiskPreview(){
+  const p = Number(document.getElementById('rProb').value) || 1;
+  const i = Number(document.getElementById('rImpact').value) || 1;
+  const score = p * i;
+  const el = document.getElementById('rScorePreview');
+  const level = riskLevel(score);
+  el.textContent = score + ' (' + (level==='high'?'بالا':level==='medium'?'متوسط':'کم') + ')';
+  el.style.color = level==='high'?'var(--danger)':level==='medium'?'var(--warning)':'var(--success)';
+}
+document.getElementById('rProb').addEventListener('input', updateRiskPreview);
+document.getElementById('rImpact').addEventListener('input', updateRiskPreview);
+
+document.getElementById('saveRiskBtn').addEventListener('click', () => {
+  const sel = document.getElementById('rProject');
+  const idx = Number(sel.value);
+  const risk = document.getElementById('rRisk').value.trim();
+  if(!risk){ alert('عنوان ریسک الزامی است'); return; }
+  if(!rawData[idx]){ alert('پروژه معتبر نیست'); return; }
+  rawData[idx].risk = risk;
+  rawData[idx].risk_probability = Number(document.getElementById('rProb').value) || 1;
+  rawData[idx].risk_impact = Number(document.getElementById('rImpact').value) || 1;
+  saveLocal();
+  closeModal('riskModal');
+  renderRisks();
+});
+
+function editRisk(projectIdx){
+  const d = rawData[projectIdx]; if(!d) return;
+  document.getElementById('riskModalTitle').textContent = 'ویرایش ریسک';
+  document.getElementById('rEditIdx').value = projectIdx;
+  const sel = document.getElementById('rProject');
+  sel.innerHTML = rawData.map((x,i) => `<option value="${i}" ${i===projectIdx?'selected':''}>${x.project}</option>`).join('');
+  document.getElementById('rRisk').value = d.risk || '';
+  document.getElementById('rProb').value = d.risk_probability || 3;
+  document.getElementById('rImpact').value = d.risk_impact || 3;
+  updateRiskPreview();
+  openModal('riskModal');
+}
+window.editRisk = editRisk;
+
+function deleteRisk(projectIdx){
+  if(!confirm('این ریسک حذف شود؟')) return;
+  if(rawData[projectIdx]){
+    rawData[projectIdx].risk = '';
+    rawData[projectIdx].risk_probability = 1;
+    rawData[projectIdx].risk_impact = 1;
+    saveLocal();
+    renderRisks();
+  }
+}
+window.deleteRisk = deleteRisk;
+
 function renderRisks(){
-  const risks = filteredData.filter(d => d.risk);
+  const risks = filteredData.map((d,i) => ({...d, _idx: rawData.indexOf(d)})).filter(d => d.risk);
   const tbody = document.getElementById('riskTableBody');
   if(!risks.length){
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--muted);">ریسکی ثبت نشده است</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fa-solid fa-shield"></i>ریسکی ثبت نشده است</td></tr>';
   } else {
     tbody.innerHTML = risks.map(r => {
       const score = r.risk_probability * r.risk_impact;
@@ -965,11 +1278,14 @@ function renderRisks(){
         <td><span class="risk-score ${level}">${score}</span></td>
         <td><span class="badge ${level==='high'?'late':level==='medium'?'pending':'done'}">${levelFa}</span></td>
         <td>${r.status}</td>
+        <td>
+          <button class="btn sm" onclick="editRisk(${r._idx})"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn sm danger" onclick="deleteRisk(${r._idx})"><i class="fa-solid fa-trash"></i></button>
+        </td>
       </tr>`;
     }).join('');
   }
 
-  // Risk Matrix Chart
   if(charts.riskMatrix) charts.riskMatrix.destroy();
   const matrixData = risks.map(r => ({x:r.risk_probability, y:r.risk_impact, r:8}));
   charts.riskMatrix = new Chart(document.getElementById('riskMatrixChart'), {
@@ -978,9 +1294,8 @@ function renderRisks(){
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{min:0,max:6, title:{display:true,text:'احتمال'}, grid:{color:'#21262d'}}, y:{min:0,max:6, title:{display:true,text:'تأثیر'}, grid:{color:'#21262d'}}}}
   });
 
-  // Risk Pie
   if(charts.riskPie) charts.riskPie.destroy();
-  const levels = {بالا:0, متوسط:0, کم:0};
+  const levels = {'بالا':0, 'متوسط':0, 'کم':0};
   risks.forEach(r => { const l = riskLevel(r.risk_probability*r.risk_impact); levels[l==='high'?'بالا':l==='medium'?'متوسط':'کم']++; });
   charts.riskPie = new Chart(document.getElementById('riskPieChart'), {
     type:'doughnut',
@@ -992,44 +1307,103 @@ function renderRisks(){
 /* ============================================================
    RESOURCES
 ============================================================ */
+document.getElementById('addResourceBtn').addEventListener('click', () => {
+  document.getElementById('resourceModalTitle').textContent = 'منبع جدید';
+  document.getElementById('resEditName').value = '';
+  document.getElementById('resName').value = '';
+  document.getElementById('resRole').value = 'توسعه‌دهنده';
+  document.getElementById('resCapacity').value = 40;
+  document.getElementById('resHours').value = 0;
+  openModal('resourceModal');
+});
+
+document.getElementById('saveResourceBtn').addEventListener('click', () => {
+  const name = document.getElementById('resName').value.trim();
+  if(!name){ alert('نام منبع الزامی است'); return; }
+  const obj = {
+    name,
+    role: document.getElementById('resRole').value,
+    capacity: Number(document.getElementById('resCapacity').value) || 40,
+    hours: Number(document.getElementById('resHours').value) || 0
+  };
+  const editName = document.getElementById('resEditName').value;
+  if(editName){
+    const idx = resources.findIndex(r => r.name === editName);
+    if(idx >= 0) resources[idx] = obj;
+  } else {
+    if(resources.find(r => r.name === name)){ alert('این نام قبلاً ثبت شده'); return; }
+    resources.push(obj);
+  }
+  saveLocal();
+  closeModal('resourceModal');
+  renderResources();
+});
+
+function editResource(name){
+  const r = resources.find(x => x.name === name); if(!r) return;
+  document.getElementById('resourceModalTitle').textContent = 'ویرایش منبع';
+  document.getElementById('resEditName').value = name;
+  document.getElementById('resName').value = r.name;
+  document.getElementById('resRole').value = r.role || 'توسعه‌دهنده';
+  document.getElementById('resCapacity').value = r.capacity || 40;
+  document.getElementById('resHours').value = r.hours || 0;
+  openModal('resourceModal');
+}
+window.editResource = editResource;
+
+function deleteResource(name){
+  if(!confirm('این منبع حذف شود؟')) return;
+  resources = resources.filter(r => r.name !== name);
+  saveLocal();
+  renderResources();
+}
+window.deleteResource = deleteResource;
+
 function renderResources(){
-  const members = {};
-  filteredData.forEach(d => {
-    if(!d.assignee) return;
-    if(!members[d.assignee]) members[d.assignee] = {projects:0, hours:0, capacity:160};
-    members[d.assignee].projects++;
-    members[d.assignee].hours += d.actual_hours || 0;
-  });
+  // اگر منابع خالی است، از داده‌ها استخراج کن
+  if(!resources.length){
+    const names = [...new Set(rawData.map(d => d.assignee).filter(Boolean))];
+    resources = names.map(n => ({name:n, role:'توسعه‌دهنده', capacity:40, hours:0}));
+  }
 
   const container = document.getElementById('heatmapContainer');
   const weeks = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
-  let html = '<table><thead><tr><th class="resource-name">منبع</th>' + weeks.map(w => `<th>${w}</th>`).join('') + '<th>مجموع</th></tr></thead><tbody>';
 
-  Object.entries(members).forEach(([name, m]) => {
-    html += `<tr><td class="resource-name">${name}</td>`;
-    const avg = Math.round(m.hours / 4);
-    for(let i=0;i<4;i++){
-      const hrs = avg + (Math.random()*20-10);
-      const pct = Math.round(hrs / 40 * 100);
-      let cls = pct > 110 ? 'red' : pct < 60 ? 'blue' : 'green';
-      html += `<td><div class="heat-cell ${cls}">${Math.round(hrs)}h</div></td>`;
-    }
-    html += `<td style="font-weight:600;">${m.hours}h</td></tr>`;
-  });
-  html += '</tbody></table>';
-  container.innerHTML = html;
+  if(!resources.length){
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-users"></i>منبعی ثبت نشده است</div>';
+  } else {
+    let html = '<table><thead><tr><th>منبع</th><th>نقش</th>' + weeks.map(w => `<th>${w}</th>`).join('') + '<th>مجموع</th><th>عملیات</th></tr></thead><tbody>';
+    resources.forEach(r => {
+      html += `<tr>
+        <td class="resource-name">${r.name}</td>
+        <td style="font-size:10px;color:var(--muted);">${r.role||'—'}</td>`;
+      const avg = Math.round((r.hours || 0) / 4);
+      for(let i=0;i<4;i++){
+        const hrs = avg + (Math.random()*16-8);
+        const pct = Math.round(hrs / (r.capacity||40) * 100);
+        let cls = pct > 110 ? 'red' : pct < 60 ? 'blue' : 'green';
+        html += `<td><div class="heat-cell ${cls}">${Math.max(0,Math.round(hrs))}h</div></td>`;
+      }
+      html += `<td style="font-weight:600;">${r.hours||0}h</td>
+        <td>
+          <button class="btn sm" onclick="editResource('${r.name}')"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn sm danger" onclick="deleteResource('${r.name}')"><i class="fa-solid fa-trash"></i></button>
+        </td></tr>`;
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  }
 
-  // Workload chart
   if(charts.workload) charts.workload.destroy();
   charts.workload = new Chart(document.getElementById('workloadChart'), {
     type:'bar',
-    data:{labels:Object.keys(members), datasets:[{label:'ساعت واقعی', data:Object.values(members).map(m => m.hours), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
+    data:{labels:resources.map(r => r.name), datasets:[{label:'ساعت تخصیص‌یافته', data:resources.map(r => r.hours || 0), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
   });
 }
 
 /* ============================================================
-   TOGGLES (Settings)
+   TOGGLES
 ============================================================ */
 document.querySelectorAll('.toggle').forEach(t => {
   t.addEventListener('click', () => t.classList.toggle('on'));
@@ -1052,7 +1426,18 @@ document.getElementById('exportBtn').addEventListener('click', () => {
 /* ============================================================
    INIT
 ============================================================ */
-setData(SAMPLE_DATA.map(d => ({...d})));
+(function init(){
+  const hasLocal = loadLocal();
+  if(!hasLocal){
+    rawData = SAMPLE_DATA.map(d => ({...d}));
+    initResourcesIfEmpty();
+    saveLocal();
+  }
+  updateTeamFilter();
+  applyTimeFilter();
+  renderAll();
+  renderKanban(); renderGantt(); renderRisks(); renderResources();
+})();
 </script>
 </body>
 </html>
