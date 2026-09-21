@@ -90,13 +90,34 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .page-header h1 i{color:var(--primary);}
 .page-header .actions{display:flex;gap:8px;flex-wrap:wrap;}
 
+/* TOP BAR */
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;}
+.top-bar h1{font-size:18px;}
+.notif-bell{position:relative;background:var(--bg3);border:1px solid var(--border);color:var(--text);width:42px;height:42px;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;}
+.notif-bell:hover{background:var(--bg4);border-color:var(--primary);}
+.notif-count{position:absolute;top:-4px;left:-4px;background:var(--danger);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--bg2);}
+
+/* NOTIFICATION PANEL */
+.notif-panel{position:fixed;top:80px;left:20px;width:360px;max-width:calc(100vw - 40px);max-height:500px;background:var(--bg2);border:1px solid var(--border);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);z-index:500;display:none;overflow:hidden;animation:slideDown .25s;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
+.notif-panel.show{display:block;}
+.notif-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.notif-head h4{font-size:13px;display:flex;align-items:center;gap:8px;}
+.notif-head button{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:11px;padding:4px 8px;border-radius:6px;}
+.notif-head button:hover{background:var(--bg3);color:var(--primary);}
+.notif-list{max-height:420px;overflow-y:auto;padding:8px;}
+.notif-item{padding:12px;border-radius:10px;margin-bottom:6px;background:var(--bg3);cursor:pointer;transition:.2s;position:relative;border-right:3px solid transparent;}
+.notif-item:hover{background:var(--bg4);}
+.notif-item.unread{background:rgba(88,166,255,.1);border-right-color:var(--primary);}
+.notif-item .n-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:10px;}
+.notif-item .n-title{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;}
+.notif-item .n-time{font-size:10px;color:var(--muted);white-space:nowrap;}
+.notif-item .n-text{font-size:11px;color:var(--muted);line-height:1.6;}
+.notif-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:12px;}
+.notif-empty i{font-size:32px;display:block;margin-bottom:10px;opacity:.5;}
+
 /* WELCOME BANNER */
-.welcome-banner{
-  background:linear-gradient(135deg,rgba(88,166,255,.15),rgba(188,140,255,.15));
-  border:1px solid rgba(88,166,255,.3);border-radius:16px;
-  padding:20px 24px;margin-bottom:20px;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
-}
+.welcome-banner{background:linear-gradient(135deg,rgba(88,166,255,.15),rgba(188,140,255,.15));border:1px solid rgba(88,166,255,.3);border-radius:16px;padding:20px 24px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .welcome-banner h2{font-size:17px;margin-bottom:4px;}
 .welcome-banner p{font-size:12px;color:var(--muted);}
 .welcome-banner .date-badge{background:var(--bg3);padding:8px 14px;border-radius:10px;font-size:12px;color:var(--primary);font-weight:600;}
@@ -147,7 +168,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .charts-2x{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
 .chart-box{position:relative;height:260px;}
 
-/* TASK CARDS (USER VIEW) */
+/* TASK CARDS */
 .task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
 .task-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;position:relative;overflow:hidden;}
 .task-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 10px 30px rgba(0,0,0,.3);}
@@ -188,9 +209,26 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .report-text{font-size:12px;color:var(--text);line-height:1.7;margin-bottom:8px;}
 .report-meta{display:flex;gap:12px;font-size:10px;color:var(--muted);flex-wrap:wrap;}
 .report-meta span{display:flex;align-items:center;gap:4px;}
-.report-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.report-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);flex-wrap:wrap;}
 .report-files{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
-.file-chip{background:var(--bg4);padding:4px 9px;border-radius:6px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.file-chip{background:var(--bg4);padding:4px 9px;border-radius:6px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px;cursor:pointer;transition:.2s;}
+.file-chip:hover{background:rgba(88,166,255,.15);color:var(--primary);}
+
+/* COMMENTS */
+.comments-section{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.comments-toggle{background:transparent;border:none;color:var(--primary);cursor:pointer;font-size:11px;display:flex;align-items:center;gap:6px;padding:4px 0;font-family:inherit;}
+.comments-toggle:hover{text-decoration:underline;}
+.comments-list{margin-top:10px;display:flex;flex-direction:column;gap:8px;}
+.comment{background:var(--bg4);border-radius:9px;padding:10px 12px;font-size:12px;}
+.comment .c-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;}
+.comment .c-author{font-weight:600;color:var(--primary);font-size:11px;display:flex;align-items:center;gap:5px;}
+.comment .c-author.admin{color:var(--danger);}
+.comment .c-time{font-size:9px;color:var(--muted);}
+.comment .c-text{color:var(--text);line-height:1.6;font-size:11px;}
+.comment-input{display:flex;gap:8px;margin-top:10px;}
+.comment-input input{flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:9px;font-size:12px;outline:none;font-family:inherit;}
+.comment-input input:focus{border-color:var(--primary);}
+.comment-input button{background:var(--primary);color:#0d1117;border:none;padding:0 14px;border-radius:9px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;}
 
 /* PROFILE */
 .profile-header{display:flex;align-items:center;gap:20px;padding:24px;background:linear-gradient(135deg,rgba(88,166,255,.1),rgba(188,140,255,.1));border:1px solid var(--border);border-radius:16px;margin-bottom:20px;flex-wrap:wrap;}
@@ -313,7 +351,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 .form-group textarea{resize:vertical;min-height:100px;}
 .form-hint{font-size:10px;color:var(--muted);}
 
-/* RANGE SLIDER */
+/* SLIDER */
 .slider-row{display:flex;align-items:center;gap:12px;}
 .slider-row input[type="range"]{flex:1;height:6px;border-radius:3px;background:var(--bg3);outline:none;-webkit-appearance:none;appearance:none;}
 .slider-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--primary);cursor:pointer;border:3px solid var(--bg2);box-shadow:0 0 0 1px var(--primary);}
@@ -328,6 +366,21 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 .file-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
 .file-list .file-chip{background:var(--bg4);padding:6px 10px;border-radius:7px;font-size:11px;color:var(--text);display:flex;align-items:center;gap:6px;}
 .file-list .file-chip button{background:transparent;border:none;color:var(--danger);cursor:pointer;font-size:11px;}
+
+/* EMAIL INBOX */
+.email-list{display:flex;flex-direction:column;gap:10px;}
+.email-item{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.2s;position:relative;border-right:3px solid var(--primary);}
+.email-item:hover{background:var(--bg4);transform:translateX(-3px);}
+.email-item.read{opacity:.7;border-right-color:var(--muted);}
+.email-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.email-subject{font-size:13px;font-weight:600;}
+.email-time{font-size:10px;color:var(--muted);}
+.email-preview{font-size:11px;color:var(--muted);line-height:1.6;}
+.email-body{padding:16px;background:var(--bg3);border-radius:11px;margin-top:12px;font-size:12px;line-height:1.8;color:var(--text);}
+.email-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:9px;font-weight:600;margin-right:6px;}
+.email-tag.approved{background:rgba(63,185,80,.2);color:var(--success);}
+.email-tag.rejected{background:rgba(248,81,73,.2);color:var(--danger);}
+.email-tag.comment{background:rgba(88,166,255,.2);color:var(--primary);}
 
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.5;}
@@ -346,6 +399,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .form-grid{grid-template-columns:1fr;}
   .task-grid{grid-template-columns:1fr;}
+  .notif-panel{left:10px;right:10px;width:auto;}
 }
 .menu-toggle{display:none;background:var(--bg3);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:16px;margin-bottom:12px;}
 @media(max-width:1024px){.menu-toggle{display:flex;align-items:center;justify-content:center;}}
@@ -353,7 +407,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 </head>
 <body>
 
-<!-- ============ LOGIN ============ -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
   <div class="login-card" id="loginCard">
@@ -361,9 +415,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <h1>ورود به سیستم</h1>
     <p class="subtitle">با حساب دامنه خود وارد شوید</p>
     <form id="loginForm" autocomplete="on">
-      <div class="field">
-        <input type="text" id="username" placeholder="نام کاربری" required autocomplete="username">
-      </div>
+      <div class="field"><input type="text" id="username" placeholder="نام کاربری" required autocomplete="username"></div>
       <div class="field">
         <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password">
         <button type="button" class="toggle-pass" id="togglePass"><i class="fa-solid fa-eye"></i></button>
@@ -372,7 +424,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <div class="error-msg" id="errorMsg"></div>
     </form>
     <div class="login-hint">
-      🎯 <strong>حالت دمو:</strong> یکی از حساب‌های زیر را انتخاب کنید<br>
+      🎯 <strong>حالت دمو</strong>
       <div class="role-quick">
         <button type="button" onclick="quickLogin('admin','admin')"><i class="fa-solid fa-crown"></i> ادمین</button>
         <button type="button" onclick="quickLogin('ali','ali')"><i class="fa-solid fa-user"></i> کاربر</button>
@@ -381,30 +433,32 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
-<!-- ============ APP ============ -->
+<!-- APP -->
 <div id="app">
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <i class="fa-solid fa-diagram-project"></i>
-      <h2>مدیریت پروژه</h2>
-    </div>
-    <nav class="sidebar-nav" id="sidebarNav">
-      <!-- پر می‌شود بر اساس نقش -->
-    </nav>
+    <div class="sidebar-header"><i class="fa-solid fa-diagram-project"></i><h2>مدیریت پروژه</h2></div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
     <div class="sidebar-user">
       <div class="user-avatar" id="userAvatar">A<span class="status-dot"></span></div>
       <div class="user-info">
         <div class="name" id="userName">کاربر</div>
         <div class="role" id="userRole">—</div>
       </div>
-      <button class="logout-btn" id="logoutBtn" title="خروج"><i class="fa-solid fa-right-from-bracket"></i></button>
+      <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i></button>
     </div>
   </aside>
 
   <main class="main">
-    <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+    <div class="top-bar">
+      <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
+      <div style="flex:1;"></div>
+      <button class="notif-bell" id="notifBell">
+        <i class="fa-solid fa-bell"></i>
+        <span class="notif-count" id="notifCount" style="display:none;">0</span>
+      </button>
+    </div>
 
-    <!-- ============== ADMIN PAGES ============== -->
+    <!-- ============== PAGES ============== -->
 
     <!-- ADMIN DASHBOARD -->
     <div class="page" id="page-dashboard" data-roles="admin">
@@ -441,13 +495,32 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
+    <!-- ADMIN ANALYTICS -->
+    <div class="page" id="page-analytics" data-roles="admin">
+      <div class="page-header">
+        <h1><i class="fa-solid fa-chart-simple"></i> تحلیل گزارش‌ها</h1>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="icon"><i class="fa-solid fa-clipboard"></i></div><div class="label">کل گزارش‌ها</div><div class="value" id="anTotal">0</div></div>
+        <div class="kpi green"><div class="icon"><i class="fa-solid fa-percent"></i></div><div class="label">نرخ تأیید</div><div class="value" id="anApprovalRate">0%</div></div>
+        <div class="kpi cyan"><div class="icon"><i class="fa-solid fa-clock"></i></div><div class="label">میانگین زمان بررسی</div><div class="value" id="anAvgHours">0h</div></div>
+        <div class="kpi purple"><div class="icon"><i class="fa-solid fa-users"></i></div><div class="label">کاربران فعال</div><div class="value" id="anActiveUsers">0</div></div>
+      </div>
+      <div class="charts-2x">
+        <div class="card"><h3><i class="fa-solid fa-chart-line"></i> روند گزارش‌دهی روزانه</h3><div class="chart-box"><canvas id="anTrendChart"></canvas></div></div>
+        <div class="card"><h3><i class="fa-solid fa-chart-pie"></i> توزیع وضعیت گزارش‌ها</h3><div class="chart-box"><canvas id="anStatusChart"></canvas></div></div>
+      </div>
+      <div class="charts-2x">
+        <div class="card"><h3><i class="fa-solid fa-ranking-star"></i> TOP 5 کاربران فعال</h3><div class="chart-box"><canvas id="anTopUsersChart"></canvas></div></div>
+        <div class="card"><h3><i class="fa-solid fa-chart-bar"></i> گزارش بر اساس تسک</h3><div class="chart-box"><canvas id="anPerTaskChart"></canvas></div></div>
+      </div>
+    </div>
+
     <!-- PROJECTS -->
     <div class="page" id="page-projects" data-roles="admin,user">
       <div class="page-header">
         <h1><i class="fa-solid fa-folder"></i> پروژه‌ها</h1>
-        <div class="actions">
-          <button class="btn primary admin-only" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button>
-        </div>
+        <div class="actions"><button class="btn primary admin-only" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button></div>
       </div>
       <div class="card">
         <div class="table-controls">
@@ -473,7 +546,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <!-- KANBAN -->
     <div class="page" id="page-kanban" data-roles="admin">
       <div class="page-header">
-        <h1><i class="fa-solid fa-table-columns"></i> تخته کانبان وظایف</h1>
+        <h1><i class="fa-solid fa-table-columns"></i> تخته کانبان</h1>
         <div class="actions"><button class="btn primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> تسک جدید</button></div>
       </div>
       <div class="kanban" id="kanbanBoard"></div>
@@ -485,10 +558,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <div class="card">
         <div class="gantt-container">
           <div class="gantt-grid">
-            <div class="gantt-header">
-              <div class="label-col">پروژه</div>
-              <div class="timeline" id="ganttTimeline"></div>
-            </div>
+            <div class="gantt-header"><div class="label-col">پروژه</div><div class="timeline" id="ganttTimeline"></div></div>
             <div id="ganttRows"></div>
           </div>
         </div>
@@ -518,40 +588,49 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <!-- RESOURCES -->
     <div class="page" id="page-resources" data-roles="admin">
       <div class="page-header">
-        <h1><i class="fa-solid fa-users"></i> مدیریت منابع و ظرفیت</h1>
+        <h1><i class="fa-solid fa-users"></i> منابع</h1>
         <div class="actions"><button class="btn primary" id="addResourceBtn"><i class="fa-solid fa-user-plus"></i> منبع جدید</button></div>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-fire"></i> هیت‌مپ ظرفیت منابع</h3>
+        <h3><i class="fa-solid fa-fire"></i> هیت‌مپ ظرفیت</h3>
         <div class="heatmap" id="heatmapContainer"></div>
       </div>
       <div class="card">
-        <h3><i class="fa-solid fa-chart-bar"></i> بار کاری اعضا</h3>
+        <h3><i class="fa-solid fa-chart-bar"></i> بار کاری</h3>
         <div class="chart-box"><canvas id="workloadChart"></canvas></div>
       </div>
     </div>
 
-    <!-- ALL REPORTS (ADMIN) -->
+    <!-- ALL REPORTS -->
     <div class="page" id="page-reports" data-roles="admin">
       <div class="page-header">
         <h1><i class="fa-solid fa-clipboard-list"></i> همه گزارش‌ها</h1>
         <div class="actions">
           <select id="reportFilter" class="btn" style="padding:9px 14px;">
-            <option value="">همه وضعیت‌ها</option>
-            <option value="pending">در انتظار بررسی</option>
+            <option value="">همه</option>
+            <option value="pending">در انتظار</option>
             <option value="approved">تأییدشده</option>
             <option value="rejected">ردشده</option>
           </select>
         </div>
       </div>
       <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
-        <div class="kpi"><div class="icon"><i class="fa-solid fa-clipboard"></i></div><div class="label">کل گزارش‌ها</div><div class="value" id="repKpiTotal">0</div></div>
-        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-hourglass-half"></i></div><div class="label">در انتظار بررسی</div><div class="value" id="repKpiPending">0</div></div>
-        <div class="kpi green"><div class="icon"><i class="fa-solid fa-check"></i></div><div class="label">تأییدشده</div><div class="value" id="repKpiApproved">0</div></div>
-        <div class="kpi red"><div class="icon"><i class="fa-solid fa-xmark"></i></div><div class="label">ردشده</div><div class="value" id="repKpiRejected">0</div></div>
+        <div class="kpi"><div class="icon"><i class="fa-solid fa-clipboard"></i></div><div class="label">کل</div><div class="value" id="repKpiTotal">0</div></div>
+        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-hourglass-half"></i></div><div class="label">در انتظار</div><div class="value" id="repKpiPending">0</div></div>
+        <div class="kpi green"><div class="icon"><i class="fa-solid fa-check"></i></div><div class="label">تأیید</div><div class="value" id="repKpiApproved">0</div></div>
+        <div class="kpi red"><div class="icon"><i class="fa-solid fa-xmark"></i></div><div class="label">رد</div><div class="value" id="repKpiRejected">0</div></div>
+      </div>
+      <div class="card"><div id="allReportsContainer"></div></div>
+    </div>
+
+    <!-- EMAIL INBOX (ADMIN) -->
+    <div class="page" id="page-email" data-roles="admin,user">
+      <div class="page-header">
+        <h1><i class="fa-solid fa-envelope"></i> صندوق پیام‌ها</h1>
+        <div class="actions"><button class="btn" id="markAllReadBtn"><i class="fa-solid fa-check-double"></i> همه خوانده شد</button></div>
       </div>
       <div class="card">
-        <div id="allReportsContainer"></div>
+        <div class="email-list" id="emailList"></div>
       </div>
     </div>
 
@@ -580,36 +659,25 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============== USER PAGES ============== -->
-
     <!-- USER DASHBOARD -->
     <div class="page" id="page-userDashboard" data-roles="user">
       <div class="welcome-banner">
         <div>
           <h2>👋 خوش آمدید، <span id="welcomeName">کاربر</span></h2>
-          <p>اینجا خلاصه‌ای از تسک‌ها و گزارش‌های شماست</p>
+          <p>خلاصه‌ای از تسک‌ها و گزارش‌های شما</p>
         </div>
         <div class="date-badge" id="todayDate"></div>
       </div>
-
       <div class="kpi-grid">
-        <div class="kpi"><div class="icon"><i class="fa-solid fa-list-check"></i></div><div class="label">کل تسک‌های من</div><div class="value" id="uKpiTotal">0</div><div class="sub">تخصیص‌یافته به من</div></div>
+        <div class="kpi"><div class="icon"><i class="fa-solid fa-list-check"></i></div><div class="label">کل تسک‌ها</div><div class="value" id="uKpiTotal">0</div><div class="sub">تخصیص‌یافته</div></div>
         <div class="kpi green"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><div class="label">تکمیل‌شده</div><div class="value" id="uKpiDone">0</div><div class="sub" id="uKpiDonePct">0%</div></div>
-        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-spinner"></i></div><div class="label">در حال انجام</div><div class="value" id="uKpiActive">0</div><div class="sub">در جریان</div></div>
-        <div class="kpi red"><div class="icon"><i class="fa-solid fa-clock"></i></div><div class="label">نزدیک مهلت</div><div class="value" id="uKpiUrgent">0</div><div class="sub">۳ روز آینده</div></div>
+        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-spinner"></i></div><div class="label">در حال انجام</div><div class="value" id="uKpiActive">0</div></div>
+        <div class="kpi red"><div class="icon"><i class="fa-solid fa-clock"></i></div><div class="label">فوری</div><div class="value" id="uKpiUrgent">0</div><div class="sub">۳ روز آینده</div></div>
       </div>
-
       <div class="charts-2x">
-        <div class="card">
-          <h3><i class="fa-solid fa-chart-line"></i> پیشرفت هفتگی من</h3>
-          <div class="chart-box"><canvas id="userProgressChart"></canvas></div>
-        </div>
-        <div class="card">
-          <h3><i class="fa-solid fa-chart-pie"></i> وضعیت تسک‌های من</h3>
-          <div class="chart-box"><canvas id="userStatusChart"></canvas></div>
-        </div>
+        <div class="card"><h3><i class="fa-solid fa-chart-line"></i> پیشرفت هفتگی</h3><div class="chart-box"><canvas id="userProgressChart"></canvas></div></div>
+        <div class="card"><h3><i class="fa-solid fa-chart-pie"></i> وضعیت تسک‌ها</h3><div class="chart-box"><canvas id="userStatusChart"></canvas></div></div>
       </div>
-
       <div class="card">
         <h3><i class="fa-solid fa-bolt"></i> تسک‌های فوری</h3>
         <div id="urgentTasksContainer"></div>
@@ -635,12 +703,8 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 
     <!-- MY REPORTS -->
     <div class="page" id="page-myReports" data-roles="user">
-      <div class="page-header">
-        <h1><i class="fa-solid fa-clipboard-list"></i> گزارش‌های من</h1>
-      </div>
-      <div class="card">
-        <div class="report-timeline" id="myReportsTimeline"></div>
-      </div>
+      <div class="page-header"><h1><i class="fa-solid fa-clipboard-list"></i> گزارش‌های من</h1></div>
+      <div class="card"><div class="report-timeline" id="myReportsTimeline"></div></div>
     </div>
 
     <!-- PROFILE -->
@@ -650,7 +714,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <div class="profile-avatar" id="profileAvatar">A</div>
         <div class="profile-info">
           <h2 id="profileName">کاربر</h2>
-          <div class="role-badge user" id="profileRole">کاربر عادی</div>
+          <div class="role-badge user" id="profileRole">کاربر</div>
           <p id="profileEmail">user@domain.com</p>
         </div>
       </div>
@@ -658,18 +722,10 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <div class="card">
           <h3><i class="fa-solid fa-chart-bar"></i> آمار من</h3>
           <div style="display:grid;gap:12px;">
-            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
-              <span>تعداد تسک‌ها</span><strong id="statTasks">0</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
-              <span>گزارش‌های ثبت‌شده</span><strong id="statReports">0</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
-              <span>گزارش‌های تأییدشده</span><strong id="statApproved">0</strong>
-            </div>
-            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
-              <span>میانگین پیشرفت</span><strong id="statProgress">0%</strong>
-            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;"><span>تعداد تسک‌ها</span><strong id="statTasks">0</strong></div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;"><span>گزارش‌ها</span><strong id="statReports">0</strong></div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;"><span>تأییدشده</span><strong id="statApproved">0</strong></div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;"><span>میانگین پیشرفت</span><strong id="statProgress">0%</strong></div>
           </div>
         </div>
         <div class="card">
@@ -682,7 +738,16 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </main>
 </div>
 
-<!-- ============ MODALS ============ -->
+<!-- NOTIFICATION PANEL -->
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-head">
+    <h4><i class="fa-solid fa-bell"></i> اعلان‌ها</h4>
+    <button id="markAllNotifRead"><i class="fa-solid fa-check-double"></i> خوانده شد</button>
+  </div>
+  <div class="notif-list" id="notifList"></div>
+</div>
+
+<!-- MODALS -->
 
 <!-- PROJECT -->
 <div class="modal-overlay" id="projectModal">
@@ -695,13 +760,13 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <input type="hidden" id="pEditIdx" value="-1">
       <div class="form-grid">
         <div class="form-group"><label>نام پروژه <span class="req">*</span></label><input type="text" id="pProject"></div>
-        <div class="form-group"><label>مدیر پروژه <span class="req">*</span></label><input type="text" id="pManager"></div>
+        <div class="form-group"><label>مدیر <span class="req">*</span></label><input type="text" id="pManager"></div>
         <div class="form-group"><label>تیم</label><select id="pTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select></div>
         <div class="form-group"><label>وضعیت</label><select id="pStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select></div>
         <div class="form-group"><label>اولویت</label><select id="pPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select></div>
         <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="pProgress" min="0" max="100" value="0"></div>
-        <div class="form-group"><label>بودجه (تومان)</label><input type="number" id="pBudget" value="0"></div>
-        <div class="form-group"><label>هزینه (تومان)</label><input type="number" id="pCost" value="0"></div>
+        <div class="form-group"><label>بودجه</label><input type="number" id="pBudget" value="0"></div>
+        <div class="form-group"><label>هزینه</label><input type="number" id="pCost" value="0"></div>
         <div class="form-group"><label>تاریخ شروع</label><input type="date" id="pStart"></div>
         <div class="form-group"><label>تاریخ پایان</label><input type="date" id="pEnd"></div>
         <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee" placeholder="نام کاربر"></div>
@@ -725,14 +790,14 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <div class="modal-body">
       <input type="hidden" id="tEditIdx" value="-1">
       <div class="form-grid">
-        <div class="form-group"><label>عنوان تسک <span class="req">*</span></label><input type="text" id="tProject"></div>
+        <div class="form-group"><label>عنوان <span class="req">*</span></label><input type="text" id="tProject"></div>
         <div class="form-group"><label>مدیر</label><input type="text" id="tManager"></div>
         <div class="form-group"><label>تیم</label><select id="tTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select></div>
         <div class="form-group"><label>وضعیت</label><select id="tStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select></div>
         <div class="form-group"><label>اولویت</label><select id="tPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select></div>
         <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="tProgress" min="0" max="100" value="0"></div>
         <div class="form-group"><label>مسئول <span class="req">*</span></label><input type="text" id="tAssignee" placeholder="نام کاربر"></div>
-        <div class="form-group"><label>مهلت انجام</label><input type="date" id="tDeadline"></div>
+        <div class="form-group"><label>مهلت</label><input type="date" id="tDeadline"></div>
         <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="tEst" value="0"></div>
       </div>
     </div>
@@ -747,21 +812,21 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 <div class="modal-overlay" id="riskModal">
   <div class="modal">
     <div class="modal-header">
-      <h3><i class="fa-solid fa-triangle-exclamation"></i> <span id="riskModalTitle">ریسک جدید</span></h3>
+      <h3><i class="fa-solid fa-triangle-exclamation"></i> <span id="riskModalTitle">ریسک</span></h3>
       <button class="modal-close" data-close="riskModal"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
       <div class="form-grid">
         <div class="form-group"><label>پروژه <span class="req">*</span></label><select id="rProject"></select></div>
         <div class="form-group"><label>عنوان ریسک <span class="req">*</span></label><input type="text" id="rRisk"></div>
-        <div class="form-group"><label>احتمال (۱-۵)</label><input type="number" id="rProb" min="1" max="5" value="3"></div>
-        <div class="form-group"><label>تأثیر (۱-۵)</label><input type="number" id="rImpact" min="1" max="5" value="3"></div>
-        <div class="form-group" style="grid-column:1/-1;"><label>امتیاز ریسک</label><div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div></div>
+        <div class="form-group"><label>احتمال</label><input type="number" id="rProb" min="1" max="5" value="3"></div>
+        <div class="form-group"><label>تأثیر</label><input type="number" id="rImpact" min="1" max="5" value="3"></div>
+        <div class="form-group" style="grid-column:1/-1;"><label>امتیاز</label><div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div></div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn" data-close="riskModal">انصراف</button>
-      <button class="btn primary" id="saveRiskBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+      <button class="btn primary" id="saveRiskBtn">ذخیره</button>
     </div>
   </div>
 </div>
@@ -776,20 +841,20 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <div class="modal-body">
       <input type="hidden" id="resEditName" value="">
       <div class="form-grid">
-        <div class="form-group"><label>نام منبع <span class="req">*</span></label><input type="text" id="resName"></div>
+        <div class="form-group"><label>نام <span class="req">*</span></label><input type="text" id="resName"></div>
         <div class="form-group"><label>نقش</label><select id="resRole"><option>توسعه‌دهنده</option><option>طراح</option><option>مدیر پروژه</option><option>تستر</option><option>دواپس</option></select></div>
-        <div class="form-group"><label>ظرفیت هفتگی (ساعت)</label><input type="number" id="resCapacity" value="40"></div>
+        <div class="form-group"><label>ظرفیت (ساعت/هفته)</label><input type="number" id="resCapacity" value="40"></div>
         <div class="form-group"><label>ساعت تخصیص‌یافته</label><input type="number" id="resHours" value="0"></div>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn" data-close="resourceModal">انصراف</button>
-      <button class="btn primary" id="saveResourceBtn"><i class="fa-solid fa-check"></i> ذخیره</button>
+      <button class="btn primary" id="saveResourceBtn">ذخیره</button>
     </div>
   </div>
 </div>
 
-<!-- REPORT TASK (کاربر روی تسک گزارش می‌دهد) -->
+<!-- REPORT -->
 <div class="modal-overlay" id="reportModal">
   <div class="modal">
     <div class="modal-header">
@@ -798,42 +863,31 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
     <div class="modal-body">
       <input type="hidden" id="reportTaskIdx" value="-1">
-
       <div style="background:var(--bg3);padding:14px;border-radius:11px;margin-bottom:18px;">
-        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">تسک در حال گزارش:</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">تسک:</div>
         <div style="font-size:15px;font-weight:700;" id="reportTaskName">—</div>
       </div>
-
       <div class="form-group" style="margin-bottom:16px;">
-        <label>وضعیت جدید تسک</label>
-        <select id="reportStatus">
-          <option>در انتظار</option>
-          <option>در حال اجرا</option>
-          <option>تأخیردار</option>
-          <option>تکمیل‌شده</option>
-        </select>
+        <label>وضعیت جدید</label>
+        <select id="reportStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select>
       </div>
-
       <div class="form-group" style="margin-bottom:16px;">
-        <label>درصد پیشرفت جدید</label>
+        <label>درصد پیشرفت</label>
         <div class="slider-row">
           <input type="range" id="reportProgress" min="0" max="100" value="0" oninput="document.getElementById('reportProgressVal').textContent=this.value+'%'">
           <span class="value" id="reportProgressVal">0%</span>
         </div>
       </div>
-
       <div class="form-group" style="margin-bottom:16px;">
-        <label>ساعت صرف‌شده (امروز)</label>
+        <label>ساعت صرف‌شده</label>
         <input type="number" id="reportHours" value="0" min="0" step="0.5">
       </div>
-
       <div class="form-group" style="margin-bottom:16px;">
-        <label>توضیحات گزارش <span class="req">*</span></label>
-        <textarea id="reportText" placeholder="چه کاری انجام دادید؟ چه مشکلی پیش آمد؟ چه چیزی نیاز دارید؟"></textarea>
+        <label>توضیحات <span class="req">*</span></label>
+        <textarea id="reportText" placeholder="چه کاری انجام دادید؟"></textarea>
       </div>
-
       <div class="form-group" style="margin-bottom:16px;">
-        <label>پیوست فایل (اختیاری)</label>
+        <label>پیوست فایل</label>
         <label class="file-upload">
           <i class="fa-solid fa-cloud-arrow-up"></i>
           <p>برای انتخاب فایل کلیک کنید</p>
@@ -844,21 +898,44 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
     <div class="modal-footer">
       <button class="btn" data-close="reportModal">انصراف</button>
-      <button class="btn primary" id="saveReportBtn"><i class="fa-solid fa-paper-plane"></i> ثبت گزارش</button>
+      <button class="btn primary" id="saveReportBtn"><i class="fa-solid fa-paper-plane"></i> ثبت</button>
     </div>
   </div>
 </div>
 
-<!-- VIEW REPORT -->
-<div class="modal-overlay" id="viewReportModal">
+<!-- REVIEW REPORT -->
+<div class="modal-overlay" id="reviewModal">
   <div class="modal">
     <div class="modal-header">
-      <h3><i class="fa-solid fa-eye"></i> جزئیات گزارش</h3>
-      <button class="modal-close" data-close="viewReportModal"><i class="fa-solid fa-xmark"></i></button>
+      <h3><i class="fa-solid fa-gavel"></i> بررسی گزارش</h3>
+      <button class="modal-close" data-close="reviewModal"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="modal-body" id="viewReportBody"></div>
+    <div class="modal-body">
+      <input type="hidden" id="reviewReportId" value="">
+      <input type="hidden" id="reviewAction" value="">
+      <div id="reviewReportPreview" style="margin-bottom:16px;"></div>
+      <div class="form-group">
+        <label>یادداشت (اختیاری)</label>
+        <textarea id="reviewNote" placeholder="توضیح برای کاربر..."></textarea>
+      </div>
+    </div>
     <div class="modal-footer">
-      <button class="btn" data-close="viewReportModal">بستن</button>
+      <button class="btn" data-close="reviewModal">انصراف</button>
+      <button class="btn primary" id="confirmReviewBtn"><i class="fa-solid fa-check"></i> تأیید</button>
+    </div>
+  </div>
+</div>
+
+<!-- FILE PREVIEW -->
+<div class="modal-overlay" id="filePreviewModal">
+  <div class="modal" style="max-width:800px;">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-file"></i> <span id="filePreviewName">پیش‌نمایش فایل</span></h3>
+      <button class="modal-close" data-close="filePreviewModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="filePreviewBody" style="text-align:center;"></div>
+    <div class="modal-footer">
+      <button class="btn" data-close="filePreviewModal">بستن</button>
     </div>
   </div>
 </div>
@@ -869,7 +946,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 ============================================================ */
 const DEMO_MODE = true;
 const USERS = {
-  // شبیه‌سازی کاربران دامنه
   'admin': { password:'admin', role:'admin', displayName:'مدیر سیستم', email:'admin@company.com' },
   'ali':   { password:'ali',   role:'user',  displayName:'علی رضایی',  email:'ali@company.com' },
   'maryam':{ password:'maryam',role:'user',  displayName:'مریم کریمی', email:'maryam@company.com' },
@@ -881,16 +957,12 @@ async function loginAPI(username, password){
   if(DEMO_MODE){
     await new Promise(r => setTimeout(r, 700));
     const u = USERS[username.toLowerCase()];
-    if(!u || u.password !== password){
-      throw new Error('نام کاربری یا رمز عبور اشتباه است');
-    }
+    if(!u || u.password !== password) throw new Error('نام کاربری یا رمز عبور اشتباه است');
     return { username, displayName: u.displayName, role: u.role, email: u.email };
   }
-  // حالت واقعی AD
   const res = await fetch('/api/login', {
     method:'POST', headers:{'Content-Type':'application/json'},
-    credentials:'include',
-    body: JSON.stringify({ username, password })
+    credentials:'include', body: JSON.stringify({ username, password })
   });
   const data = await res.json();
   if(!res.ok) throw new Error(data.message || 'ورود ناموفق');
@@ -913,7 +985,9 @@ let currentUser = null;
 let rawData = [];
 let filteredData = [];
 let resources = [];
-let reports = []; // {id, taskIdx, taskName, username, progress, status, hours, text, files, createdAt, reportStatus:'pending|approved|rejected', reviewNote}
+let reports = [];
+let notifications = [];
+let emails = [];
 let currentRange = 'monthly';
 let sortKey = null, sortAsc = true;
 let currentPage = 1;
@@ -955,20 +1029,23 @@ const statusClass = s => {
   return '';
 };
 const priorityClass = p => p==='بالا'?'high':p==='متوسط'?'medium':'low';
-const riskLevel = score => score >= 15 ? 'high' : score >= 8 ? 'medium' : 'low';
+const riskLevel = s => s >= 15 ? 'high' : s >= 8 ? 'medium' : 'low';
 const today = () => new Date().toISOString().split('T')[0];
 const daysUntil = dateStr => {
   const d = new Date(dateStr); if(isNaN(d)) return 9999;
   const t = new Date(); t.setHours(0,0,0,0);
   return Math.round((d - t) / 86400000);
 };
-const fmtDate = d => {
-  if(!d) return '—';
-  try{ return new Date(d).toLocaleDateString('fa-IR'); }catch(e){ return d; }
-};
 const fmtDateTime = d => {
   if(!d) return '—';
   try{ return new Date(d).toLocaleString('fa-IR'); }catch(e){ return d; }
+};
+const timeAgo = iso => {
+  const diff = (Date.now() - new Date(iso).getTime()) / 1000;
+  if(diff < 60) return 'همین حالا';
+  if(diff < 3600) return Math.round(diff/60)+' دقیقه پیش';
+  if(diff < 86400) return Math.round(diff/3600)+' ساعت پیش';
+  return Math.round(diff/86400)+' روز پیش';
 };
 
 /* ============================================================
@@ -978,17 +1055,28 @@ function saveLocal(){
   try{
     localStorage.setItem('pm_data', JSON.stringify(rawData));
     localStorage.setItem('pm_resources', JSON.stringify(resources));
-    localStorage.setItem('pm_reports', JSON.stringify(reports));
-  }catch(e){}
+    // گزارش‌ها بدون فایل‌های Base64 ذخیره می‌شوند تا حجم زیاد نشود
+    const reportsLight = reports.map(r => ({
+      ...r,
+      files: (r.files||[]).map(f => ({name:f.name, type:f.type, size:f.size, data:f.data?.length > 500000 ? null : f.data}))
+    }));
+    localStorage.setItem('pm_reports', JSON.stringify(reportsLight));
+    localStorage.setItem('pm_notifications', JSON.stringify(notifications.slice(0, 50)));
+    localStorage.setItem('pm_emails', JSON.stringify(emails.slice(0, 50)));
+  }catch(e){ console.warn('Save failed:', e); }
 }
 function loadLocal(){
   try{
     const d = localStorage.getItem('pm_data');
     const r = localStorage.getItem('pm_resources');
     const rp = localStorage.getItem('pm_reports');
+    const nt = localStorage.getItem('pm_notifications');
+    const em = localStorage.getItem('pm_emails');
     if(d) rawData = JSON.parse(d);
     if(r) resources = JSON.parse(r);
     if(rp) reports = JSON.parse(rp);
+    if(nt) notifications = JSON.parse(nt);
+    if(em) emails = JSON.parse(em);
     return !!d;
   }catch(e){ return false; }
 }
@@ -998,6 +1086,168 @@ function loadLocal(){
 ============================================================ */
 function isAdmin(){ return currentUser && currentUser.role === 'admin'; }
 function isUser(){ return currentUser && currentUser.role === 'user'; }
+
+/* ============================================================
+   NOTIFICATIONS
+============================================================ */
+function addNotification(targetUser, title, text, type){
+  notifications.unshift({
+    id: 'N-' + Date.now() + '-' + Math.random().toString(36).slice(2,6),
+    targetUser, title, text, type: type || 'info',
+    createdAt: new Date().toISOString(),
+    read: false
+  });
+  saveLocal();
+  renderNotifications();
+  updateNotifCount();
+}
+
+function getMyNotifications(){
+  if(!currentUser) return [];
+  return notifications.filter(n => n.targetUser === currentUser.username || n.targetUser === 'all');
+}
+
+function renderNotifications(){
+  const list = document.getElementById('notifList'); if(!list) return;
+  const mine = getMyNotifications();
+  if(!mine.length){
+    list.innerHTML = '<div class="notif-empty"><i class="fa-solid fa-bell-slash"></i>اعلان جدیدی ندارید</div>';
+    return;
+  }
+  list.innerHTML = mine.slice(0, 30).map(n => `
+    <div class="notif-item ${n.read ? '' : 'unread'}" onclick="markNotifRead('${n.id}')">
+      <div class="n-head">
+        <div class="n-title">
+          <i class="fa-solid ${n.type === 'success' ? 'fa-circle-check' : n.type === 'warning' ? 'fa-triangle-exclamation' : n.type === 'danger' ? 'fa-circle-xmark' : 'fa-info-circle'}"
+             style="color:${n.type === 'success' ? 'var(--success)' : n.type === 'warning' ? 'var(--warning)' : n.type === 'danger' ? 'var(--danger)' : 'var(--primary)'};"></i>
+          ${n.title}
+        </div>
+        <div class="n-time">${timeAgo(n.createdAt)}</div>
+      </div>
+      <div class="n-text">${n.text}</div>
+    </div>
+  `).join('');
+}
+
+function updateNotifCount(){
+  const count = document.getElementById('notifCount');
+  if(!count) return;
+  const unread = getMyNotifications().filter(n => !n.read).length;
+  count.textContent = unread;
+  count.style.display = unread ? 'flex' : 'none';
+}
+
+function markNotifRead(id){
+  const n = notifications.find(x => x.id === id);
+  if(n){ n.read = true; saveLocal(); renderNotifications(); updateNotifCount(); }
+}
+window.markNotifRead = markNotifRead;
+
+document.getElementById('notifBell').addEventListener('click', (e) => {
+  e.stopPropagation();
+  document.getElementById('notifPanel').classList.toggle('show');
+  renderNotifications();
+});
+
+document.getElementById('markAllNotifRead').addEventListener('click', () => {
+  getMyNotifications().forEach(n => n.read = true);
+  saveLocal(); renderNotifications(); updateNotifCount();
+});
+
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('notifPanel');
+  const bell = document.getElementById('notifBell');
+  if(panel && !panel.contains(e.target) && !bell.contains(e.target)){
+    panel.classList.remove('show');
+  }
+});
+
+/* ============================================================
+   EMAIL SIMULATION
+============================================================ */
+function sendEmail(targetUser, subject, body, tag){
+  emails.unshift({
+    id: 'E-' + Date.now() + '-' + Math.random().toString(36).slice(2,6),
+    targetUser,
+    subject, body, tag: tag || 'info',
+    createdAt: new Date().toISOString(),
+    read: false
+  });
+  saveLocal();
+  renderEmails();
+}
+
+function getMyEmails(){
+  if(!currentUser) return [];
+  return emails.filter(e => e.targetUser === currentUser.username || e.targetUser === 'all');
+}
+
+function renderEmails(){
+  const list = document.getElementById('emailList'); if(!list) return;
+  const mine = getMyEmails();
+  if(!mine.length){
+    list.innerHTML = '<div class="empty-state"><i class="fa-solid fa-envelope-open"></i>صندوق پیام شما خالی است</div>';
+    return;
+  }
+  list.innerHTML = mine.map(e => `
+    <div class="email-item ${e.read ? 'read' : ''}" onclick="toggleEmailRead('${e.id}')">
+      <div class="email-head">
+        <div class="email-subject">
+          ${e.tag === 'approved' ? '<span class="email-tag approved">تأیید</span>' : e.tag === 'rejected' ? '<span class="email-tag rejected">رد</span>' : ''}
+          ${e.subject}
+        </div>
+        <div class="email-time">${timeAgo(e.createdAt)}</div>
+      </div>
+      <div class="email-preview">${e.body.substring(0, 100)}${e.body.length > 100 ? '...' : ''}</div>
+      ${e.read ? `<div class="email-body">${e.body}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function toggleEmailRead(id){
+  const e = emails.find(x => x.id === id);
+  if(e){ e.read = !e.read; saveLocal(); renderEmails(); }
+}
+window.toggleEmailRead = toggleEmailRead;
+
+document.getElementById('markAllReadBtn').addEventListener('click', () => {
+  getMyEmails().forEach(e => e.read = true);
+  saveLocal(); renderEmails();
+});
+
+/* ============================================================
+   FILE HANDLING
+============================================================ */
+function readFileAsBase64(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = e => resolve({name: file.name, type: file.type, size: file.size, data: e.target.result});
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function previewFile(fileIdx, reportId){
+  const report = reports.find(r => r.id === reportId);
+  if(!report || !report.files || !report.files[fileIdx]) return;
+  const f = report.files[fileIdx];
+  const body = document.getElementById('filePreviewBody');
+  document.getElementById('filePreviewName').textContent = f.name;
+
+  if(!f.data){
+    body.innerHTML = '<div class="empty-state"><i class="fa-solid fa-file"></i>فایل قابل پیش‌نمایش نیست (حجم زیاد)</div>';
+    return;
+  }
+  if(f.type && f.type.startsWith('image/')){
+    body.innerHTML = `<img src="${f.data}" style="max-width:100%;border-radius:10px;">`;
+  } else if(f.type === 'application/pdf'){
+    body.innerHTML = `<iframe src="${f.data}" style="width:100%;height:500px;border-radius:10px;border:none;"></iframe>`;
+  } else {
+    body.innerHTML = `<div style="padding:40px;"><i class="fa-solid fa-file" style="font-size:60px;color:var(--primary);"></i><p style="margin-top:16px;">${f.name}</p><a href="${f.data}" download="${f.name}" class="btn primary" style="margin-top:16px;"><i class="fa-solid fa-download"></i> دانلود</a></div>`;
+  }
+  openModal('filePreviewModal');
+}
+window.previewFile = previewFile;
 
 /* ============================================================
    LOGIN UI
@@ -1051,12 +1301,10 @@ loginForm.addEventListener('submit', async (e) => {
 const app = document.getElementById('app');
 
 function showApp(){
-  // اطلاعات کاربر در سایدبار
   document.getElementById('userName').textContent = currentUser.displayName || currentUser.username;
   document.getElementById('userRole').textContent = isAdmin() ? 'مدیر سیستم' : 'کاربر';
   document.getElementById('userAvatar').childNodes[0].nodeValue = (currentUser.displayName || currentUser.username).charAt(0).toUpperCase();
 
-  // پروفایل
   document.getElementById('profileName').textContent = currentUser.displayName || currentUser.username;
   document.getElementById('profileRole').textContent = isAdmin() ? 'مدیر سیستم' : 'کاربر عادی';
   document.getElementById('profileRole').className = 'role-badge ' + (isAdmin() ? 'admin' : 'user');
@@ -1071,7 +1319,6 @@ function showApp(){
   loginScreen.classList.add('hidden');
   app.classList.add('show');
 
-  // بارگذاری داده
   if(!localStorage.getItem('pm_data')){
     rawData = SAMPLE_DATA.map(d => ({...d}));
     initResourcesIfEmpty();
@@ -1085,11 +1332,11 @@ function showApp(){
     updateTeamFilter();
     applyTimeFilter();
     renderAll();
-    renderKanban();
-    renderGantt();
-    renderRisks();
-    renderResources();
+    renderKanban(); renderGantt(); renderRisks(); renderResources();
     renderUserPages();
+    renderNotifications(); updateNotifCount();
+    renderEmails();
+    renderAnalytics();
   }, 100);
 }
 
@@ -1105,7 +1352,7 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
 });
 
 /* ============================================================
-   SIDEBAR بر اساس نقش
+   SIDEBAR
 ============================================================ */
 function buildSidebar(){
   const nav = document.getElementById('sidebarNav');
@@ -1117,7 +1364,10 @@ function buildSidebar(){
     <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
     <div class="nav-item" data-page="risks"><i class="fa-solid fa-triangle-exclamation"></i> ریسک‌ها</div>
     <div class="nav-item" data-page="resources"><i class="fa-solid fa-users"></i> منابع</div>
+    <div class="nav-section">گزارش‌ها</div>
+    <div class="nav-item" data-page="analytics"><i class="fa-solid fa-chart-simple"></i> تحلیل گزارش‌ها</div>
     <div class="nav-item" data-page="reports"><i class="fa-solid fa-clipboard-list"></i> همه گزارش‌ها <span class="nav-badge" id="pendingReportsBadge">0</span></div>
+    <div class="nav-item" data-page="email"><i class="fa-solid fa-envelope"></i> صندوق پیام</div>
     <div class="nav-section">حساب</div>
     <div class="nav-item" data-page="profile"><i class="fa-solid fa-user"></i> پروفایل</div>
     <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> تنظیمات</div>
@@ -1127,6 +1377,7 @@ function buildSidebar(){
     <div class="nav-item active" data-page="userDashboard"><i class="fa-solid fa-gauge"></i> داشبورد من</div>
     <div class="nav-item" data-page="myTasks"><i class="fa-solid fa-list-check"></i> تسک‌های من</div>
     <div class="nav-item" data-page="myReports"><i class="fa-solid fa-clipboard-list"></i> گزارش‌های من</div>
+    <div class="nav-item" data-page="email"><i class="fa-solid fa-envelope"></i> صندوق پیام</div>
     <div class="nav-section">عمومی</div>
     <div class="nav-item" data-page="projects"><i class="fa-solid fa-folder"></i> پروژه‌ها</div>
     <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
@@ -1134,7 +1385,7 @@ function buildSidebar(){
   `;
   nav.innerHTML = isAdmin() ? adminMenu : userMenu;
 
-  nav.addEventListener('click', e => {
+  nav.onclick = (e) => {
     const item = e.target.closest('.nav-item');
     if(!item) return;
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1149,13 +1400,15 @@ function buildSidebar(){
       if(page === 'risks') renderRisks();
       if(page === 'resources') renderResources();
       if(page === 'reports') renderAllReports();
+      if(page === 'analytics') renderAnalytics();
+      if(page === 'email') renderEmails();
       if(page === 'myTasks') renderMyTasks();
       if(page === 'myReports') renderMyReports();
       if(page === 'userDashboard') renderUserDashboard();
       if(page === 'profile') renderProfile();
     }
     if(window.innerWidth <= 1024) document.getElementById('sidebar').classList.remove('open');
-  });
+  };
 }
 
 function showDefaultPage(){
@@ -1211,7 +1464,6 @@ document.getElementById('apiBtn').addEventListener('click', async () => {
     setData(normalize(Array.isArray(json) ? json : [json]));
   }catch(err){ alert('خطا: ' + err.message); }
 });
-
 document.getElementById('sampleBtn').addEventListener('click', () => {
   if(rawData.length && !confirm('داده‌های فعلی جایگزین شوند؟')) return;
   setData(SAMPLE_DATA.map(d => ({...d})));
@@ -1224,10 +1476,8 @@ document.getElementById('sampleBtn2').addEventListener('click', () => {
 });
 document.getElementById('clearBtn').addEventListener('click', () => {
   if(!confirm('همه داده‌ها حذف شوند؟')) return;
-  rawData = []; filteredData = []; resources = []; reports = [];
-  localStorage.removeItem('pm_data');
-  localStorage.removeItem('pm_resources');
-  localStorage.removeItem('pm_reports');
+  rawData = []; filteredData = []; resources = []; reports = []; notifications = []; emails = [];
+  localStorage.clear();
   renderAll();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
 });
@@ -1294,7 +1544,7 @@ function applyTimeFilter(){
 }
 
 /* ============================================================
-   RENDER ALL (ADMIN)
+   ADMIN DASHBOARD RENDER
 ============================================================ */
 function renderAll(){ if(isAdmin()){ renderKPIs(); renderCharts(); renderTable(); } }
 
@@ -1330,46 +1580,38 @@ function renderCharts(){
 
   if(charts.line) charts.line.destroy();
   const lineEl = document.getElementById('lineChart');
-  if(lineEl){
-    charts.line = new Chart(lineEl, {
-      type:'line', data:{labels:lineLabels, datasets:[{label:'میانگین پیشرفت (%)', data:lineData, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointBackgroundColor:'#58a6ff', pointRadius:4}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
-    });
-  }
+  if(lineEl) charts.line = new Chart(lineEl, {
+    type:'line', data:{labels:lineLabels, datasets:[{label:'پیشرفت (%)', data:lineData, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointRadius:4}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+  });
 
   const statusCount = {};
   filteredData.forEach(d => statusCount[d.status] = (statusCount[d.status]||0)+1);
   if(charts.pie) charts.pie.destroy();
   const pieEl = document.getElementById('pieChart');
-  if(pieEl){
-    charts.pie = new Chart(pieEl, {
-      type:'doughnut', data:{labels:Object.keys(statusCount), datasets:[{data:Object.values(statusCount), backgroundColor:['#3fb950','#58a6ff','#d29922','#f85149','#bc8cff'], borderColor:'#161b22', borderWidth:2}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
-    });
-  }
+  if(pieEl) charts.pie = new Chart(pieEl, {
+    type:'doughnut', data:{labels:Object.keys(statusCount), datasets:[{data:Object.values(statusCount), backgroundColor:['#3fb950','#58a6ff','#d29922','#f85149','#bc8cff'], borderColor:'#161b22', borderWidth:2}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
+  });
 
   const teamBudget = {};
   filteredData.forEach(d => teamBudget[d.team] = (teamBudget[d.team]||0) + d.budget);
   if(charts.bar) charts.bar.destroy();
   const barEl = document.getElementById('barChart');
-  if(barEl){
-    charts.bar = new Chart(barEl, {
-      type:'bar', data:{labels:Object.keys(teamBudget), datasets:[{label:'بودجه', data:Object.values(teamBudget), backgroundColor:'rgba(188,140,255,.6)', borderColor:'#bc8cff', borderWidth:1, borderRadius:6}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx => fmtMoney(ctx.parsed.y)+' تومان'}}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{callback:v => fmtMoney(v)}}, x:{grid:{display:false}}}}
-    });
-  }
+  if(barEl) charts.bar = new Chart(barEl, {
+    type:'bar', data:{labels:Object.keys(teamBudget), datasets:[{label:'بودجه', data:Object.values(teamBudget), backgroundColor:'rgba(188,140,255,.6)', borderColor:'#bc8cff', borderWidth:1, borderRadius:6}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{callback:v => fmtMoney(v)}}, x:{grid:{display:false}}}}
+  });
 
   const managerCount = {};
   filteredData.forEach(d => managerCount[d.manager] = (managerCount[d.manager]||0)+1);
   const topManagers = Object.entries(managerCount).sort((a,b) => b[1]-a[1]).slice(0,5);
   if(charts.manager) charts.manager.destroy();
   const mEl = document.getElementById('managerChart');
-  if(mEl){
-    charts.manager = new Chart(mEl, {
-      type:'bar', data:{labels:topManagers.map(m => m[0]), datasets:[{label:'تعداد پروژه', data:topManagers.map(m => m[1]), backgroundColor:'rgba(57,197,207,.6)', borderColor:'#39c5cf', borderWidth:1, borderRadius:6}]},
-      options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, y:{grid:{display:false}}}}
-    });
-  }
+  if(mEl) charts.manager = new Chart(mEl, {
+    type:'bar', data:{labels:topManagers.map(m => m[0]), datasets:[{data:topManagers.map(m => m[1]), backgroundColor:'rgba(57,197,207,.6)', borderColor:'#39c5cf', borderWidth:1, borderRadius:6}]},
+    options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, y:{grid:{display:false}}}}
+  });
 }
 
 function periodKey(dateStr){
@@ -1431,7 +1673,7 @@ function renderTable(){
   const start = (currentPage-1)*PAGE_SIZE;
   const page = data.slice(start, start+PAGE_SIZE);
   if(!page.length){
-    tbody.innerHTML = `<tr><td colspan="10" class="empty-state"><i class="fa-solid fa-inbox"></i>داده‌ای یافت نشد</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="10" class="empty-state"><i class="fa-solid fa-inbox"></i>داده‌ای نیست</td></tr>`;
   } else {
     tbody.innerHTML = page.map(d => {
       const idx = rawData.indexOf(d);
@@ -1439,9 +1681,8 @@ function renderTable(){
         <td>
           <button class="btn sm" onclick="editProject(${idx})"><i class="fa-solid fa-pen"></i></button>
           <button class="btn sm danger" onclick="deleteProject(${idx})"><i class="fa-solid fa-trash"></i></button>
-        </td>` : '<td class="admin-only"></td>';
-      return `
-      <tr>
+        </td>` : '<td></td>';
+      return `<tr>
         <td>${d.date}</td><td>${d.project}</td><td>${d.manager}</td><td>${d.team}</td>
         <td><span class="badge ${statusClass(d.status)}">${d.status}</span></td>
         <td>${d.priority}</td>
@@ -1506,8 +1747,7 @@ window.editProject = editProject;
 function deleteProject(idx){
   if(!confirm('این پروژه حذف شود؟')) return;
   rawData.splice(idx, 1);
-  saveLocal();
-  applyTimeFilter();
+  saveLocal(); applyTimeFilter();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
 }
 window.deleteProject = deleteProject;
@@ -1516,7 +1756,7 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
   const project = document.getElementById('pProject').value.trim();
   const manager = document.getElementById('pManager').value.trim();
   if(!project){ alert('نام پروژه الزامی است'); return; }
-  if(!manager){ alert('مدیر پروژه الزامی است'); return; }
+  if(!manager){ alert('مدیر الزامی است'); return; }
   const obj = {
     date: today(), project, manager,
     team: document.getElementById('pTeam').value,
@@ -1535,10 +1775,16 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
   const idx = Number(document.getElementById('pEditIdx').value);
   if(idx >= 0) rawData[idx] = {...rawData[idx], ...obj};
   else rawData.push(obj);
-  saveLocal();
-  closeModal('projectModal');
-  applyTimeFilter();
+  saveLocal(); closeModal('projectModal'); applyTimeFilter();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
+
+  if(obj.assignee && obj.assignee !== '—'){
+    const targetUser = Object.values(USERS).find(u => u.displayName === obj.assignee);
+    if(targetUser){
+      const uname = Object.keys(USERS).find(k => USERS[k] === targetUser);
+      addNotification(uname, 'تسک جدید تخصیص یافت', `پروژه «${project}» به شما تخصیص داده شد`, 'info');
+    }
+  }
 });
 
 /* ============================================================
@@ -1559,8 +1805,8 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
 document.getElementById('saveTaskBtn').addEventListener('click', () => {
   const project = document.getElementById('tProject').value.trim();
   const assignee = document.getElementById('tAssignee').value.trim();
-  if(!project){ alert('عنوان تسک الزامی است'); return; }
-  if(!assignee){ alert('مسئول تسک الزامی است'); return; }
+  if(!project){ alert('عنوان الزامی است'); return; }
+  if(!assignee){ alert('مسئول الزامی است'); return; }
   const obj = {
     date: today(), project,
     manager: document.getElementById('tManager').value.trim(),
@@ -1571,16 +1817,19 @@ document.getElementById('saveTaskBtn').addEventListener('click', () => {
     assignee,
     estimated_hours: Number(document.getElementById('tEst').value) || 0,
     actual_hours: 0, budget:0, cost:0,
-    start_date: today(),
-    end_date: today(),
+    start_date: today(), end_date: today(),
     deadline: document.getElementById('tDeadline').value
   };
   if(obj.status === 'تکمیل‌شده') obj.progress = 100;
   rawData.push(obj);
-  saveLocal();
-  closeModal('taskModal');
-  applyTimeFilter();
+  saveLocal(); closeModal('taskModal'); applyTimeFilter();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
+
+  const targetUser = Object.values(USERS).find(u => u.displayName === assignee);
+  if(targetUser){
+    const uname = Object.keys(USERS).find(k => USERS[k] === targetUser);
+    addNotification(uname, 'تسک جدید', `تسک «${project}» به شما تخصیص داده شد`, 'info');
+  }
 });
 
 function editTask(idx){
@@ -1601,10 +1850,9 @@ function editTask(idx){
 window.editTask = editTask;
 
 function deleteTask(idx){
-  if(!confirm('این تسک حذف شود؟')) return;
+  if(!confirm('حذف شود؟')) return;
   rawData.splice(idx, 1);
-  saveLocal();
-  applyTimeFilter();
+  saveLocal(); applyTimeFilter();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
 }
 window.deleteTask = deleteTask;
@@ -1709,11 +1957,10 @@ document.getElementById('addRiskBtn').addEventListener('click', () => {
   document.getElementById('rImpact').value = 3;
   const sel = document.getElementById('rProject');
   sel.innerHTML = rawData.map((d,i) => `<option value="${i}">${d.project}</option>`).join('');
-  if(!sel.innerHTML){ alert('ابتدا یک پروژه ایجاد کنید'); return; }
+  if(!sel.innerHTML){ alert('ابتدا پروژه ایجاد کنید'); return; }
   updateRiskPreview();
   openModal('riskModal');
 });
-
 function updateRiskPreview(){
   const p = Number(document.getElementById('rProb').value) || 1;
   const i = Number(document.getElementById('rImpact').value) || 1;
@@ -1729,14 +1976,12 @@ document.getElementById('rImpact').addEventListener('input', updateRiskPreview);
 document.getElementById('saveRiskBtn').addEventListener('click', () => {
   const idx = Number(document.getElementById('rProject').value);
   const risk = document.getElementById('rRisk').value.trim();
-  if(!risk){ alert('عنوان ریسک الزامی است'); return; }
+  if(!risk){ alert('عنوان الزامی است'); return; }
   if(!rawData[idx]){ alert('پروژه معتبر نیست'); return; }
   rawData[idx].risk = risk;
   rawData[idx].risk_probability = Number(document.getElementById('rProb').value) || 1;
   rawData[idx].risk_impact = Number(document.getElementById('rImpact').value) || 1;
-  saveLocal();
-  closeModal('riskModal');
-  renderRisks();
+  saveLocal(); closeModal('riskModal'); renderRisks();
 });
 
 function editRisk(projectIdx){
@@ -1747,19 +1992,17 @@ function editRisk(projectIdx){
   document.getElementById('rRisk').value = d.risk || '';
   document.getElementById('rProb').value = d.risk_probability || 3;
   document.getElementById('rImpact').value = d.risk_impact || 3;
-  updateRiskPreview();
-  openModal('riskModal');
+  updateRiskPreview(); openModal('riskModal');
 }
 window.editRisk = editRisk;
 
 function deleteRisk(projectIdx){
-  if(!confirm('این ریسک حذف شود؟')) return;
+  if(!confirm('حذف شود؟')) return;
   if(rawData[projectIdx]){
     rawData[projectIdx].risk = '';
     rawData[projectIdx].risk_probability = 1;
     rawData[projectIdx].risk_impact = 1;
-    saveLocal();
-    renderRisks();
+    saveLocal(); renderRisks();
   }
 }
 window.deleteRisk = deleteRisk;
@@ -1788,14 +2031,11 @@ function renderRisks(){
   }
   if(charts.riskMatrix) charts.riskMatrix.destroy();
   const mEl = document.getElementById('riskMatrixChart');
-  if(mEl){
-    const matrixData = risks.map(r => ({x:r.risk_probability, y:r.risk_impact, r:8}));
-    charts.riskMatrix = new Chart(mEl, {
-      type:'bubble',
-      data:{datasets:[{label:'ریسک‌ها', data:matrixData, backgroundColor:'rgba(248,81,73,.5)', borderColor:'#f85149', borderWidth:1}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{min:0,max:6, title:{display:true,text:'احتمال'}, grid:{color:'#21262d'}}, y:{min:0,max:6, title:{display:true,text:'تأثیر'}, grid:{color:'#21262d'}}}}
-    });
-  }
+  if(mEl) charts.riskMatrix = new Chart(mEl, {
+    type:'bubble',
+    data:{datasets:[{data:risks.map(r => ({x:r.risk_probability, y:r.risk_impact, r:8})), backgroundColor:'rgba(248,81,73,.5)', borderColor:'#f85149', borderWidth:1}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{min:0,max:6, grid:{color:'#21262d'}}, y:{min:0,max:6, grid:{color:'#21262d'}}}}
+  });
   if(charts.riskPie) charts.riskPie.destroy();
   const pEl = document.getElementById('riskPieChart');
   if(pEl){
@@ -1821,10 +2061,9 @@ document.getElementById('addResourceBtn').addEventListener('click', () => {
   document.getElementById('resHours').value = 0;
   openModal('resourceModal');
 });
-
 document.getElementById('saveResourceBtn').addEventListener('click', () => {
   const name = document.getElementById('resName').value.trim();
-  if(!name){ alert('نام منبع الزامی است'); return; }
+  if(!name){ alert('نام الزامی است'); return; }
   const obj = {
     name,
     role: document.getElementById('resRole').value,
@@ -1836,17 +2075,14 @@ document.getElementById('saveResourceBtn').addEventListener('click', () => {
     const idx = resources.findIndex(r => r.name === editName);
     if(idx >= 0) resources[idx] = obj;
   } else {
-    if(resources.find(r => r.name === name)){ alert('این نام قبلاً ثبت شده'); return; }
+    if(resources.find(r => r.name === name)){ alert('تکراری است'); return; }
     resources.push(obj);
   }
-  saveLocal();
-  closeModal('resourceModal');
-  renderResources();
+  saveLocal(); closeModal('resourceModal'); renderResources();
 });
-
 function editResource(name){
   const r = resources.find(x => x.name === name); if(!r) return;
-  document.getElementById('resourceModalTitle').textContent = 'ویرایش منبع';
+  document.getElementById('resourceModalTitle').textContent = 'ویرایش';
   document.getElementById('resEditName').value = name;
   document.getElementById('resName').value = r.name;
   document.getElementById('resRole').value = r.role || 'توسعه‌دهنده';
@@ -1855,12 +2091,10 @@ function editResource(name){
   openModal('resourceModal');
 }
 window.editResource = editResource;
-
 function deleteResource(name){
-  if(!confirm('این منبع حذف شود؟')) return;
+  if(!confirm('حذف شود؟')) return;
   resources = resources.filter(r => r.name !== name);
-  saveLocal();
-  renderResources();
+  saveLocal(); renderResources();
 }
 window.deleteResource = deleteResource;
 
@@ -1872,7 +2106,7 @@ function renderResources(){
   }
   const weeks = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
   if(!resources.length){
-    container.innerHTML = '<div class="empty-state">منبعی ثبت نشده</div>';
+    container.innerHTML = '<div class="empty-state">منبعی نیست</div>';
   } else {
     let html = '<table><thead><tr><th>منبع</th><th>نقش</th>' + weeks.map(w => `<th>${w}</th>`).join('') + '<th>مجموع</th><th>عملیات</th></tr></thead><tbody>';
     resources.forEach(r => {
@@ -1895,13 +2129,11 @@ function renderResources(){
   }
   if(charts.workload) charts.workload.destroy();
   const wEl = document.getElementById('workloadChart');
-  if(wEl){
-    charts.workload = new Chart(wEl, {
-      type:'bar',
-      data:{labels:resources.map(r => r.name), datasets:[{label:'ساعت', data:resources.map(r => r.hours || 0), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
-    });
-  }
+  if(wEl) charts.workload = new Chart(wEl, {
+    type:'bar',
+    data:{labels:resources.map(r => r.name), datasets:[{data:resources.map(r => r.hours || 0), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+  });
 }
 
 /* ============================================================
@@ -1933,27 +2165,21 @@ function renderUserDashboard(){
     return d >= 0 && d <= 3;
   }).length;
 
-  document.getElementById('uKpiTotal').textContent = fmtNum(total);
-  document.getElementById('uKpiDone').textContent = fmtNum(done);
-  document.getElementById('uKpiDonePct').textContent = total ? Math.round(done/total*100)+'% تکمیل' : '0%';
-  document.getElementById('uKpiActive').textContent = fmtNum(active);
-  document.getElementById('uKpiUrgent').textContent = fmtNum(urgent);
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('uKpiTotal', fmtNum(total));
+  set('uKpiDone', fmtNum(done));
+  set('uKpiDonePct', total ? Math.round(done/total*100)+'% تکمیل' : '0%');
+  set('uKpiActive', fmtNum(active));
+  set('uKpiUrgent', fmtNum(urgent));
 
-  // نمودار پیشرفت هفتگی
   if(charts.userProgress) charts.userProgress.destroy();
   const pEl = document.getElementById('userProgressChart');
-  if(pEl){
-    // بر اساس هفته‌های اخیر - شبیه‌سازی
-    const labels = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
-    const data = labels.map(() => 20 + Math.round(Math.random()*60));
-    charts.userProgress = new Chart(pEl, {
-      type:'line',
-      data:{labels, datasets:[{label:'پیشرفت (%)', data, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointRadius:4}]},
-      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
-    });
-  }
+  if(pEl) charts.userProgress = new Chart(pEl, {
+    type:'line',
+    data:{labels:['هفته ۱','هفته ۲','هفته ۳','هفته ۴'], datasets:[{data:[20,45,60,75].map(() => 20 + Math.round(Math.random()*60)), borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointRadius:4}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+  });
 
-  // نمودار وضعیت
   if(charts.userStatus) charts.userStatus.destroy();
   const sEl = document.getElementById('userStatusChart');
   if(sEl){
@@ -1966,7 +2192,6 @@ function renderUserDashboard(){
     });
   }
 
-  // تسک‌های فوری
   const container = document.getElementById('urgentTasksContainer');
   if(!container) return;
   const urgentTasks = my.filter(t => t.status !== 'تکمیل‌شده').sort((a,b) => daysUntil(a.deadline) - daysUntil(b.deadline)).slice(0,3);
@@ -1982,18 +2207,13 @@ function renderUserDashboard(){
           <div style="flex:1;">
             <div style="font-weight:700;margin-bottom:6px;">${t.project}</div>
             <div style="font-size:11px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;">
-              <span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span>
               <span><i class="fa-solid fa-users"></i> ${t.team}</span>
               <span class="${cls}" style="color:${days<0?'var(--danger)':days<=3?'var(--warning)':'var(--muted)'};">
-                <i class="fa-solid fa-calendar"></i> ${days<0?Math.abs(days)+' روز گذشته':days===0?'امروز':days+' روز مانده'}
+                <i class="fa-solid fa-calendar"></i> ${days<0?Math.abs(days)+' روز تأخیر':days===0?'امروز':days+' روز مانده'}
               </span>
             </div>
           </div>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <span class="tag ${priorityClass(t.priority)}">${t.priority}</span>
-            <span class="tag">${t.progress}%</span>
-            <button class="btn primary sm" onclick="openReportModal(${idx})"><i class="fa-solid fa-pen"></i> گزارش</button>
-          </div>
+          <button class="btn primary sm" onclick="openReportModal(${idx})"><i class="fa-solid fa-pen"></i> گزارش</button>
         </div>`;
     }).join('');
   }
@@ -2005,12 +2225,10 @@ function renderMyTasks(){
   const filter = document.getElementById('myTaskFilter')?.value || '';
   let my = getMyTasks();
   if(filter) my = my.filter(t => t.status === filter);
-
   if(!my.length){
     grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i class="fa-solid fa-inbox"></i>تسکی به شما تخصیص داده نشده</div>';
     return;
   }
-
   grid.innerHTML = my.map(t => {
     const idx = rawData.indexOf(t);
     const days = daysUntil(t.deadline);
@@ -2027,19 +2245,16 @@ function renderMyTasks(){
           <span class="badge ${statusClass(t.status)}">${t.status}</span>
         </div>
         <div class="meta">
-          <span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span>
           <span><i class="fa-solid fa-users"></i> ${t.team}</span>
-          <span><i class="fa-solid fa-hourglass"></i> ${t.estimated_hours||0}h برآورد</span>
+          <span><i class="fa-solid fa-hourglass"></i> ${t.estimated_hours||0}h</span>
         </div>
         <div class="progress-row">
           <div class="progress-bar"><div class="progress-fill" style="width:${t.progress}%"></div></div>
           <span style="font-size:11px;color:var(--muted);min-width:35px;">${t.progress}%</span>
         </div>
         <div class="footer">
-          <span class="deadline ${deadlineCls}">
-            <i class="fa-solid fa-calendar"></i> ${deadlineTxt}
-          </span>
-          ${repCount ? `<span class="report-count"><i class="fa-solid fa-clipboard"></i> ${repCount} گزارش</span>` : ''}
+          <span class="deadline ${deadlineCls}"><i class="fa-solid fa-calendar"></i> ${deadlineTxt}</span>
+          ${repCount ? `<span class="report-count"><i class="fa-solid fa-clipboard"></i> ${repCount}</span>` : ''}
         </div>
         <button class="btn primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="openReportModal(${idx})">
           <i class="fa-solid fa-pen-to-square"></i> ثبت گزارش
@@ -2071,11 +2286,18 @@ function openReportModal(taskIdx){
 }
 window.openReportModal = openReportModal;
 
-document.getElementById('reportFiles').addEventListener('change', e => {
+document.getElementById('reportFiles').addEventListener('change', async e => {
   const files = Array.from(e.target.files || []);
-  files.forEach(f => {
-    pendingFiles.push({name:f.name, size:f.size});
-  });
+  for(const f of files){
+    if(f.size > 2 * 1024 * 1024){
+      alert(`فایل ${f.name} بزرگ‌تر از 2MB است و ذخیره نمی‌شود`);
+      continue;
+    }
+    try{
+      const base64 = await readFileAsBase64(f);
+      pendingFiles.push(base64);
+    }catch(err){ console.warn(err); }
+  }
   renderReportFileList();
   e.target.value = '';
 });
@@ -2089,16 +2311,13 @@ function renderReportFileList(){
     </div>
   `).join('');
 }
-function removeReportFile(i){
-  pendingFiles.splice(i, 1);
-  renderReportFileList();
-}
+function removeReportFile(i){ pendingFiles.splice(i, 1); renderReportFileList(); }
 window.removeReportFile = removeReportFile;
 
 document.getElementById('saveReportBtn').addEventListener('click', () => {
   const taskIdx = Number(document.getElementById('reportTaskIdx').value);
   const text = document.getElementById('reportText').value.trim();
-  if(!text){ alert('توضیحات گزارش الزامی است'); return; }
+  if(!text){ alert('توضیحات الزامی است'); return; }
   if(!rawData[taskIdx]){ alert('تسک معتبر نیست'); return; }
 
   const newStatus = document.getElementById('reportStatus').value;
@@ -2113,31 +2332,28 @@ document.getElementById('saveReportBtn').addEventListener('click', () => {
     displayName: currentUser.displayName || currentUser.username,
     progress: newProgress,
     status: newStatus,
-    hours,
-    text,
-    files: pendingFiles.map(f => f.name),
+    hours, text,
+    files: pendingFiles,
     createdAt: new Date().toISOString(),
     reportStatus: 'pending',
-    reviewNote: ''
+    reviewNote: '',
+    comments: []
   };
   reports.push(report);
 
-  // به‌روزرسانی تسک
   rawData[taskIdx].progress = newProgress;
   rawData[taskIdx].status = newStatus;
   rawData[taskIdx].actual_hours = (rawData[taskIdx].actual_hours || 0) + hours;
   if(newStatus === 'تکمیل‌شده') rawData[taskIdx].progress = 100;
 
-  saveLocal();
-  closeModal('reportModal');
-  renderMyTasks();
-  renderUserDashboard();
-  renderMyReports();
-  renderAll();
-  renderKanban();
-  renderGantt();
-  updatePendingReportsBadge();
-  alert('گزارش با موفقیت ثبت شد و در انتظار بررسی مدیر است ✓');
+  // نوتیفیکیشن برای ادمین
+  addNotification('admin', 'گزارش جدید', `${currentUser.displayName || currentUser.username} روی «${rawData[taskIdx].project}» گزارش ثبت کرد`, 'info');
+  sendEmail('admin', `گزارش جدید: ${rawData[taskIdx].project}`, `کاربر ${currentUser.displayName || currentUser.username} گزارش جدیدی روی تسک «${rawData[taskIdx].project}» ثبت کرد.\n\nپیشرفت: ${newProgress}%\nوضعیت: ${newStatus}\nساعت: ${hours}h\n\n${text}`, 'comment');
+
+  saveLocal(); closeModal('reportModal');
+  renderMyTasks(); renderUserDashboard(); renderMyReports(); renderAll();
+  renderKanban(); renderGantt(); updatePendingReportsBadge(); renderAnalytics();
+  alert('گزارش ثبت شد ✓');
 });
 
 /* ============================================================
@@ -2158,24 +2374,90 @@ function renderMyReports(){
         <div style="display:flex;gap:8px;align-items:center;">
           <span class="time">${fmtDateTime(r.createdAt)}</span>
           <span class="status-badge ${r.reportStatus}">
-            ${r.reportStatus==='approved'?'✓ تأییدشده':r.reportStatus==='rejected'?'✗ ردشده':'⏳ در انتظار'}
+            ${r.reportStatus==='approved'?'✓ تأیید':r.reportStatus==='rejected'?'✗ رد':'⏳ انتظار'}
           </span>
         </div>
       </div>
       <div class="report-text">${r.text}</div>
       <div class="report-meta">
         <span><i class="fa-solid fa-chart-line"></i> پیشرفت: ${r.progress}%</span>
-        <span><i class="fa-solid fa-tag"></i> وضعیت: ${r.status}</span>
+        <span><i class="fa-solid fa-tag"></i> ${r.status}</span>
         <span><i class="fa-solid fa-clock"></i> ${r.hours}h</span>
       </div>
-      ${r.files?.length ? `<div class="report-files">${r.files.map(f => `<span class="file-chip"><i class="fa-solid fa-file"></i> ${f}</span>`).join('')}</div>` : ''}
+      ${r.files?.length ? `<div class="report-files">${r.files.map((f,i) => `<span class="file-chip" onclick="previewFile(${i},'${r.id}')"><i class="fa-solid fa-paperclip"></i> ${f.name}</span>`).join('')}</div>` : ''}
       ${r.reviewNote ? `<div style="margin-top:10px;padding:10px;background:var(--bg4);border-radius:8px;font-size:12px;color:var(--muted);"><strong>یادداشت مدیر:</strong> ${r.reviewNote}</div>` : ''}
+      ${renderComments(r)}
     </div>
   `).join('');
 }
 
+function renderComments(report){
+  const comments = report.comments || [];
+  return `
+    <div class="comments-section">
+      <button class="comments-toggle" onclick="toggleComments('${report.id}')">
+        <i class="fa-solid fa-comments"></i> کامنت‌ها (${comments.length})
+      </button>
+      <div class="comments-list" id="comments-${report.id}" style="display:none;">
+        ${comments.map(c => `
+          <div class="comment">
+            <div class="c-head">
+              <span class="c-author ${c.isAdmin ? 'admin' : ''}">
+                <i class="fa-solid ${c.isAdmin ? 'fa-crown' : 'fa-user'}"></i> ${c.author}
+              </span>
+              <span class="c-time">${timeAgo(c.createdAt)}</span>
+            </div>
+            <div class="c-text">${c.text}</div>
+          </div>
+        `).join('')}
+        <div class="comment-input">
+          <input type="text" id="commentInput-${report.id}" placeholder="نظر خود را بنویسید..." onkeypress="if(event.key==='Enter')addComment('${report.id}')">
+          <button onclick="addComment('${report.id}')"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+window.renderComments = renderComments;
+
+function toggleComments(reportId){
+  const el = document.getElementById('comments-' + reportId);
+  if(el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+window.toggleComments = toggleComments;
+
+function addComment(reportId){
+  const input = document.getElementById('commentInput-' + reportId);
+  if(!input) return;
+  const text = input.value.trim();
+  if(!text) return;
+  const r = reports.find(x => x.id === reportId);
+  if(!r) return;
+  if(!r.comments) r.comments = [];
+  r.comments.push({
+    author: currentUser.displayName || currentUser.username,
+    isAdmin: isAdmin(),
+    text,
+    createdAt: new Date().toISOString()
+  });
+  input.value = '';
+
+  // نوتیفیکیشن برای طرف مقابل
+  if(isAdmin()){
+    addNotification(r.username, 'کامنت مدیر', `مدیر روی گزارش «${r.taskName}» کامنت گذاشت`, 'info');
+    sendEmail(r.username, `پاسخ مدیر به گزارش شما: ${r.taskName}`, text, 'comment');
+  } else {
+    addNotification('admin', 'کامنت کاربر', `${currentUser.displayName} روی گزارش «${r.taskName}» کامنت گذاشت`, 'info');
+  }
+
+  saveLocal();
+  if(isUser()) renderMyReports();
+  else renderAllReports();
+}
+window.addComment = addComment;
+
 /* ============================================================
-   ADMIN: ALL REPORTS
+   ALL REPORTS (ADMIN)
 ============================================================ */
 function renderAllReports(){
   if(!isAdmin()) return;
@@ -2183,7 +2465,6 @@ function renderAllReports(){
   let list = [...reports].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
   if(filter) list = list.filter(r => r.reportStatus === filter);
 
-  // KPI
   const total = reports.length;
   const pending = reports.filter(r => r.reportStatus === 'pending').length;
   const approved = reports.filter(r => r.reportStatus === 'approved').length;
@@ -2195,7 +2476,7 @@ function renderAllReports(){
 
   const container = document.getElementById('allReportsContainer');
   if(!list.length){
-    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox"></i>گزارشی برای نمایش وجود ندارد</div>';
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox"></i>گزارشی نیست</div>';
     return;
   }
   container.innerHTML = list.map(r => `
@@ -2208,46 +2489,70 @@ function renderAllReports(){
           </div>
         </div>
         <span class="status-badge ${r.reportStatus}">
-          ${r.reportStatus==='approved'?'✓ تأییدشده':r.reportStatus==='rejected'?'✗ ردشده':'⏳ در انتظار'}
+          ${r.reportStatus==='approved'?'✓ تأیید':r.reportStatus==='rejected'?'✗ رد':'⏳ انتظار'}
         </span>
       </div>
       <div class="report-text">${r.text}</div>
       <div class="report-meta">
-        <span><i class="fa-solid fa-chart-line"></i> پیشرفت: ${r.progress}%</span>
-        <span><i class="fa-solid fa-tag"></i> وضعیت: ${r.status}</span>
+        <span><i class="fa-solid fa-chart-line"></i> ${r.progress}%</span>
+        <span><i class="fa-solid fa-tag"></i> ${r.status}</span>
         <span><i class="fa-solid fa-clock"></i> ${r.hours}h</span>
       </div>
-      ${r.files?.length ? `<div class="report-files">${r.files.map(f => `<span class="file-chip"><i class="fa-solid fa-file"></i> ${f}</span>`).join('')}</div>` : ''}
+      ${r.files?.length ? `<div class="report-files">${r.files.map((f,i) => `<span class="file-chip" onclick="previewFile(${i},'${r.id}')"><i class="fa-solid fa-paperclip"></i> ${f.name}</span>`).join('')}</div>` : ''}
       <div class="report-actions">
         ${r.reportStatus === 'pending' ? `
-          <button class="btn success sm" onclick="reviewReport('${r.id}', 'approved')"><i class="fa-solid fa-check"></i> تأیید</button>
-          <button class="btn danger sm" onclick="reviewReport('${r.id}', 'rejected')"><i class="fa-solid fa-xmark"></i> رد</button>
+          <button class="btn success sm" onclick="openReview('${r.id}','approved')"><i class="fa-solid fa-check"></i> تأیید</button>
+          <button class="btn danger sm" onclick="openReview('${r.id}','rejected')"><i class="fa-solid fa-xmark"></i> رد</button>
         ` : r.reportStatus === 'approved' ? `
-          <button class="btn sm" onclick="reviewReport('${r.id}', 'pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
+          <button class="btn sm" onclick="openReview('${r.id}','pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
         ` : `
-          <button class="btn warning sm" onclick="reviewReport('${r.id}', 'pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
+          <button class="btn warning sm" onclick="openReview('${r.id}','pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
         `}
       </div>
+      ${renderComments(r)}
     </div>
   `).join('');
 }
 
-function reviewReport(reportId, newStatus){
+function openReview(reportId, action){
   const r = reports.find(x => x.id === reportId);
   if(!r) return;
-  let note = '';
-  if(newStatus === 'rejected'){
-    note = prompt('دلیل رد گزارش:', '') || '';
-  } else if(newStatus === 'approved'){
-    note = prompt('یادداشت تأیید (اختیاری):', '') || '';
-  }
-  r.reportStatus = newStatus;
-  r.reviewNote = note;
-  saveLocal();
-  renderAllReports();
-  updatePendingReportsBadge();
+  document.getElementById('reviewReportId').value = reportId;
+  document.getElementById('reviewAction').value = action;
+  document.getElementById('reviewReportPreview').innerHTML = `
+    <div style="background:var(--bg3);padding:14px;border-radius:11px;">
+      <div style="font-weight:700;margin-bottom:8px;">${r.taskName}</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">${r.displayName} • ${fmtDateTime(r.createdAt)}</div>
+      <div style="font-size:12px;line-height:1.7;">${r.text}</div>
+    </div>
+  `;
+  document.getElementById('reviewNote').value = r.reviewNote || '';
+  openModal('reviewModal');
 }
-window.reviewReport = reviewReport;
+window.openReview = openReview;
+
+document.getElementById('confirmReviewBtn').addEventListener('click', () => {
+  const reportId = document.getElementById('reviewReportId').value;
+  const action = document.getElementById('reviewAction').value;
+  const note = document.getElementById('reviewNote').value.trim();
+  const r = reports.find(x => x.id === reportId);
+  if(!r) return;
+
+  r.reportStatus = action;
+  r.reviewNote = note;
+
+  const actionFa = action === 'approved' ? 'تأیید' : action === 'rejected' ? 'رد' : 'بازبینی';
+  const type = action === 'approved' ? 'success' : action === 'rejected' ? 'danger' : 'info';
+
+  addNotification(r.username, `گزارش شما ${actionFa} شد`, `گزارش روی «${r.taskName}» ${actionFa} شد${note ? ': ' + note : ''}`, type);
+  sendEmail(r.username, `گزارش شما ${actionFa} شد - ${r.taskName}`,
+    `گزارش شما روی تسک «${r.taskName}» توسط مدیر ${actionFa} شد.\n\n${note ? 'یادداشت مدیر:\n' + note : ''}`,
+    action === 'approved' ? 'approved' : action === 'rejected' ? 'rejected' : 'info');
+
+  saveLocal(); closeModal('reviewModal');
+  renderAllReports(); updatePendingReportsBadge(); renderAnalytics(); renderEmails();
+  renderNotifications(); updateNotifCount();
+});
 
 document.getElementById('reportFilter')?.addEventListener('change', renderAllReports);
 
@@ -2257,6 +2562,78 @@ function updatePendingReportsBadge(){
   const pending = reports.filter(r => r.reportStatus === 'pending').length;
   badge.textContent = pending;
   badge.style.display = pending ? 'inline-block' : 'none';
+}
+
+/* ============================================================
+   ANALYTICS
+============================================================ */
+function renderAnalytics(){
+  if(!isAdmin()) return;
+  const total = reports.length;
+  const approved = reports.filter(r => r.reportStatus === 'approved').length;
+  const approvalRate = total ? Math.round(approved/total*100) : 0;
+  const totalHours = reports.reduce((s,r) => s + (r.hours || 0), 0);
+  const uniqueUsers = [...new Set(reports.map(r => r.username))].length;
+
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('anTotal', fmtNum(total));
+  set('anApprovalRate', approvalRate + '%');
+  set('anAvgHours', totalHours + 'h');
+  set('anActiveUsers', fmtNum(uniqueUsers));
+
+  if(charts.anTrend) charts.anTrend.destroy();
+  const tEl = document.getElementById('anTrendChart');
+  if(tEl){
+    const days = {};
+    reports.forEach(r => {
+      const d = new Date(r.createdAt).toLocaleDateString('fa-IR');
+      days[d] = (days[d]||0) + 1;
+    });
+    const labels = Object.keys(days).sort().slice(-10);
+    charts.anTrend = new Chart(tEl, {
+      type:'line',
+      data:{labels, datasets:[{label:'تعداد گزارش', data:labels.map(l => days[l]), borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointRadius:4}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, x:{grid:{display:false}}}}
+    });
+  }
+
+  if(charts.anStatus) charts.anStatus.destroy();
+  const sEl = document.getElementById('anStatusChart');
+  if(sEl){
+    const st = {pending:0, approved:0, rejected:0};
+    reports.forEach(r => st[r.reportStatus]++);
+    charts.anStatus = new Chart(sEl, {
+      type:'doughnut',
+      data:{labels:['در انتظار','تأییدشده','ردشده'], datasets:[{data:[st.pending, st.approved, st.rejected], backgroundColor:['#d29922','#3fb950','#f85149'], borderColor:'#161b22', borderWidth:2}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
+    });
+  }
+
+  if(charts.anTopUsers) charts.anTopUsers.destroy();
+  const uEl = document.getElementById('anTopUsersChart');
+  if(uEl){
+    const users = {};
+    reports.forEach(r => users[r.displayName] = (users[r.displayName]||0)+1);
+    const top = Object.entries(users).sort((a,b) => b[1]-a[1]).slice(0,5);
+    charts.anTopUsers = new Chart(uEl, {
+      type:'bar',
+      data:{labels:top.map(x => x[0]), datasets:[{data:top.map(x => x[1]), backgroundColor:'rgba(188,140,255,.6)', borderColor:'#bc8cff', borderWidth:1, borderRadius:6}]},
+      options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, y:{grid:{display:false}}}}
+    });
+  }
+
+  if(charts.anPerTask) charts.anPerTask.destroy();
+  const ptEl = document.getElementById('anPerTaskChart');
+  if(ptEl){
+    const tasks = {};
+    reports.forEach(r => tasks[r.taskName] = (tasks[r.taskName]||0)+1);
+    const top = Object.entries(tasks).sort((a,b) => b[1]-a[1]).slice(0,6);
+    charts.anPerTask = new Chart(ptEl, {
+      type:'bar',
+      data:{labels:top.map(x => x[0]), datasets:[{data:top.map(x => x[1]), backgroundColor:'rgba(57,197,207,.6)', borderColor:'#39c5cf', borderWidth:1, borderRadius:6}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, x:{grid:{display:false}, ticks:{font:{size:9}}}}}
+    });
+  }
 }
 
 /* ============================================================
@@ -2277,7 +2654,7 @@ function renderProfile(){
   const actEl = document.getElementById('recentActivity');
   const recent = [...myReps].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
   if(!recent.length){
-    actEl.innerHTML = '<div style="text-align:center;padding:20px;">فعالیتی ثبت نشده</div>';
+    actEl.innerHTML = '<div style="text-align:center;padding:20px;">فعالیتی نیست</div>';
   } else {
     actEl.innerHTML = recent.map(r => `
       <div style="padding:8px 0;border-bottom:1px solid var(--border);">
@@ -2285,7 +2662,7 @@ function renderProfile(){
         <div style="font-size:10px;">
           ${fmtDateTime(r.createdAt)} • 
           <span style="color:${r.reportStatus==='approved'?'var(--success)':r.reportStatus==='rejected'?'var(--danger)':'var(--warning)'};">
-            ${r.reportStatus==='approved'?'تأییدشده':r.reportStatus==='rejected'?'ردشده':'در انتظار'}
+            ${r.reportStatus==='approved'?'تأیید':r.reportStatus==='rejected'?'رد':'انتظار'}
           </span>
         </div>
       </div>
@@ -2303,7 +2680,7 @@ document.querySelectorAll('.toggle').forEach(t => {
 document.getElementById('exportBtn').addEventListener('click', () => {
   if(!isAdmin()) return;
   const data = getTableData();
-  if(!data.length){ alert('داده‌ای برای خروجی وجود ندارد'); return; }
+  if(!data.length){ alert('داده‌ای نیست'); return; }
   const csv = Papa.unparse(data);
   const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
@@ -2311,6 +2688,28 @@ document.getElementById('exportBtn').addEventListener('click', () => {
   a.download = 'projects-report.csv';
   a.click();
 });
+
+/* ============================================================
+   AUTO DEADLINE CHECK
+============================================================ */
+function checkDeadlines(){
+  if(!currentUser || !isUser()) return;
+  const my = getMyTasks();
+  my.forEach(t => {
+    if(t.status === 'تکمیل‌شده' || !t.deadline) return;
+    const days = daysUntil(t.deadline);
+    if(days >= 0 && days <= 1){
+      const alreadyNotified = notifications.some(n =>
+        n.targetUser === currentUser.username &&
+        n.text.includes(t.project) &&
+        new Date(n.createdAt).toDateString() === new Date().toDateString()
+      );
+      if(!alreadyNotified){
+        addNotification(currentUser.username, '⏰ نزدیک مهلت', `تسک «${t.project}» مهلتش ${days === 0 ? 'امروز' : 'فردا'} است`, 'warning');
+      }
+    }
+  });
+}
 
 /* ============================================================
    INIT
@@ -2321,6 +2720,7 @@ document.getElementById('exportBtn').addEventListener('click', () => {
   if(session){
     currentUser = session;
     showApp();
+    setTimeout(checkDeadlines, 2000);
   } else {
     loginScreen.classList.remove('hidden');
     document.getElementById('username').focus();
