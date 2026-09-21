@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سیستم مدیریت پروژه - ورود</title>
+<title>سیستم مدیریت پروژه</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -12,9 +12,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-/* ============================================================
-   ROOT VARIABLES
-============================================================ */
 :root{
   --bg:#0d1117; --bg2:#161b22; --bg3:#1f2630; --bg4:#262d38;
   --border:#2d333b; --text:#e6edf3; --muted:#8b949e;
@@ -26,183 +23,92 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif;}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* ============================================================
-   LOGIN SCREEN
-============================================================ */
-#loginScreen{
-  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-  background:#0d1117;overflow:hidden;z-index:9999;
-  transition:opacity .4s,visibility .4s;
-}
+/* ============ LOGIN ============ */
+#loginScreen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#0d1117;overflow:hidden;z-index:9999;transition:opacity .4s,visibility .4s;}
 #loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
-
-.blob{
-  position:absolute;border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
-  filter:blur(80px);opacity:.6;animation:morph 8s ease-in-out infinite alternate;
-  pointer-events:none;
-}
+.blob{position:absolute;border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;filter:blur(80px);opacity:.6;animation:morph 8s ease-in-out infinite alternate;pointer-events:none;}
 .blob-1{width:500px;height:500px;background:#1f6feb;top:-10%;right:-5%;animation-duration:10s;}
 .blob-2{width:400px;height:400px;background:#bc8cff;bottom:-10%;left:-5%;animation-duration:12s;animation-delay:-3s;}
 .blob-3{width:300px;height:300px;background:#39c5cf;top:50%;left:30%;animation-duration:14s;animation-delay:-6s;}
-
-@keyframes morph{
-  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;transform:translate(0,0) rotate(0deg);}
-  100%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;transform:translate(30px,-40px) rotate(20deg);}
-}
-
-.login-card{
-  position:relative;z-index:10;width:100%;max-width:380px;
-  padding:40px 32px;background:var(--glass-bg);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid var(--glass-border);border-radius:24px;
-  box-shadow:0 25px 45px rgba(0,0,0,.4);
-  transition:transform .3s ease;
-}
-.login-card.shake{animation:shake .4s ease;}
-@keyframes shake{
-  0%,100%{transform:translateX(0);}
-  20%{transform:translateX(-8px);}
-  40%{transform:translateX(8px);}
-  60%{transform:translateX(-5px);}
-  80%{transform:translateX(5px);}
-}
-
-.login-logo{
-  width:70px;height:70px;margin:0 auto 18px;
-  display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(88,166,255,.3),rgba(188,140,255,.3));
-  border:1px solid rgba(88,166,255,.5);border-radius:20px;
-  font-size:32px;color:#fff;
-  animation:float 3s ease-in-out infinite;
-}
+@keyframes morph{0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;transform:translate(0,0) rotate(0deg);}100%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;transform:translate(30px,-40px) rotate(20deg);}}
+.login-card{position:relative;z-index:10;width:100%;max-width:380px;padding:40px 32px;background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:24px;box-shadow:0 25px 45px rgba(0,0,0,.4);transition:transform .3s;}
+.login-card.shake{animation:shake .4s;}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-8px);}40%{transform:translateX(8px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+.login-logo{width:70px;height:70px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(88,166,255,.3),rgba(188,140,255,.3));border:1px solid rgba(88,166,255,.5);border-radius:20px;font-size:32px;color:#fff;animation:float 3s ease-in-out infinite;}
 @keyframes float{50%{transform:translateY(-8px);}}
-
 .login-card h1{color:#fff;font-size:22px;text-align:center;margin-bottom:6px;}
 .login-card .subtitle{color:rgba(255,255,255,.5);font-size:12px;text-align:center;margin-bottom:28px;}
-
 .field{position:relative;margin-bottom:18px;}
-.field input{
-  width:100%;padding:14px 16px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:12px;color:#fff;font-size:14px;outline:none;
-  transition:border-color .25s,background .25s;
-  direction:ltr;text-align:left;font-family:inherit;
-}
+.field input{width:100%;padding:14px 16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:#fff;font-size:14px;outline:none;transition:.25s;direction:ltr;text-align:left;font-family:inherit;}
 .field input::placeholder{color:rgba(255,255,255,.35);}
 .field input:focus{border-color:var(--primary);background:rgba(88,166,255,.08);}
-.field input:disabled{opacity:.6;}
-
-.toggle-pass{
-  position:absolute;left:14px;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:rgba(255,255,255,.4);
-  cursor:pointer;font-size:16px;padding:5px;
-}
-
-.btn-login{
-  width:100%;padding:14px;margin-top:8px;border:none;border-radius:12px;
-  background:var(--primary);color:#0d1117;font-size:15px;font-weight:700;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:background .25s,transform .15s;font-family:inherit;
-}
+.toggle-pass{position:absolute;left:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:16px;padding:5px;}
+.btn-login{width:100%;padding:14px;margin-top:8px;border:none;border-radius:12px;background:var(--primary);color:#0d1117;font-size:15px;font-weight:700;cursor:pointer;transition:.25s;font-family:inherit;}
 .btn-login:hover{background:#4493f8;}
-.btn-login:active{transform:scale(.98);}
 .btn-login:disabled{opacity:.7;cursor:not-allowed;}
-
-.spinner{
-  display:inline-block;width:16px;height:16px;
-  border:2px solid rgba(13,17,23,.3);border-top-color:#0d1117;
-  border-radius:50%;animation:spin .6s linear infinite;
-  vertical-align:middle;margin-right:8px;
-}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(13,17,23,.3);border-top-color:#0d1117;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-.error-msg{
-  color:var(--danger);font-size:12px;text-align:center;
-  min-height:18px;margin-top:12px;
-}
-
-.login-hint{
-  margin-top:20px;padding:12px;background:rgba(88,166,255,.08);
-  border:1px solid rgba(88,166,255,.2);border-radius:10px;
-  font-size:11px;color:rgba(255,255,255,.6);text-align:center;
-}
+.error-msg{color:var(--danger);font-size:12px;text-align:center;min-height:18px;margin-top:12px;}
+.login-hint{margin-top:20px;padding:12px;background:rgba(88,166,255,.08);border:1px solid rgba(88,166,255,.2);border-radius:10px;font-size:11px;color:rgba(255,255,255,.6);text-align:center;line-height:1.8;}
 .login-hint code{background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;color:var(--primary);}
+.role-quick{display:flex;gap:8px;margin-top:12px;}
+.role-quick button{flex:1;padding:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:11px;cursor:pointer;transition:.2s;font-family:inherit;}
+.role-quick button:hover{background:rgba(88,166,255,.2);border-color:var(--primary);}
 
-/* ============================================================
-   MAIN APP
-============================================================ */
+/* ============ APP ============ */
 #app{display:none;}
 #app.show{display:flex;min-height:100vh;}
 
-/* SIDEBAR */
-.sidebar{
-  width:230px;background:var(--bg2);border-left:1px solid var(--border);
-  display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;
-  z-index:100;transition:transform .3s;
-}
-.sidebar-header{
-  padding:20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-}
+.sidebar{width:230px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:100;transition:transform .3s;}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
 .sidebar-header i{font-size:22px;color:var(--primary);}
 .sidebar-header h2{font-size:15px;font-weight:700;}
 .sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto;}
-.nav-item{
-  display:flex;align-items:center;gap:12px;padding:11px 14px;
-  border-radius:10px;color:var(--muted);cursor:pointer;
-  font-size:13px;transition:.2s;margin-bottom:3px;
-}
+.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;margin-bottom:3px;}
 .nav-item:hover{background:var(--bg3);color:var(--text);}
 .nav-item.active{background:var(--primary);color:#0d1117;font-weight:600;}
 .nav-item i{width:18px;text-align:center;font-size:14px;}
+.nav-badge{margin-right:auto;background:var(--danger);color:#fff;font-size:9px;padding:2px 6px;border-radius:10px;font-weight:600;}
+.nav-section{padding:10px 14px 6px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
 
-.sidebar-user{
-  padding:14px;border-top:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-}
-.user-avatar{
-  width:36px;height:36px;border-radius:50%;
-  background:linear-gradient(135deg,var(--primary),var(--purple));
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;font-weight:700;font-size:14px;flex-shrink:0;
-}
+.sidebar-user{padding:14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--purple));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px;flex-shrink:0;position:relative;}
+.user-avatar .status-dot{position:absolute;bottom:0;left:0;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--bg2);}
 .user-info{flex:1;overflow:hidden;}
 .user-info .name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .user-info .role{font-size:10px;color:var(--muted);}
-.logout-btn{
-  background:transparent;border:none;color:var(--muted);cursor:pointer;
-  width:32px;height:32px;border-radius:8px;font-size:14px;transition:.2s;
-}
+.logout-btn{background:transparent;border:none;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:14px;transition:.2s;}
 .logout-btn:hover{background:rgba(248,81,73,.2);color:var(--danger);}
 
-/* MAIN */
 .main{flex:1;margin-right:230px;padding:20px;min-height:100vh;}
-
-/* PAGE */
 .page{display:none;animation:fadeIn .3s;}
 .page.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-.page-header{
-  display:flex;justify-content:space-between;align-items:center;
-  flex-wrap:wrap;gap:12px;margin-bottom:20px;
-}
+.page-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
 .page-header h1{font-size:20px;display:flex;align-items:center;gap:10px;}
 .page-header h1 i{color:var(--primary);}
 .page-header .actions{display:flex;gap:8px;flex-wrap:wrap;}
 
-/* BUTTONS */
-.btn{
-  padding:9px 16px;border-radius:9px;border:1px solid var(--border);
-  background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;
-  display:inline-flex;align-items:center;gap:7px;transition:.2s;font-family:inherit;
+/* WELCOME BANNER */
+.welcome-banner{
+  background:linear-gradient(135deg,rgba(88,166,255,.15),rgba(188,140,255,.15));
+  border:1px solid rgba(88,166,255,.3);border-radius:16px;
+  padding:20px 24px;margin-bottom:20px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
 }
+.welcome-banner h2{font-size:17px;margin-bottom:4px;}
+.welcome-banner p{font-size:12px;color:var(--muted);}
+.welcome-banner .date-badge{background:var(--bg3);padding:8px 14px;border-radius:10px;font-size:12px;color:var(--primary);font-weight:600;}
+
+/* BUTTONS */
+.btn{padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:7px;transition:.2s;font-family:inherit;}
 .btn:hover{background:var(--bg4);border-color:var(--primary);}
 .btn.primary{background:var(--primary);color:#0d1117;border:none;font-weight:600;}
 .btn.primary:hover{background:#4493f8;}
 .btn.success{background:var(--success);color:#0d1117;border:none;}
 .btn.danger{background:var(--danger);color:#fff;border:none;}
+.btn.warning{background:var(--warning);color:#0d1117;border:none;}
 .btn.sm{padding:5px 9px;font-size:11px;border-radius:7px;}
 
 /* CARD */
@@ -211,24 +117,14 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .card h3 i{color:var(--primary);}
 
 /* TIME FILTER */
-.time-filter{
-  display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);
-  padding:6px;border-radius:11px;border:1px solid var(--border);
-  width:fit-content;margin-bottom:16px;
-}
-.time-filter button{
-  padding:8px 18px;border-radius:8px;border:none;background:transparent;
-  color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;font-family:inherit;
-}
+.time-filter{display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);padding:6px;border-radius:11px;border:1px solid var(--border);width:fit-content;margin-bottom:16px;}
+.time-filter button{padding:8px 18px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;font-family:inherit;}
 .time-filter button:hover{color:var(--text);background:var(--bg3);}
 .time-filter button.active{background:var(--primary);color:#0d1117;font-weight:600;}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px;}
-.kpi{
-  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
-  padding:18px;position:relative;overflow:hidden;transition:.25s;
-}
+.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;}
 .kpi:hover{transform:translateY(-3px);border-color:var(--primary);}
 .kpi::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--primary);}
 .kpi.green::before{background:var(--success);}
@@ -236,12 +132,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .kpi.red::before{background:var(--danger);}
 .kpi.purple::before{background:var(--purple);}
 .kpi.cyan::before{background:var(--cyan);}
-.kpi .icon{
-  width:38px;height:38px;border-radius:10px;display:flex;
-  align-items:center;justify-content:center;
-  background:rgba(88,166,255,.15);color:var(--primary);
-  font-size:16px;margin-bottom:10px;
-}
+.kpi .icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(88,166,255,.15);color:var(--primary);font-size:16px;margin-bottom:10px;}
 .kpi.green .icon{background:rgba(63,185,80,.15);color:var(--success);}
 .kpi.orange .icon{background:rgba(210,153,34,.15);color:var(--warning);}
 .kpi.red .icon{background:rgba(248,81,73,.15);color:var(--danger);}
@@ -255,6 +146,60 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .charts-2{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px;}
 .charts-2x{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
 .chart-box{position:relative;height:260px;}
+
+/* TASK CARDS (USER VIEW) */
+.task-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.task-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;position:relative;overflow:hidden;}
+.task-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow:0 10px 30px rgba(0,0,0,.3);}
+.task-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;}
+.task-card.p-high::before{background:var(--danger);}
+.task-card.p-medium::before{background:var(--warning);}
+.task-card.p-low::before{background:var(--success);}
+.task-card .head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.task-card .title{font-size:14px;font-weight:700;flex:1;}
+.task-card .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;font-size:11px;color:var(--muted);}
+.task-card .meta span{display:flex;align-items:center;gap:5px;}
+.task-card .meta i{color:var(--primary);font-size:11px;}
+.task-card .progress-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.task-card .progress-bar{flex:1;height:8px;border-radius:4px;background:var(--bg3);overflow:hidden;}
+.task-card .progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--primary),var(--cyan));transition:width .4s;}
+.task-card .footer{display:flex;justify-content:space-between;align-items:center;gap:8px;padding-top:12px;border-top:1px solid var(--border);}
+.task-card .deadline{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+.task-card .deadline.overdue{color:var(--danger);}
+.task-card .deadline.soon{color:var(--warning);}
+.task-card .report-count{background:var(--bg3);padding:3px 8px;border-radius:6px;font-size:10px;color:var(--cyan);display:flex;align-items:center;gap:4px;}
+
+/* REPORT TIMELINE */
+.report-timeline{position:relative;padding-right:24px;}
+.report-timeline::before{content:'';position:absolute;right:8px;top:0;bottom:0;width:2px;background:var(--border);}
+.report-item{position:relative;margin-bottom:16px;padding:14px;background:var(--bg3);border-radius:11px;border:1px solid var(--border);transition:.2s;}
+.report-item:hover{border-color:var(--primary);}
+.report-item::before{content:'';position:absolute;right:-21px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--primary);border:2px solid var(--bg2);box-shadow:0 0 0 3px rgba(88,166,255,.15);}
+.report-item.approved::before{background:var(--success);box-shadow:0 0 0 3px rgba(63,185,80,.15);}
+.report-item.rejected::before{background:var(--danger);box-shadow:0 0 0 3px rgba(248,81,73,.15);}
+.report-item.pending::before{background:var(--warning);box-shadow:0 0 0 3px rgba(210,153,34,.15);}
+.report-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:10px;flex-wrap:wrap;}
+.report-head .task-name{font-size:13px;font-weight:700;}
+.report-head .time{font-size:10px;color:var(--muted);}
+.report-head .status-badge{padding:3px 9px;border-radius:6px;font-size:10px;font-weight:600;}
+.report-head .status-badge.approved{background:rgba(63,185,80,.15);color:var(--success);}
+.report-head .status-badge.rejected{background:rgba(248,81,73,.15);color:var(--danger);}
+.report-head .status-badge.pending{background:rgba(210,153,34,.15);color:var(--warning);}
+.report-text{font-size:12px;color:var(--text);line-height:1.7;margin-bottom:8px;}
+.report-meta{display:flex;gap:12px;font-size:10px;color:var(--muted);flex-wrap:wrap;}
+.report-meta span{display:flex;align-items:center;gap:4px;}
+.report-actions{display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);}
+.report-files{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;}
+.file-chip{background:var(--bg4);padding:4px 9px;border-radius:6px;font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px;}
+
+/* PROFILE */
+.profile-header{display:flex;align-items:center;gap:20px;padding:24px;background:linear-gradient(135deg,rgba(88,166,255,.1),rgba(188,140,255,.1));border:1px solid var(--border);border-radius:16px;margin-bottom:20px;flex-wrap:wrap;}
+.profile-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--purple));display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700;flex-shrink:0;}
+.profile-info h2{font-size:20px;margin-bottom:6px;}
+.profile-info .role-badge{display:inline-block;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:600;margin-bottom:8px;}
+.profile-info .role-badge.admin{background:rgba(248,81,73,.15);color:var(--danger);}
+.profile-info .role-badge.user{background:rgba(88,166,255,.15);color:var(--primary);}
+.profile-info p{font-size:12px;color:var(--muted);}
 
 /* KANBAN */
 .kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;min-height:400px;}
@@ -292,8 +237,7 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .gantt-row .label-col .name{font-size:12px;font-weight:600;}
 .gantt-row .label-col .manager{font-size:10px;color:var(--muted);}
 .gantt-row .timeline{flex:1;height:26px;position:relative;background:var(--bg3);border-radius:6px;overflow:hidden;}
-.gantt-bar{position:absolute;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;min-width:20px;cursor:pointer;transition:.2s;}
-.gantt-bar:hover{filter:brightness(1.2);}
+.gantt-bar{position:absolute;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--primary),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:600;min-width:20px;cursor:pointer;}
 .gantt-bar.done{background:linear-gradient(90deg,var(--success),#2ea043);}
 .gantt-bar.late{background:linear-gradient(90deg,var(--danger),#da3633);}
 .gantt-bar.pending{background:linear-gradient(90deg,var(--warning),#bb8009);}
@@ -307,9 +251,9 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 /* HEATMAP */
 .heatmap{overflow-x:auto;}
 .heatmap table{width:100%;border-collapse:collapse;font-size:11px;}
-.heatmap th{background:var(--bg3);padding:8px 6px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);text-align:center;white-space:nowrap;}
+.heatmap th{background:var(--bg3);padding:8px 6px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);text-align:center;}
 .heatmap td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);}
-.heatmap .resource-name{text-align:right;font-weight:600;background:var(--bg2);padding-right:12px;}
+.heatmap .resource-name{text-align:right;font-weight:600;padding-right:12px;}
 .heat-cell{width:100%;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;}
 .heat-cell.green{background:rgba(63,185,80,.25);color:var(--success);}
 .heat-cell.blue{background:rgba(88,166,255,.25);color:var(--primary);}
@@ -347,22 +291,14 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 .toggle.on::after{background:#fff;transform:translateX(-20px);}
 
 /* MODAL */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
-  display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;
-  animation:fadeIn .2s;
-}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;}
 .modal-overlay.show{display:flex;}
-.modal{
-  background:var(--bg2);border:1px solid var(--border);border-radius:16px;
-  width:100%;max-width:620px;max-height:90vh;overflow-y:auto;
-  animation:slideUp .3s;
-}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px;width:100%;max-width:620px;max-height:90vh;overflow-y:auto;animation:slideUp .3s;}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 .modal-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .modal-header h3{font-size:16px;display:flex;align-items:center;gap:10px;}
 .modal-header h3 i{color:var(--primary);}
-.modal-close{background:transparent;border:none;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:16px;transition:.2s;}
+.modal-close{background:transparent;border:none;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:16px;}
 .modal-close:hover{background:var(--bg3);color:var(--danger);}
 .modal-body{padding:20px 22px;}
 .modal-footer{padding:16px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;}
@@ -372,13 +308,26 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 .form-group{display:flex;flex-direction:column;gap:6px;}
 .form-group label{font-size:12px;color:var(--muted);font-weight:600;}
 .form-group label .req{color:var(--danger);}
-.form-group input,.form-group select,.form-group textarea{
-  background:var(--bg3);border:1px solid var(--border);color:var(--text);
-  padding:10px 12px;border-radius:9px;font-size:13px;outline:none;
-  font-family:inherit;transition:.2s;width:100%;
-}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:9px;font-size:13px;outline:none;font-family:inherit;transition:.2s;width:100%;}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);}
+.form-group textarea{resize:vertical;min-height:100px;}
 .form-hint{font-size:10px;color:var(--muted);}
+
+/* RANGE SLIDER */
+.slider-row{display:flex;align-items:center;gap:12px;}
+.slider-row input[type="range"]{flex:1;height:6px;border-radius:3px;background:var(--bg3);outline:none;-webkit-appearance:none;appearance:none;}
+.slider-row input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--primary);cursor:pointer;border:3px solid var(--bg2);box-shadow:0 0 0 1px var(--primary);}
+.slider-row .value{min-width:50px;text-align:center;font-weight:700;color:var(--primary);font-size:14px;}
+
+/* FILE UPLOAD */
+.file-upload{border:2px dashed var(--border);border-radius:11px;padding:20px;text-align:center;cursor:pointer;transition:.2s;background:var(--bg3);}
+.file-upload:hover{border-color:var(--primary);background:rgba(88,166,255,.05);}
+.file-upload i{font-size:26px;color:var(--muted);margin-bottom:8px;display:block;}
+.file-upload p{font-size:12px;color:var(--muted);}
+.file-upload input{display:none;}
+.file-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.file-list .file-chip{background:var(--bg4);padding:6px 10px;border-radius:7px;font-size:11px;color:var(--text);display:flex;align-items:center;gap:6px;}
+.file-list .file-chip button{background:transparent;border:none;color:var(--danger);cursor:pointer;font-size:11px;}
 
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.5;}
@@ -396,7 +345,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   .kanban{grid-template-columns:1fr;}
   .kpi-grid{grid-template-columns:1fr 1fr;}
   .form-grid{grid-template-columns:1fr;}
-  .gantt-header .label-col,.gantt-row .label-col{width:120px;}
+  .task-grid{grid-template-columns:1fr;}
 }
 .menu-toggle{display:none;background:var(--bg3);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;cursor:pointer;font-size:16px;margin-bottom:12px;}
 @media(max-width:1024px){.menu-toggle{display:flex;align-items:center;justify-content:center;}}
@@ -404,75 +353,61 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 </head>
 <body>
 
-<!-- ============================================================
-     LOGIN SCREEN
-============================================================ -->
+<!-- ============ LOGIN ============ -->
 <div id="loginScreen">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-
+  <div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div>
   <div class="login-card" id="loginCard">
     <div class="login-logo"><i class="fa-solid fa-diagram-project"></i></div>
     <h1>ورود به سیستم</h1>
     <p class="subtitle">با حساب دامنه خود وارد شوید</p>
-
     <form id="loginForm" autocomplete="on">
       <div class="field">
-        <input type="text" id="username" placeholder="نام کاربری (DOMAIN\user)" required autocomplete="username">
+        <input type="text" id="username" placeholder="نام کاربری" required autocomplete="username">
       </div>
       <div class="field">
         <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password">
         <button type="button" class="toggle-pass" id="togglePass"><i class="fa-solid fa-eye"></i></button>
       </div>
-
       <button type="submit" class="btn-login" id="loginBtn">ورود</button>
       <div class="error-msg" id="errorMsg"></div>
     </form>
-
     <div class="login-hint">
-      🎯 <strong>حالت دمو:</strong> با هر نام کاربری و رمزی وارد شوید<br>
-      یا حساب تست: <code>admin</code> / <code>admin</code>
+      🎯 <strong>حالت دمو:</strong> یکی از حساب‌های زیر را انتخاب کنید<br>
+      <div class="role-quick">
+        <button type="button" onclick="quickLogin('admin','admin')"><i class="fa-solid fa-crown"></i> ادمین</button>
+        <button type="button" onclick="quickLogin('ali','ali')"><i class="fa-solid fa-user"></i> کاربر</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     MAIN APP
-============================================================ -->
+<!-- ============ APP ============ -->
 <div id="app">
-
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <i class="fa-solid fa-diagram-project"></i>
       <h2>مدیریت پروژه</h2>
     </div>
     <nav class="sidebar-nav" id="sidebarNav">
-      <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-gauge"></i> داشبورد</div>
-      <div class="nav-item" data-page="projects"><i class="fa-solid fa-folder"></i> پروژه‌ها</div>
-      <div class="nav-item" data-page="kanban"><i class="fa-solid fa-table-columns"></i> وظایف (کانبان)</div>
-      <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
-      <div class="nav-item" data-page="risks"><i class="fa-solid fa-triangle-exclamation"></i> ریسک‌ها</div>
-      <div class="nav-item" data-page="resources"><i class="fa-solid fa-users"></i> منابع</div>
-      <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> تنظیمات</div>
+      <!-- پر می‌شود بر اساس نقش -->
     </nav>
     <div class="sidebar-user">
-      <div class="user-avatar" id="userAvatar">A</div>
+      <div class="user-avatar" id="userAvatar">A<span class="status-dot"></span></div>
       <div class="user-info">
         <div class="name" id="userName">کاربر</div>
-        <div class="role" id="userRole">مدیر سیستم</div>
+        <div class="role" id="userRole">—</div>
       </div>
-      <button class="logout-btn" id="logoutBtn" title="خروج">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
+      <button class="logout-btn" id="logoutBtn" title="خروج"><i class="fa-solid fa-right-from-bracket"></i></button>
     </div>
   </aside>
 
   <main class="main">
     <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
 
-    <!-- DASHBOARD -->
-    <div class="page active" id="page-dashboard">
+    <!-- ============== ADMIN PAGES ============== -->
+
+    <!-- ADMIN DASHBOARD -->
+    <div class="page" id="page-dashboard" data-roles="admin">
       <div class="page-header">
         <h1><i class="fa-solid fa-gauge"></i> داشبورد کلی</h1>
         <div class="actions">
@@ -481,7 +416,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
           <button class="btn danger" id="clearBtn"><i class="fa-solid fa-trash"></i> پاک‌سازی</button>
         </div>
       </div>
-
       <div class="time-filter" id="timeFilter">
         <button data-range="daily"><i class="fa-solid fa-calendar-day"></i> روزانه</button>
         <button data-range="weekly"><i class="fa-solid fa-calendar-week"></i> هفتگی</button>
@@ -489,7 +423,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <button data-range="yearly"><i class="fa-solid fa-calendar-days"></i> سالانه</button>
         <button data-range="all"><i class="fa-solid fa-infinity"></i> همه</button>
       </div>
-
       <div class="kpi-grid">
         <div class="kpi"><div class="icon"><i class="fa-solid fa-folder-open"></i></div><div class="label">کل پروژه‌ها</div><div class="value" id="kpiTotal">0</div><div class="sub">در بازه انتخابی</div></div>
         <div class="kpi green"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><div class="label">تکمیل‌شده</div><div class="value" id="kpiDone">0</div><div class="sub" id="kpiDonePct">0%</div></div>
@@ -498,7 +431,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <div class="kpi purple"><div class="icon"><i class="fa-solid fa-coins"></i></div><div class="label">مجموع بودجه</div><div class="value" id="kpiBudget">0</div><div class="sub">تومان</div></div>
         <div class="kpi cyan"><div class="icon"><i class="fa-solid fa-wallet"></i></div><div class="label">مجموع هزینه</div><div class="value" id="kpiCost">0</div><div class="sub" id="kpiUsage">مصرف: 0%</div></div>
       </div>
-
       <div class="charts-2">
         <div class="card"><h3><i class="fa-solid fa-chart-line"></i> روند پیشرفت</h3><div class="chart-box"><canvas id="lineChart"></canvas></div></div>
         <div class="card"><h3><i class="fa-solid fa-chart-pie"></i> سهم وضعیت‌ها</h3><div class="chart-box"><canvas id="pieChart"></canvas></div></div>
@@ -510,10 +442,12 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
 
     <!-- PROJECTS -->
-    <div class="page" id="page-projects">
+    <div class="page" id="page-projects" data-roles="admin,user">
       <div class="page-header">
         <h1><i class="fa-solid fa-folder"></i> پروژه‌ها</h1>
-        <div class="actions"><button class="btn primary" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button></div>
+        <div class="actions">
+          <button class="btn primary admin-only" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button>
+        </div>
       </div>
       <div class="card">
         <div class="table-controls">
@@ -527,7 +461,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
               <th data-key="date">تاریخ</th><th data-key="project">پروژه</th><th data-key="manager">مدیر</th>
               <th data-key="team">تیم</th><th data-key="status">وضعیت</th><th data-key="priority">اولویت</th>
               <th data-key="progress">پیشرفت</th><th data-key="budget">بودجه</th><th data-key="cost">هزینه</th>
-              <th>عملیات</th>
+              <th class="admin-only">عملیات</th>
             </tr></thead>
             <tbody id="tableBody"></tbody>
           </table>
@@ -537,7 +471,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
 
     <!-- KANBAN -->
-    <div class="page" id="page-kanban">
+    <div class="page" id="page-kanban" data-roles="admin">
       <div class="page-header">
         <h1><i class="fa-solid fa-table-columns"></i> تخته کانبان وظایف</h1>
         <div class="actions"><button class="btn primary" id="addTaskBtn"><i class="fa-solid fa-plus"></i> تسک جدید</button></div>
@@ -546,11 +480,11 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
 
     <!-- GANTT -->
-    <div class="page" id="page-gantt">
+    <div class="page" id="page-gantt" data-roles="admin,user">
       <div class="page-header"><h1><i class="fa-solid fa-chart-gantt"></i> نمودار گانت</h1></div>
       <div class="card">
         <div class="gantt-container">
-          <div class="gantt-grid" id="ganttGrid">
+          <div class="gantt-grid">
             <div class="gantt-header">
               <div class="label-col">پروژه</div>
               <div class="timeline" id="ganttTimeline"></div>
@@ -562,7 +496,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
 
     <!-- RISKS -->
-    <div class="page" id="page-risks">
+    <div class="page" id="page-risks" data-roles="admin">
       <div class="page-header">
         <h1><i class="fa-solid fa-triangle-exclamation"></i> مدیریت ریسک‌ها</h1>
         <div class="actions"><button class="btn primary" id="addRiskBtn"><i class="fa-solid fa-plus"></i> ریسک جدید</button></div>
@@ -582,7 +516,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
 
     <!-- RESOURCES -->
-    <div class="page" id="page-resources">
+    <div class="page" id="page-resources" data-roles="admin">
       <div class="page-header">
         <h1><i class="fa-solid fa-users"></i> مدیریت منابع و ظرفیت</h1>
         <div class="actions"><button class="btn primary" id="addResourceBtn"><i class="fa-solid fa-user-plus"></i> منبع جدید</button></div>
@@ -597,8 +531,32 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
+    <!-- ALL REPORTS (ADMIN) -->
+    <div class="page" id="page-reports" data-roles="admin">
+      <div class="page-header">
+        <h1><i class="fa-solid fa-clipboard-list"></i> همه گزارش‌ها</h1>
+        <div class="actions">
+          <select id="reportFilter" class="btn" style="padding:9px 14px;">
+            <option value="">همه وضعیت‌ها</option>
+            <option value="pending">در انتظار بررسی</option>
+            <option value="approved">تأییدشده</option>
+            <option value="rejected">ردشده</option>
+          </select>
+        </div>
+      </div>
+      <div class="kpi-grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+        <div class="kpi"><div class="icon"><i class="fa-solid fa-clipboard"></i></div><div class="label">کل گزارش‌ها</div><div class="value" id="repKpiTotal">0</div></div>
+        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-hourglass-half"></i></div><div class="label">در انتظار بررسی</div><div class="value" id="repKpiPending">0</div></div>
+        <div class="kpi green"><div class="icon"><i class="fa-solid fa-check"></i></div><div class="label">تأییدشده</div><div class="value" id="repKpiApproved">0</div></div>
+        <div class="kpi red"><div class="icon"><i class="fa-solid fa-xmark"></i></div><div class="label">ردشده</div><div class="value" id="repKpiRejected">0</div></div>
+      </div>
+      <div class="card">
+        <div id="allReportsContainer"></div>
+      </div>
+    </div>
+
     <!-- SETTINGS -->
-    <div class="page" id="page-settings">
+    <div class="page" id="page-settings" data-roles="admin">
       <div class="page-header"><h1><i class="fa-solid fa-gear"></i> تنظیمات</h1></div>
       <div class="charts-2x">
         <div class="card">
@@ -611,29 +569,122 @@ table.data-table tbody tr:hover{background:var(--bg3);}
             <i class="fa-solid fa-file-excel" style="color:var(--success);"></i> بارگذاری Excel
             <input type="file" id="xlsxInput" accept=".xlsx,.xls" style="display:none;">
           </label>
-          <button class="btn" id="apiBtn" style="width:100%;justify-content:center;margin-bottom:10px;"><i class="fa-solid fa-cloud-arrow-down"></i> دریافت از سرور (API)</button>
-          <button class="btn" id="sampleBtn2" style="width:100%;justify-content:center;"><i class="fa-solid fa-database"></i> بارگذاری داده نمونه</button>
+          <button class="btn" id="apiBtn" style="width:100%;justify-content:center;margin-bottom:10px;"><i class="fa-solid fa-cloud-arrow-down"></i> دریافت از سرور</button>
+          <button class="btn" id="sampleBtn2" style="width:100%;justify-content:center;"><i class="fa-solid fa-database"></i> داده نمونه</button>
         </div>
         <div class="card">
-          <h3><i class="fa-solid fa-shield-halved"></i> سطوح دسترسی (RBAC)</h3>
-          <div class="setting-item"><div class="info"><h4>مدیر سیستم</h4><p>دسترسی کامل</p></div><div class="toggle on" data-role="admin"></div></div>
-          <div class="setting-item"><div class="info"><h4>مدیر پروژه</h4><p>مدیریت پروژه‌های خود</p></div><div class="toggle on" data-role="manager"></div></div>
-          <div class="setting-item"><div class="info"><h4>عضو تیم</h4><p>فقط وظایف خود</p></div><div class="toggle" data-role="member"></div></div>
-          <div class="setting-item"><div class="info"><h4>مهمان</h4><p>فقط مشاهده</p></div><div class="toggle" data-role="guest"></div></div>
+          <h3><i class="fa-solid fa-shield-halved"></i> سطوح دسترسی</h3>
+          <div class="setting-item"><div class="info"><h4>مدیر سیستم</h4><p>دسترسی کامل</p></div><div class="toggle on"></div></div>
+          <div class="setting-item"><div class="info"><h4>کاربر عادی</h4><p>فقط تسک‌های خود</p></div><div class="toggle on"></div></div>
         </div>
       </div>
+    </div>
+
+    <!-- ============== USER PAGES ============== -->
+
+    <!-- USER DASHBOARD -->
+    <div class="page" id="page-userDashboard" data-roles="user">
+      <div class="welcome-banner">
+        <div>
+          <h2>👋 خوش آمدید، <span id="welcomeName">کاربر</span></h2>
+          <p>اینجا خلاصه‌ای از تسک‌ها و گزارش‌های شماست</p>
+        </div>
+        <div class="date-badge" id="todayDate"></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="icon"><i class="fa-solid fa-list-check"></i></div><div class="label">کل تسک‌های من</div><div class="value" id="uKpiTotal">0</div><div class="sub">تخصیص‌یافته به من</div></div>
+        <div class="kpi green"><div class="icon"><i class="fa-solid fa-circle-check"></i></div><div class="label">تکمیل‌شده</div><div class="value" id="uKpiDone">0</div><div class="sub" id="uKpiDonePct">0%</div></div>
+        <div class="kpi orange"><div class="icon"><i class="fa-solid fa-spinner"></i></div><div class="label">در حال انجام</div><div class="value" id="uKpiActive">0</div><div class="sub">در جریان</div></div>
+        <div class="kpi red"><div class="icon"><i class="fa-solid fa-clock"></i></div><div class="label">نزدیک مهلت</div><div class="value" id="uKpiUrgent">0</div><div class="sub">۳ روز آینده</div></div>
+      </div>
+
+      <div class="charts-2x">
+        <div class="card">
+          <h3><i class="fa-solid fa-chart-line"></i> پیشرفت هفتگی من</h3>
+          <div class="chart-box"><canvas id="userProgressChart"></canvas></div>
+        </div>
+        <div class="card">
+          <h3><i class="fa-solid fa-chart-pie"></i> وضعیت تسک‌های من</h3>
+          <div class="chart-box"><canvas id="userStatusChart"></canvas></div>
+        </div>
+      </div>
+
       <div class="card">
-        <h3><i class="fa-solid fa-robot"></i> اتوماسیون</h3>
-        <div class="setting-item"><div class="info"><h4>تغییر وضعیت خودکار</h4><p>وقتی پیشرفت ۱۰۰٪ شد، تکمیل‌شده شود</p></div><div class="toggle on" data-auto="status"></div></div>
-        <div class="setting-item"><div class="info"><h4>هشدار مهلت</h4><p>اطلاع‌رسانی نزدیک شدن مهلت</p></div><div class="toggle on" data-auto="deadline"></div></div>
-        <div class="setting-item"><div class="info"><h4>هشدار بودجه</h4><p>اطلاع‌رسانی عبور هزینه از بودجه</p></div><div class="toggle on" data-auto="budget"></div></div>
+        <h3><i class="fa-solid fa-bolt"></i> تسک‌های فوری</h3>
+        <div id="urgentTasksContainer"></div>
+      </div>
+    </div>
+
+    <!-- MY TASKS -->
+    <div class="page" id="page-myTasks" data-roles="user">
+      <div class="page-header">
+        <h1><i class="fa-solid fa-list-check"></i> تسک‌های من</h1>
+        <div class="actions">
+          <select id="myTaskFilter" class="btn" style="padding:9px 14px;">
+            <option value="">همه</option>
+            <option value="در انتظار">در انتظار</option>
+            <option value="در حال اجرا">در حال اجرا</option>
+            <option value="تأخیردار">تأخیردار</option>
+            <option value="تکمیل‌شده">تکمیل‌شده</option>
+          </select>
+        </div>
+      </div>
+      <div class="task-grid" id="myTasksGrid"></div>
+    </div>
+
+    <!-- MY REPORTS -->
+    <div class="page" id="page-myReports" data-roles="user">
+      <div class="page-header">
+        <h1><i class="fa-solid fa-clipboard-list"></i> گزارش‌های من</h1>
+      </div>
+      <div class="card">
+        <div class="report-timeline" id="myReportsTimeline"></div>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="page" id="page-profile" data-roles="admin,user">
+      <div class="page-header"><h1><i class="fa-solid fa-user"></i> پروفایل من</h1></div>
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">A</div>
+        <div class="profile-info">
+          <h2 id="profileName">کاربر</h2>
+          <div class="role-badge user" id="profileRole">کاربر عادی</div>
+          <p id="profileEmail">user@domain.com</p>
+        </div>
+      </div>
+      <div class="charts-2x">
+        <div class="card">
+          <h3><i class="fa-solid fa-chart-bar"></i> آمار من</h3>
+          <div style="display:grid;gap:12px;">
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
+              <span>تعداد تسک‌ها</span><strong id="statTasks">0</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
+              <span>گزارش‌های ثبت‌شده</span><strong id="statReports">0</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
+              <span>گزارش‌های تأییدشده</span><strong id="statApproved">0</strong>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:12px;background:var(--bg3);border-radius:10px;">
+              <span>میانگین پیشرفت</span><strong id="statProgress">0%</strong>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3><i class="fa-solid fa-clock-rotate-left"></i> آخرین فعالیت‌ها</h3>
+          <div id="recentActivity" style="font-size:12px;color:var(--muted);line-height:2;"></div>
+        </div>
       </div>
     </div>
 
   </main>
 </div>
 
-<!-- MODALS -->
+<!-- ============ MODALS ============ -->
+
+<!-- PROJECT -->
 <div class="modal-overlay" id="projectModal">
   <div class="modal">
     <div class="modal-header">
@@ -653,7 +704,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <div class="form-group"><label>هزینه (تومان)</label><input type="number" id="pCost" value="0"></div>
         <div class="form-group"><label>تاریخ شروع</label><input type="date" id="pStart"></div>
         <div class="form-group"><label>تاریخ پایان</label><input type="date" id="pEnd"></div>
-        <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee"></div>
+        <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee" placeholder="نام کاربر"></div>
         <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="pEstHours" value="0"></div>
       </div>
     </div>
@@ -664,6 +715,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
+<!-- TASK -->
 <div class="modal-overlay" id="taskModal">
   <div class="modal">
     <div class="modal-header">
@@ -679,7 +731,8 @@ table.data-table tbody tr:hover{background:var(--bg3);}
         <div class="form-group"><label>وضعیت</label><select id="tStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select></div>
         <div class="form-group"><label>اولویت</label><select id="tPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select></div>
         <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="tProgress" min="0" max="100" value="0"></div>
-        <div class="form-group"><label>مسئول</label><input type="text" id="tAssignee"></div>
+        <div class="form-group"><label>مسئول <span class="req">*</span></label><input type="text" id="tAssignee" placeholder="نام کاربر"></div>
+        <div class="form-group"><label>مهلت انجام</label><input type="date" id="tDeadline"></div>
         <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="tEst" value="0"></div>
       </div>
     </div>
@@ -690,6 +743,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
+<!-- RISK -->
 <div class="modal-overlay" id="riskModal">
   <div class="modal">
     <div class="modal-header">
@@ -698,11 +752,11 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     </div>
     <div class="modal-body">
       <div class="form-grid">
-        <div class="form-group"><label>پروژه مرتبط <span class="req">*</span></label><select id="rProject"></select></div>
+        <div class="form-group"><label>پروژه <span class="req">*</span></label><select id="rProject"></select></div>
         <div class="form-group"><label>عنوان ریسک <span class="req">*</span></label><input type="text" id="rRisk"></div>
         <div class="form-group"><label>احتمال (۱-۵)</label><input type="number" id="rProb" min="1" max="5" value="3"></div>
         <div class="form-group"><label>تأثیر (۱-۵)</label><input type="number" id="rImpact" min="1" max="5" value="3"></div>
-        <div class="form-group" style="grid-column:1/-1;"><label>امتیاز ریسک (خودکار)</label><div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div></div>
+        <div class="form-group" style="grid-column:1/-1;"><label>امتیاز ریسک</label><div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div></div>
       </div>
     </div>
     <div class="modal-footer">
@@ -712,6 +766,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
+<!-- RESOURCE -->
 <div class="modal-overlay" id="resourceModal">
   <div class="modal">
     <div class="modal-header">
@@ -734,27 +789,106 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
+<!-- REPORT TASK (کاربر روی تسک گزارش می‌دهد) -->
+<div class="modal-overlay" id="reportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-clipboard-check"></i> گزارش‌دهی روی تسک</h3>
+      <button class="modal-close" data-close="reportModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="reportTaskIdx" value="-1">
+
+      <div style="background:var(--bg3);padding:14px;border-radius:11px;margin-bottom:18px;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">تسک در حال گزارش:</div>
+        <div style="font-size:15px;font-weight:700;" id="reportTaskName">—</div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>وضعیت جدید تسک</label>
+        <select id="reportStatus">
+          <option>در انتظار</option>
+          <option>در حال اجرا</option>
+          <option>تأخیردار</option>
+          <option>تکمیل‌شده</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>درصد پیشرفت جدید</label>
+        <div class="slider-row">
+          <input type="range" id="reportProgress" min="0" max="100" value="0" oninput="document.getElementById('reportProgressVal').textContent=this.value+'%'">
+          <span class="value" id="reportProgressVal">0%</span>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>ساعت صرف‌شده (امروز)</label>
+        <input type="number" id="reportHours" value="0" min="0" step="0.5">
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>توضیحات گزارش <span class="req">*</span></label>
+        <textarea id="reportText" placeholder="چه کاری انجام دادید؟ چه مشکلی پیش آمد؟ چه چیزی نیاز دارید؟"></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>پیوست فایل (اختیاری)</label>
+        <label class="file-upload">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <p>برای انتخاب فایل کلیک کنید</p>
+          <input type="file" id="reportFiles" multiple>
+        </label>
+        <div class="file-list" id="reportFileList"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="reportModal">انصراف</button>
+      <button class="btn primary" id="saveReportBtn"><i class="fa-solid fa-paper-plane"></i> ثبت گزارش</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW REPORT -->
+<div class="modal-overlay" id="viewReportModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-eye"></i> جزئیات گزارش</h3>
+      <button class="modal-close" data-close="viewReportModal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="viewReportBody"></div>
+    <div class="modal-footer">
+      <button class="btn" data-close="viewReportModal">بستن</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================================================
-   AUTH MODULE
+   AUTH
 ============================================================ */
-
-// حالت دمو: اگر بک‌اند در دسترس نباشد، ورود محلی انجام می‌شود
-const DEMO_MODE = true; // در محیط واقعی false کنید
+const DEMO_MODE = true;
+const USERS = {
+  // شبیه‌سازی کاربران دامنه
+  'admin': { password:'admin', role:'admin', displayName:'مدیر سیستم', email:'admin@company.com' },
+  'ali':   { password:'ali',   role:'user',  displayName:'علی رضایی',  email:'ali@company.com' },
+  'maryam':{ password:'maryam',role:'user',  displayName:'مریم کریمی', email:'maryam@company.com' },
+  'hasan': { password:'hasan', role:'user',  displayName:'حسین نوری',  email:'hasan@company.com' },
+  'zahra': { password:'zahra', role:'user',  displayName:'زهرا احمدی', email:'zahra@company.com' }
+};
 
 async function loginAPI(username, password){
   if(DEMO_MODE){
-    // شبیه‌سازی تأخیر شبکه
-    await new Promise(r => setTimeout(r, 800));
-    // در حالت دمو: هر نام کاربری/رمزی قبول است، اما admin/admin توصیه می‌شود
-    if(!username || !password) throw new Error('نام کاربری و رمز عبور الزامی است');
-    return { success:true, username, displayName: username, role:'مدیر سیستم' };
+    await new Promise(r => setTimeout(r, 700));
+    const u = USERS[username.toLowerCase()];
+    if(!u || u.password !== password){
+      throw new Error('نام کاربری یا رمز عبور اشتباه است');
+    }
+    return { username, displayName: u.displayName, role: u.role, email: u.email };
   }
-
-  // حالت واقعی: ارسال به بک‌اند
+  // حالت واقعی AD
   const res = await fetch('/api/login', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
+    method:'POST', headers:{'Content-Type':'application/json'},
     credentials:'include',
     body: JSON.stringify({ username, password })
   });
@@ -764,170 +898,43 @@ async function loginAPI(username, password){
 }
 
 async function logoutAPI(){
-  if(DEMO_MODE){
-    await new Promise(r => setTimeout(r, 300));
-    return;
-  }
-  try{
-    await fetch('/api/logout', { method:'POST', credentials:'include' });
-  }catch(e){}
+  if(DEMO_MODE){ await new Promise(r => setTimeout(r, 200)); return; }
+  try{ await fetch('/api/logout', {method:'POST', credentials:'include'}); }catch(e){}
 }
 
-function saveSession(user){
-  try{
-    sessionStorage.setItem('pm_user', JSON.stringify(user));
-  }catch(e){}
-}
-
-function loadSession(){
-  try{
-    const raw = sessionStorage.getItem('pm_user');
-    return raw ? JSON.parse(raw) : null;
-  }catch(e){ return null; }
-}
-
-function clearSession(){
-  try{ sessionStorage.removeItem('pm_user'); }catch(e){}
-}
+function saveSession(user){ try{ sessionStorage.setItem('pm_user', JSON.stringify(user)); }catch(e){} }
+function loadSession(){ try{ const r = sessionStorage.getItem('pm_user'); return r ? JSON.parse(r) : null; }catch(e){ return null; } }
+function clearSession(){ try{ sessionStorage.removeItem('pm_user'); }catch(e){} }
 
 /* ============================================================
-   LOGIN UI
+   STATE
 ============================================================ */
-const loginScreen = document.getElementById('loginScreen');
-const loginForm   = document.getElementById('loginForm');
-const loginBtn    = document.getElementById('loginBtn');
-const errorMsg    = document.getElementById('errorMsg');
-const loginCard   = document.getElementById('loginCard');
-const passInput   = document.getElementById('password');
-const togglePass  = document.getElementById('togglePass');
-
-togglePass.addEventListener('click', () => {
-  const isPass = passInput.type === 'password';
-  passInput.type = isPass ? 'text' : 'password';
-  togglePass.innerHTML = isPass
-    ? '<i class="fa-solid fa-eye-slash"></i>'
-    : '<i class="fa-solid fa-eye"></i>';
-});
-
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  errorMsg.textContent = '';
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = 'در حال ورود <span class="spinner"></span>';
-
-  try{
-    const username = document.getElementById('username').value.trim();
-    const password = passInput.value;
-
-    const user = await loginAPI(username, password);
-    saveSession(user);
-    showApp(user);
-  }catch(err){
-    errorMsg.textContent = err.message || 'خطا در ورود';
-    loginCard.classList.add('shake');
-    setTimeout(() => loginCard.classList.remove('shake'), 400);
-  }finally{
-    loginBtn.disabled = false;
-    loginBtn.textContent = 'ورود';
-  }
-});
-
-/* ============================================================
-   APP SHOW / HIDE
-============================================================ */
-const app = document.getElementById('app');
-
-function showApp(user){
-  // پر کردن اطلاعات کاربر در سایدبار
-  document.getElementById('userName').textContent = user.displayName || user.username;
-  document.getElementById('userRole').textContent = user.role || 'کاربر';
-  document.getElementById('userAvatar').textContent =
-    (user.displayName || user.username || 'U').charAt(0).toUpperCase();
-
-  loginScreen.classList.add('hidden');
-  app.classList.add('show');
-
-  // اگر داده‌ای در localStorage نیست، داده نمونه بارگذاری شود
-  if(!localStorage.getItem('pm_data')){
-    rawData = SAMPLE_DATA.map(d => ({...d}));
-    initResourcesIfEmpty();
-    saveLocal();
-  }
-
-  // رندر اولیه
-  setTimeout(() => {
-    updateTeamFilter();
-    applyTimeFilter();
-    renderAll();
-    renderKanban(); renderGantt(); renderRisks(); renderResources();
-  }, 100);
-}
-
-document.getElementById('logoutBtn').addEventListener('click', async () => {
-  if(!confirm('از حساب خود خارج می‌شوید؟')) return;
-  await logoutAPI();
-  clearSession();
-  app.classList.remove('show');
-  loginScreen.classList.remove('hidden');
-  // پاک کردن فرم
-  loginForm.reset();
-  errorMsg.textContent = '';
-});
+let currentUser = null;
+let rawData = [];
+let filteredData = [];
+let resources = [];
+let reports = []; // {id, taskIdx, taskName, username, progress, status, hours, text, files, createdAt, reportStatus:'pending|approved|rejected', reviewNote}
+let currentRange = 'monthly';
+let sortKey = null, sortAsc = true;
+let currentPage = 1;
+const PAGE_SIZE = 8;
+const charts = {};
 
 /* ============================================================
    SAMPLE DATA
 ============================================================ */
 const SAMPLE_DATA = [
-  {date:'2024-01-05', project:'سایت فروشگاهی', manager:'احمدی', team:'فرانت‌اند', status:'تکمیل‌شده', priority:'بالا', progress:100, budget:150000000, cost:142000000, start_date:'2024-01-01', end_date:'2024-02-15', risk:'کمبود منابع', risk_probability:2, risk_impact:3, dependencies:'', assignee:'علی رضایی', estimated_hours:320, actual_hours:340},
-  {date:'2024-01-12', project:'اپلیکیشن موبایل', manager:'رضایی', team:'موبایل', status:'در حال اجرا', priority:'بالا', progress:65, budget:280000000, cost:170000000, start_date:'2024-01-10', end_date:'2024-04-20', risk:'تغییر نیازمندی‌ها', risk_probability:4, risk_impact:4, dependencies:'', assignee:'مریم کریمی', estimated_hours:500, actual_hours:320},
-  {date:'2024-02-03', project:'داشبورد مدیریت', manager:'محمدی', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:45, budget:120000000, cost:60000000, start_date:'2024-02-01', end_date:'2024-05-10', risk:'پیچیدگی فنی', risk_probability:3, risk_impact:4, dependencies:'', assignee:'حسین نوری', estimated_hours:400, actual_hours:180},
-  {date:'2024-02-18', project:'سیستم CRM', manager:'احمدی', team:'بک‌اند', status:'تأخیردار', priority:'بالا', progress:30, budget:200000000, cost:190000000, start_date:'2024-02-15', end_date:'2024-04-01', risk:'تأخیر در تحویل', risk_probability:5, risk_impact:5, dependencies:'', assignee:'زهرا احمدی', estimated_hours:600, actual_hours:550},
-  {date:'2024-03-02', project:'پنل ادمین', manager:'کریمی', team:'فرانت‌اند', status:'تکمیل‌شده', priority:'متوسط', progress:100, budget:80000000, cost:75000000, start_date:'2024-03-01', end_date:'2024-04-15', risk:'ناپایداری API', risk_probability:2, risk_impact:2, dependencies:'', assignee:'علی رضایی', estimated_hours:200, actual_hours:190},
-  {date:'2024-03-15', project:'اپ فروشگاهی', manager:'رضایی', team:'موبایل', status:'در انتظار', priority:'کم', progress:10, budget:180000000, cost:20000000, start_date:'2024-03-15', end_date:'2024-07-01', risk:'', risk_probability:1, risk_impact:2, dependencies:'', assignee:'مریم کریمی', estimated_hours:450, actual_hours:50},
-  {date:'2024-04-01', project:'سایت شرکتی', manager:'نوری', team:'فرانت‌اند', status:'در حال اجرا', priority:'متوسط', progress:70, budget:60000000, cost:40000000, start_date:'2024-03-25', end_date:'2024-05-30', risk:'', risk_probability:2, risk_impact:2, dependencies:'', assignee:'حسین نوری', estimated_hours:150, actual_hours:105},
-  {date:'2024-04-20', project:'API Gateway', manager:'محمدی', team:'بک‌اند', status:'تکمیل‌شده', priority:'بالا', progress:100, budget:90000000, cost:88000000, start_date:'2024-04-01', end_date:'2024-05-25', risk:'حملات امنیتی', risk_probability:3, risk_impact:5, dependencies:'', assignee:'زهرا احمدی', estimated_hours:280, actual_hours:300},
-  {date:'2024-05-10', project:'اپ بانکی', manager:'کریمی', team:'موبایل', status:'تأخیردار', priority:'بالا', progress:25, budget:350000000, cost:300000000, start_date:'2024-05-01', end_date:'2024-08-15', risk:'مشکلات امنیتی', risk_probability:5, risk_impact:5, dependencies:'', assignee:'علی رضایی', estimated_hours:800, actual_hours:720},
-  {date:'2024-05-22', project:'سیستم انبار', manager:'نوری', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:55, budget:110000000, cost:55000000, start_date:'2024-05-15', end_date:'2024-08-01', risk:'', risk_probability:2, risk_impact:3, dependencies:'', assignee:'حسین نوری', estimated_hours:350, actual_hours:190},
-  {date:'2024-06-05', project:'پورتال مشتریان', manager:'احمدی', team:'فرانت‌اند', status:'در انتظار', priority:'کم', progress:5, budget:70000000, cost:5000000, start_date:'2024-06-01', end_date:'2024-09-15', risk:'', risk_probability:1, risk_impact:2, dependencies:'', assignee:'مریم کریمی', estimated_hours:250, actual_hours:15},
-  {date:'2024-06-18', project:'اپ تحویل غذا', manager:'رضایی', team:'موبایل', status:'در حال اجرا', priority:'بالا', progress:80, budget:220000000, cost:160000000, start_date:'2024-06-01', end_date:'2024-08-30', risk:'رقابت شدید', risk_probability:4, risk_impact:3, dependencies:'', assignee:'مریم کریمی', estimated_hours:420, actual_hours:340},
-  {date:'2024-07-02', project:'داشبورد فروش', manager:'محمدی', team:'فرانت‌اند', status:'تکمیل‌شده', priority:'متوسط', progress:100, budget:95000000, cost:92000000, start_date:'2024-06-15', end_date:'2024-07-30', risk:'', risk_probability:2, risk_impact:2, dependencies:'', assignee:'علی رضایی', estimated_hours:200, actual_hours:205},
-  {date:'2024-07-20', project:'سیستم پشتیبانی', manager:'کریمی', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:50, budget:130000000, cost:70000000, start_date:'2024-07-01', end_date:'2024-10-15', risk:'', risk_probability:2, risk_impact:3, dependencies:'', assignee:'زهرا احمدی', estimated_hours:380, actual_hours:190},
-  {date:'2024-08-08', project:'اپ سلامت', manager:'نوری', team:'موبایل', status:'تأخیردار', priority:'بالا', progress:35, budget:300000000, cost:250000000, start_date:'2024-08-01', end_date:'2024-11-30', risk:'تغییر مقررات', risk_probability:4, risk_impact:5, dependencies:'', assignee:'حسین نوری', estimated_hours:700, actual_hours:600},
-  {date:'2024-08-25', project:'سایت آموزشی', manager:'احمدی', team:'فرانت‌اند', status:'در حال اجرا', priority:'کم', progress:60, budget:85000000, cost:50000000, start_date:'2024-08-15', end_date:'2024-11-01', risk:'', risk_probability:2, risk_impact:2, dependencies:'', assignee:'علی رضایی', estimated_hours:280, actual_hours:170},
-  {date:'2024-09-10', project:'سیستم حسابداری', manager:'رضایی', team:'بک‌اند', status:'تکمیل‌شده', priority:'بالا', progress:100, budget:160000000, cost:155000000, start_date:'2024-08-01', end_date:'2024-09-20', risk:'', risk_probability:2, risk_impact:3, dependencies:'', assignee:'زهرا احمدی', estimated_hours:340, actual_hours:350},
-  {date:'2024-10-01', project:'اپ سفر', manager:'محمدی', team:'موبایل', status:'در انتظار', priority:'متوسط', progress:15, budget:250000000, cost:30000000, start_date:'2024-10-01', end_date:'2025-01-15', risk:'', risk_probability:2, risk_impact:3, dependencies:'', assignee:'مریم کریمی', estimated_hours:550, actual_hours:80},
+  {date:'2024-10-01', project:'سایت فروشگاهی', manager:'احمدی', team:'فرانت‌اند', status:'در حال اجرا', priority:'بالا', progress:45, budget:150000000, cost:92000000, start_date:'2024-09-01', end_date:'2024-12-15', assignee:'علی رضایی', estimated_hours:320, actual_hours:180, deadline:'2024-12-15'},
+  {date:'2024-10-02', project:'اپلیکیشن موبایل', manager:'رضایی', team:'موبایل', status:'در حال اجرا', priority:'بالا', progress:65, budget:280000000, cost:170000000, start_date:'2024-08-10', end_date:'2024-11-20', assignee:'مریم کریمی', estimated_hours:500, actual_hours:320, deadline:'2024-11-20'},
+  {date:'2024-10-03', project:'داشبورد مدیریت', manager:'محمدی', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:55, budget:120000000, cost:60000000, start_date:'2024-09-01', end_date:'2024-12-10', assignee:'حسین نوری', estimated_hours:400, actual_hours:220, deadline:'2024-12-10'},
+  {date:'2024-10-04', project:'سیستم CRM', manager:'احمدی', team:'بک‌اند', status:'تأخیردار', priority:'بالا', progress:30, budget:200000000, cost:190000000, start_date:'2024-07-15', end_date:'2024-10-25', assignee:'زهرا احمدی', estimated_hours:600, actual_hours:550, deadline:'2024-10-25'},
+  {date:'2024-10-05', project:'پنل ادمین', manager:'کریمی', team:'فرانت‌اند', status:'تکمیل‌شده', priority:'متوسط', progress:100, budget:80000000, cost:75000000, start_date:'2024-08-01', end_date:'2024-10-01', assignee:'علی رضایی', estimated_hours:200, actual_hours:190, deadline:'2024-10-01'},
+  {date:'2024-10-06', project:'سیستم انبار', manager:'نوری', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:70, budget:110000000, cost:70000000, start_date:'2024-09-15', end_date:'2024-12-01', assignee:'حسین نوری', estimated_hours:350, actual_hours:245, deadline:'2024-12-01'},
+  {date:'2024-10-07', project:'اپ تحویل غذا', manager:'رضایی', team:'موبایل', status:'در حال اجرا', priority:'بالا', progress:80, budget:220000000, cost:160000000, start_date:'2024-08-01', end_date:'2024-11-15', assignee:'مریم کریمی', estimated_hours:420, actual_hours:340, deadline:'2024-11-15'},
+  {date:'2024-10-08', project:'سیستم پشتیبانی', manager:'کریمی', team:'بک‌اند', status:'در حال اجرا', priority:'متوسط', progress:50, budget:130000000, cost:70000000, start_date:'2024-09-01', end_date:'2024-12-15', assignee:'زهرا احمدی', estimated_hours:380, actual_hours:190, deadline:'2024-12-15'},
+  {date:'2024-10-09', project:'اپ سلامت', manager:'نوری', team:'موبایل', status:'تأخیردار', priority:'بالا', progress:35, budget:300000000, cost:250000000, start_date:'2024-07-01', end_date:'2024-10-30', assignee:'حسین نوری', estimated_hours:700, actual_hours:600, deadline:'2024-10-30'},
+  {date:'2024-10-10', project:'سیستم حسابداری', manager:'رضایی', team:'بک‌اند', status:'تکمیل‌شده', priority:'بالا', progress:100, budget:160000000, cost:155000000, start_date:'2024-06-01', end_date:'2024-09-20', assignee:'زهرا احمدی', estimated_hours:340, actual_hours:350, deadline:'2024-09-20'}
 ];
-
-/* ============================================================
-   STATE
-============================================================ */
-let rawData = [];
-let filteredData = [];
-let resources = [];
-let currentRange = 'monthly';
-let sortKey = null, sortAsc = true;
-let currentPage = 1;
-const PAGE_SIZE = 8;
-const charts = { line:null, pie:null, bar:null, manager:null, riskMatrix:null, riskPie:null, workload:null };
-
-/* ============================================================
-   PERSISTENCE
-============================================================ */
-function saveLocal(){
-  try{
-    localStorage.setItem('pm_data', JSON.stringify(rawData));
-    localStorage.setItem('pm_resources', JSON.stringify(resources));
-  }catch(e){}
-}
-function loadLocal(){
-  try{
-    const d = localStorage.getItem('pm_data');
-    const r = localStorage.getItem('pm_resources');
-    if(d) rawData = JSON.parse(d);
-    if(r) resources = JSON.parse(r);
-    return !!d;
-  }catch(e){ return false; }
-}
 
 /* ============================================================
    UTILS
@@ -947,8 +954,219 @@ const statusClass = s => {
   if(s==='تأخیردار') return 'late';
   return '';
 };
+const priorityClass = p => p==='بالا'?'high':p==='متوسط'?'medium':'low';
 const riskLevel = score => score >= 15 ? 'high' : score >= 8 ? 'medium' : 'low';
 const today = () => new Date().toISOString().split('T')[0];
+const daysUntil = dateStr => {
+  const d = new Date(dateStr); if(isNaN(d)) return 9999;
+  const t = new Date(); t.setHours(0,0,0,0);
+  return Math.round((d - t) / 86400000);
+};
+const fmtDate = d => {
+  if(!d) return '—';
+  try{ return new Date(d).toLocaleDateString('fa-IR'); }catch(e){ return d; }
+};
+const fmtDateTime = d => {
+  if(!d) return '—';
+  try{ return new Date(d).toLocaleString('fa-IR'); }catch(e){ return d; }
+};
+
+/* ============================================================
+   STORAGE
+============================================================ */
+function saveLocal(){
+  try{
+    localStorage.setItem('pm_data', JSON.stringify(rawData));
+    localStorage.setItem('pm_resources', JSON.stringify(resources));
+    localStorage.setItem('pm_reports', JSON.stringify(reports));
+  }catch(e){}
+}
+function loadLocal(){
+  try{
+    const d = localStorage.getItem('pm_data');
+    const r = localStorage.getItem('pm_resources');
+    const rp = localStorage.getItem('pm_reports');
+    if(d) rawData = JSON.parse(d);
+    if(r) resources = JSON.parse(r);
+    if(rp) reports = JSON.parse(rp);
+    return !!d;
+  }catch(e){ return false; }
+}
+
+/* ============================================================
+   PERMISSIONS
+============================================================ */
+function isAdmin(){ return currentUser && currentUser.role === 'admin'; }
+function isUser(){ return currentUser && currentUser.role === 'user'; }
+
+/* ============================================================
+   LOGIN UI
+============================================================ */
+const loginScreen = document.getElementById('loginScreen');
+const loginForm = document.getElementById('loginForm');
+const loginBtn = document.getElementById('loginBtn');
+const errorMsg = document.getElementById('errorMsg');
+const loginCard = document.getElementById('loginCard');
+const passInput = document.getElementById('password');
+const togglePass = document.getElementById('togglePass');
+
+togglePass.addEventListener('click', () => {
+  const isPass = passInput.type === 'password';
+  passInput.type = isPass ? 'text' : 'password';
+  togglePass.innerHTML = isPass ? '<i class="fa-solid fa-eye-slash"></i>' : '<i class="fa-solid fa-eye"></i>';
+});
+
+function quickLogin(u, p){
+  document.getElementById('username').value = u;
+  document.getElementById('password').value = p;
+  loginForm.dispatchEvent(new Event('submit'));
+}
+window.quickLogin = quickLogin;
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorMsg.textContent = '';
+  loginBtn.disabled = true;
+  loginBtn.innerHTML = 'در حال ورود <span class="spinner"></span>';
+  try{
+    const username = document.getElementById('username').value.trim();
+    const password = passInput.value;
+    const user = await loginAPI(username, password);
+    currentUser = user;
+    saveSession(user);
+    showApp();
+  }catch(err){
+    errorMsg.textContent = err.message || 'خطا در ورود';
+    loginCard.classList.add('shake');
+    setTimeout(() => loginCard.classList.remove('shake'), 400);
+  }finally{
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'ورود';
+  }
+});
+
+/* ============================================================
+   APP INIT
+============================================================ */
+const app = document.getElementById('app');
+
+function showApp(){
+  // اطلاعات کاربر در سایدبار
+  document.getElementById('userName').textContent = currentUser.displayName || currentUser.username;
+  document.getElementById('userRole').textContent = isAdmin() ? 'مدیر سیستم' : 'کاربر';
+  document.getElementById('userAvatar').childNodes[0].nodeValue = (currentUser.displayName || currentUser.username).charAt(0).toUpperCase();
+
+  // پروفایل
+  document.getElementById('profileName').textContent = currentUser.displayName || currentUser.username;
+  document.getElementById('profileRole').textContent = isAdmin() ? 'مدیر سیستم' : 'کاربر عادی';
+  document.getElementById('profileRole').className = 'role-badge ' + (isAdmin() ? 'admin' : 'user');
+  document.getElementById('profileEmail').textContent = currentUser.email || '—';
+  document.getElementById('profileAvatar').textContent = (currentUser.displayName || currentUser.username).charAt(0).toUpperCase();
+  document.getElementById('welcomeName').textContent = currentUser.displayName || currentUser.username;
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('fa-IR', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+
+  buildSidebar();
+  showDefaultPage();
+
+  loginScreen.classList.add('hidden');
+  app.classList.add('show');
+
+  // بارگذاری داده
+  if(!localStorage.getItem('pm_data')){
+    rawData = SAMPLE_DATA.map(d => ({...d}));
+    initResourcesIfEmpty();
+    saveLocal();
+  } else {
+    loadLocal();
+  }
+  initResourcesIfEmpty();
+
+  setTimeout(() => {
+    updateTeamFilter();
+    applyTimeFilter();
+    renderAll();
+    renderKanban();
+    renderGantt();
+    renderRisks();
+    renderResources();
+    renderUserPages();
+  }, 100);
+}
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  if(!confirm('از حساب خود خارج می‌شوید؟')) return;
+  await logoutAPI();
+  clearSession();
+  currentUser = null;
+  app.classList.remove('show');
+  loginScreen.classList.remove('hidden');
+  loginForm.reset();
+  errorMsg.textContent = '';
+});
+
+/* ============================================================
+   SIDEBAR بر اساس نقش
+============================================================ */
+function buildSidebar(){
+  const nav = document.getElementById('sidebarNav');
+  const adminMenu = `
+    <div class="nav-section">مدیریت</div>
+    <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-gauge"></i> داشبورد</div>
+    <div class="nav-item" data-page="projects"><i class="fa-solid fa-folder"></i> پروژه‌ها</div>
+    <div class="nav-item" data-page="kanban"><i class="fa-solid fa-table-columns"></i> کانبان</div>
+    <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
+    <div class="nav-item" data-page="risks"><i class="fa-solid fa-triangle-exclamation"></i> ریسک‌ها</div>
+    <div class="nav-item" data-page="resources"><i class="fa-solid fa-users"></i> منابع</div>
+    <div class="nav-item" data-page="reports"><i class="fa-solid fa-clipboard-list"></i> همه گزارش‌ها <span class="nav-badge" id="pendingReportsBadge">0</span></div>
+    <div class="nav-section">حساب</div>
+    <div class="nav-item" data-page="profile"><i class="fa-solid fa-user"></i> پروفایل</div>
+    <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> تنظیمات</div>
+  `;
+  const userMenu = `
+    <div class="nav-section">من</div>
+    <div class="nav-item active" data-page="userDashboard"><i class="fa-solid fa-gauge"></i> داشبورد من</div>
+    <div class="nav-item" data-page="myTasks"><i class="fa-solid fa-list-check"></i> تسک‌های من</div>
+    <div class="nav-item" data-page="myReports"><i class="fa-solid fa-clipboard-list"></i> گزارش‌های من</div>
+    <div class="nav-section">عمومی</div>
+    <div class="nav-item" data-page="projects"><i class="fa-solid fa-folder"></i> پروژه‌ها</div>
+    <div class="nav-item" data-page="gantt"><i class="fa-solid fa-chart-gantt"></i> گانت</div>
+    <div class="nav-item" data-page="profile"><i class="fa-solid fa-user"></i> پروفایل</div>
+  `;
+  nav.innerHTML = isAdmin() ? adminMenu : userMenu;
+
+  nav.addEventListener('click', e => {
+    const item = e.target.closest('.nav-item');
+    if(!item) return;
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = item.dataset.page;
+    const pageEl = document.getElementById('page-'+page);
+    if(pageEl){
+      pageEl.classList.add('active');
+      if(page === 'kanban') renderKanban();
+      if(page === 'gantt') renderGantt();
+      if(page === 'risks') renderRisks();
+      if(page === 'resources') renderResources();
+      if(page === 'reports') renderAllReports();
+      if(page === 'myTasks') renderMyTasks();
+      if(page === 'myReports') renderMyReports();
+      if(page === 'userDashboard') renderUserDashboard();
+      if(page === 'profile') renderProfile();
+    }
+    if(window.innerWidth <= 1024) document.getElementById('sidebar').classList.remove('open');
+  });
+}
+
+function showDefaultPage(){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const defaultPage = isAdmin() ? 'dashboard' : 'userDashboard';
+  document.getElementById('page-'+defaultPage).classList.add('active');
+}
+
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+});
 
 /* ============================================================
    MODAL HELPERS
@@ -963,27 +1181,6 @@ document.querySelectorAll('.modal-overlay').forEach(ov => {
 });
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
-});
-
-/* ============================================================
-   NAVIGATION
-============================================================ */
-document.getElementById('sidebarNav').addEventListener('click', e => {
-  const item = e.target.closest('.nav-item');
-  if(!item) return;
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  item.classList.add('active');
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const page = item.dataset.page;
-  document.getElementById('page-'+page).classList.add('active');
-  if(page === 'kanban') renderKanban();
-  if(page === 'gantt') renderGantt();
-  if(page === 'risks') renderRisks();
-  if(page === 'resources') renderResources();
-  if(window.innerWidth <= 1024) document.getElementById('sidebar').classList.remove('open');
-});
-document.getElementById('menuToggle').addEventListener('click', () => {
-  document.getElementById('sidebar').classList.toggle('open');
 });
 
 /* ============================================================
@@ -1008,11 +1205,11 @@ document.getElementById('xlsxInput').addEventListener('change', e => {
 document.getElementById('apiBtn').addEventListener('click', async () => {
   const url = prompt('آدرس API:', 'https://jsonplaceholder.typicode.com/posts');
   if(!url) return;
-  try {
+  try{
     const res = await fetch(url);
     const json = await res.json();
     setData(normalize(Array.isArray(json) ? json : [json]));
-  } catch(err) { alert('خطا: ' + err.message); }
+  }catch(err){ alert('خطا: ' + err.message); }
 });
 
 document.getElementById('sampleBtn').addEventListener('click', () => {
@@ -1027,9 +1224,10 @@ document.getElementById('sampleBtn2').addEventListener('click', () => {
 });
 document.getElementById('clearBtn').addEventListener('click', () => {
   if(!confirm('همه داده‌ها حذف شوند؟')) return;
-  rawData = []; filteredData = []; resources = [];
+  rawData = []; filteredData = []; resources = []; reports = [];
   localStorage.removeItem('pm_data');
   localStorage.removeItem('pm_resources');
+  localStorage.removeItem('pm_reports');
   renderAll();
   renderKanban(); renderGantt(); renderRisks(); renderResources();
 });
@@ -1042,13 +1240,12 @@ function initResourcesIfEmpty(){
 
 function normalize(rows){
   const map = {
-    date:['date','تاریخ'], project:['project','نام پروژه','پروژه'], manager:['manager','مدیر','مدیر پروژه'],
+    date:['date','تاریخ'], project:['project','نام پروژه','پروژه'], manager:['manager','مدیر'],
     team:['team','تیم'], status:['status','وضعیت'], priority:['priority','اولویت'],
     progress:['progress','پیشرفت'], budget:['budget','بودجه'], cost:['cost','هزینه'],
     start_date:['start_date','تاریخ شروع'], end_date:['end_date','تاریخ پایان'],
-    risk:['risk','ریسک'], risk_probability:['risk_probability','احتمال'], risk_impact:['risk_impact','تأثیر'],
-    dependencies:['dependencies','وابستگی'], assignee:['assignee','مسئول'],
-    estimated_hours:['estimated_hours','ساعت برآوردی'], actual_hours:['actual_hours','ساعت واقعی']
+    assignee:['assignee','مسئول'], estimated_hours:['estimated_hours','ساعت برآوردی'],
+    actual_hours:['actual_hours','ساعت واقعی'], deadline:['deadline','مهلت']
   };
   return rows.map(r => {
     const out = {};
@@ -1056,10 +1253,6 @@ function normalize(rows){
     out.progress = Number(out.progress) || 0;
     out.budget = Number(String(out.budget).replace(/[^\d.-]/g,'')) || 0;
     out.cost = Number(String(out.cost).replace(/[^\d.-]/g,'')) || 0;
-    out.risk_probability = Number(out.risk_probability) || 1;
-    out.risk_impact = Number(out.risk_impact) || 1;
-    out.estimated_hours = Number(out.estimated_hours) || 0;
-    out.actual_hours = Number(out.actual_hours) || 0;
     return out;
   }).filter(r => r.project);
 }
@@ -1101,9 +1294,9 @@ function applyTimeFilter(){
 }
 
 /* ============================================================
-   RENDER ALL
+   RENDER ALL (ADMIN)
 ============================================================ */
-function renderAll(){ renderKPIs(); renderCharts(); renderTable(); }
+function renderAll(){ if(isAdmin()){ renderKPIs(); renderCharts(); renderTable(); } }
 
 function renderKPIs(){
   const data = filteredData;
@@ -1113,17 +1306,19 @@ function renderKPIs(){
   const late = data.filter(d => d.status === 'تأخیردار').length;
   const budget = data.reduce((s,d) => s + d.budget, 0);
   const cost = data.reduce((s,d) => s + d.cost, 0);
-  document.getElementById('kpiTotal').textContent = fmtNum(total);
-  document.getElementById('kpiDone').textContent = fmtNum(done);
-  document.getElementById('kpiDonePct').textContent = total ? Math.round(done/total*100)+'% تکمیل' : '0%';
-  document.getElementById('kpiActive').textContent = fmtNum(active);
-  document.getElementById('kpiLate').textContent = fmtNum(late);
-  document.getElementById('kpiBudget').textContent = fmtMoney(budget);
-  document.getElementById('kpiCost').textContent = fmtMoney(cost);
-  document.getElementById('kpiUsage').textContent = 'مصرف: ' + (budget ? Math.round(cost/budget*100) : 0) + '%';
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('kpiTotal', fmtNum(total));
+  set('kpiDone', fmtNum(done));
+  set('kpiDonePct', (total ? Math.round(done/total*100) : 0)+'% تکمیل');
+  set('kpiActive', fmtNum(active));
+  set('kpiLate', fmtNum(late));
+  set('kpiBudget', fmtMoney(budget));
+  set('kpiCost', fmtMoney(cost));
+  set('kpiUsage', 'مصرف: ' + (budget ? Math.round(cost/budget*100) : 0) + '%');
 }
 
 function renderCharts(){
+  if(!isAdmin()) return;
   Chart.defaults.color = '#8b949e';
   Chart.defaults.borderColor = '#2d333b';
   Chart.defaults.font.family = 'Segoe UI,Tahoma,sans-serif';
@@ -1134,35 +1329,47 @@ function renderCharts(){
   const lineData = lineLabels.map(k => Math.round(grouped[k].sum / grouped[k].count));
 
   if(charts.line) charts.line.destroy();
-  charts.line = new Chart(document.getElementById('lineChart'), {
-    type:'line', data:{labels:lineLabels, datasets:[{label:'میانگین پیشرفت (%)', data:lineData, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointBackgroundColor:'#58a6ff', pointRadius:4}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
-  });
+  const lineEl = document.getElementById('lineChart');
+  if(lineEl){
+    charts.line = new Chart(lineEl, {
+      type:'line', data:{labels:lineLabels, datasets:[{label:'میانگین پیشرفت (%)', data:lineData, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointBackgroundColor:'#58a6ff', pointRadius:4}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+    });
+  }
 
   const statusCount = {};
   filteredData.forEach(d => statusCount[d.status] = (statusCount[d.status]||0)+1);
   if(charts.pie) charts.pie.destroy();
-  charts.pie = new Chart(document.getElementById('pieChart'), {
-    type:'doughnut', data:{labels:Object.keys(statusCount), datasets:[{data:Object.values(statusCount), backgroundColor:['#3fb950','#58a6ff','#d29922','#f85149','#bc8cff'], borderColor:'#161b22', borderWidth:2}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
-  });
+  const pieEl = document.getElementById('pieChart');
+  if(pieEl){
+    charts.pie = new Chart(pieEl, {
+      type:'doughnut', data:{labels:Object.keys(statusCount), datasets:[{data:Object.values(statusCount), backgroundColor:['#3fb950','#58a6ff','#d29922','#f85149','#bc8cff'], borderColor:'#161b22', borderWidth:2}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
+    });
+  }
 
   const teamBudget = {};
   filteredData.forEach(d => teamBudget[d.team] = (teamBudget[d.team]||0) + d.budget);
   if(charts.bar) charts.bar.destroy();
-  charts.bar = new Chart(document.getElementById('barChart'), {
-    type:'bar', data:{labels:Object.keys(teamBudget), datasets:[{label:'بودجه', data:Object.values(teamBudget), backgroundColor:'rgba(188,140,255,.6)', borderColor:'#bc8cff', borderWidth:1, borderRadius:6}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx => fmtMoney(ctx.parsed.y)+' تومان'}}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{callback:v => fmtMoney(v)}}, x:{grid:{display:false}}}}
-  });
+  const barEl = document.getElementById('barChart');
+  if(barEl){
+    charts.bar = new Chart(barEl, {
+      type:'bar', data:{labels:Object.keys(teamBudget), datasets:[{label:'بودجه', data:Object.values(teamBudget), backgroundColor:'rgba(188,140,255,.6)', borderColor:'#bc8cff', borderWidth:1, borderRadius:6}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx => fmtMoney(ctx.parsed.y)+' تومان'}}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{callback:v => fmtMoney(v)}}, x:{grid:{display:false}}}}
+    });
+  }
 
   const managerCount = {};
   filteredData.forEach(d => managerCount[d.manager] = (managerCount[d.manager]||0)+1);
   const topManagers = Object.entries(managerCount).sort((a,b) => b[1]-a[1]).slice(0,5);
   if(charts.manager) charts.manager.destroy();
-  charts.manager = new Chart(document.getElementById('managerChart'), {
-    type:'bar', data:{labels:topManagers.map(m => m[0]), datasets:[{label:'تعداد پروژه', data:topManagers.map(m => m[1]), backgroundColor:'rgba(57,197,207,.6)', borderColor:'#39c5cf', borderWidth:1, borderRadius:6}]},
-    options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, y:{grid:{display:false}}}}
-  });
+  const mEl = document.getElementById('managerChart');
+  if(mEl){
+    charts.manager = new Chart(mEl, {
+      type:'bar', data:{labels:topManagers.map(m => m[0]), datasets:[{label:'تعداد پروژه', data:topManagers.map(m => m[1]), backgroundColor:'rgba(57,197,207,.6)', borderColor:'#39c5cf', borderWidth:1, borderRadius:6}]},
+      options:{indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, grid:{color:'#21262d'}, ticks:{stepSize:1}}, y:{grid:{display:false}}}}
+    });
+  }
 }
 
 function periodKey(dateStr){
@@ -1188,11 +1395,13 @@ document.querySelectorAll('#dataTable thead th[data-key]').forEach(th => {
     renderTable();
   });
 });
+
 function updateTeamFilter(){
-  const sel = document.getElementById('teamFilter');
+  const sel = document.getElementById('teamFilter'); if(!sel) return;
   const teams = [...new Set(rawData.map(d => d.team).filter(Boolean))];
   sel.innerHTML = '<option value="">همه تیم‌ها</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
 }
+
 function getTableData(){
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const status = document.getElementById('statusFilter').value;
@@ -1213,9 +1422,10 @@ function getTableData(){
   }
   return data;
 }
+
 function renderTable(){
+  const tbody = document.getElementById('tableBody'); if(!tbody) return;
   const data = getTableData();
-  const tbody = document.getElementById('tableBody');
   const totalPages = Math.max(1, Math.ceil(data.length/PAGE_SIZE));
   if(currentPage > totalPages) currentPage = totalPages;
   const start = (currentPage-1)*PAGE_SIZE;
@@ -1225,6 +1435,11 @@ function renderTable(){
   } else {
     tbody.innerHTML = page.map(d => {
       const idx = rawData.indexOf(d);
+      const actions = isAdmin() ? `
+        <td>
+          <button class="btn sm" onclick="editProject(${idx})"><i class="fa-solid fa-pen"></i></button>
+          <button class="btn sm danger" onclick="deleteProject(${idx})"><i class="fa-solid fa-trash"></i></button>
+        </td>` : '<td class="admin-only"></td>';
       return `
       <tr>
         <td>${d.date}</td><td>${d.project}</td><td>${d.manager}</td><td>${d.team}</td>
@@ -1232,17 +1447,15 @@ function renderTable(){
         <td>${d.priority}</td>
         <td><div style="display:flex;align-items:center;gap:6px;"><div class="progress-bar"><div class="progress-fill" style="width:${d.progress}%"></div></div><span style="font-size:10px;color:var(--muted);">${d.progress}%</span></div></td>
         <td>${fmtMoney(d.budget)}</td><td>${fmtMoney(d.cost)}</td>
-        <td>
-          <button class="btn sm" onclick="editProject(${idx})"><i class="fa-solid fa-pen"></i></button>
-          <button class="btn sm danger" onclick="deleteProject(${idx})"><i class="fa-solid fa-trash"></i></button>
-        </td>
+        ${actions}
       </tr>`;
     }).join('');
   }
   renderPagination(totalPages);
 }
+
 function renderPagination(totalPages){
-  const el = document.getElementById('pagination');
+  const el = document.getElementById('pagination'); if(!el) return;
   if(totalPages <= 1){ el.innerHTML=''; return; }
   let html = `<button ${currentPage===1?'disabled':''} data-page="${currentPage-1}"><i class="fa-solid fa-chevron-right"></i></button>`;
   for(let i=1;i<=totalPages;i++){
@@ -1255,7 +1468,7 @@ function renderPagination(totalPages){
 }
 
 /* ============================================================
-   PROJECT: ADD/EDIT/DELETE
+   PROJECT CRUD
 ============================================================ */
 document.getElementById('addProjectBtn').addEventListener('click', () => {
   document.getElementById('projectModalTitle').textContent = 'پروژه جدید';
@@ -1304,7 +1517,6 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
   const manager = document.getElementById('pManager').value.trim();
   if(!project){ alert('نام پروژه الزامی است'); return; }
   if(!manager){ alert('مدیر پروژه الزامی است'); return; }
-
   const obj = {
     date: today(), project, manager,
     team: document.getElementById('pTeam').value,
@@ -1317,14 +1529,12 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
     end_date: document.getElementById('pEnd').value,
     assignee: document.getElementById('pAssignee').value.trim(),
     estimated_hours: Number(document.getElementById('pEstHours').value) || 0,
-    actual_hours: 0, risk:'', risk_probability:1, risk_impact:1, dependencies:''
+    actual_hours: 0
   };
   if(obj.status === 'تکمیل‌شده') obj.progress = 100;
-
   const idx = Number(document.getElementById('pEditIdx').value);
   if(idx >= 0) rawData[idx] = {...rawData[idx], ...obj};
   else rawData.push(obj);
-
   saveLocal();
   closeModal('projectModal');
   applyTimeFilter();
@@ -1332,7 +1542,7 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
 });
 
 /* ============================================================
-   TASK
+   TASK CRUD
 ============================================================ */
 document.getElementById('addTaskBtn').addEventListener('click', () => {
   document.getElementById('taskModalTitle').textContent = 'تسک جدید';
@@ -1342,12 +1552,15 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
   document.getElementById('tTeam').value = 'فرانت‌اند';
   document.getElementById('tStatus').value = 'در انتظار';
   document.getElementById('tPriority').value = 'متوسط';
+  document.getElementById('tDeadline').value = today();
   openModal('taskModal');
 });
 
 document.getElementById('saveTaskBtn').addEventListener('click', () => {
   const project = document.getElementById('tProject').value.trim();
+  const assignee = document.getElementById('tAssignee').value.trim();
   if(!project){ alert('عنوان تسک الزامی است'); return; }
+  if(!assignee){ alert('مسئول تسک الزامی است'); return; }
   const obj = {
     date: today(), project,
     manager: document.getElementById('tManager').value.trim(),
@@ -1355,11 +1568,12 @@ document.getElementById('saveTaskBtn').addEventListener('click', () => {
     status: document.getElementById('tStatus').value,
     priority: document.getElementById('tPriority').value,
     progress: Number(document.getElementById('tProgress').value) || 0,
-    assignee: document.getElementById('tAssignee').value.trim(),
+    assignee,
     estimated_hours: Number(document.getElementById('tEst').value) || 0,
     actual_hours: 0, budget:0, cost:0,
-    start_date: today(), end_date: today(),
-    risk:'', risk_probability:1, risk_impact:1, dependencies:''
+    start_date: today(),
+    end_date: today(),
+    deadline: document.getElementById('tDeadline').value
   };
   if(obj.status === 'تکمیل‌شده') obj.progress = 100;
   rawData.push(obj);
@@ -1381,6 +1595,7 @@ function editTask(idx){
   document.getElementById('tProgress').value = d.progress || 0;
   document.getElementById('tAssignee').value = d.assignee || '';
   document.getElementById('tEst').value = d.estimated_hours || 0;
+  document.getElementById('tDeadline').value = d.deadline || today();
   openModal('taskModal');
 }
 window.editTask = editTask;
@@ -1401,11 +1616,11 @@ const KANBAN_COLS = [
   {key:'در انتظار', title:'در انتظار', icon:'fa-clock', color:'#d29922'},
   {key:'در حال اجرا', title:'در حال اجرا', icon:'fa-spinner', color:'#58a6ff'},
   {key:'تأخیردار', title:'تأخیردار', icon:'fa-triangle-exclamation', color:'#f85149'},
-  {key:'تکمیل‌شده', title:'تکمیل‌شده', icon:'fa-circle-check', color:'#3fb950'},
+  {key:'تکمیل‌شده', title:'تکمیل‌شده', icon:'fa-circle-check', color:'#3fb950'}
 ];
+
 function renderKanban(){
-  const board = document.getElementById('kanbanBoard');
-  if(!board) return;
+  const board = document.getElementById('kanbanBoard'); if(!board || !isAdmin()) return;
   board.innerHTML = KANBAN_COLS.map(col => {
     const tasks = filteredData.filter(d => d.status === col.key);
     return `
@@ -1424,9 +1639,9 @@ function renderKanban(){
                 <button class="del" onclick="deleteTask(${idx})"><i class="fa-solid fa-trash"></i></button>
               </div>
               <div class="title">${t.project}</div>
-              <div class="meta"><span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span><span><i class="fa-solid fa-users"></i> ${t.team}</span></div>
+              <div class="meta"><span><i class="fa-solid fa-user"></i> ${t.assignee||'—'}</span><span><i class="fa-solid fa-users"></i> ${t.team}</span></div>
               <div class="tags">
-                <span class="tag ${t.priority==='بالا'?'high':t.priority==='متوسط'?'medium':'low'}">${t.priority}</span>
+                <span class="tag ${priorityClass(t.priority)}">${t.priority}</span>
                 <span class="tag">${t.progress}%</span>
               </div>
             </div>`;
@@ -1456,21 +1671,17 @@ function renderKanban(){
    GANTT
 ============================================================ */
 function renderGantt(){
-  const timeline = document.getElementById('ganttTimeline');
-  if(!timeline) return;
+  const timeline = document.getElementById('ganttTimeline'); if(!timeline) return;
   const months = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
   timeline.innerHTML = months.map(m => `<span>${m}</span>`).join('');
-
   const rows = document.getElementById('ganttRows');
   const data = filteredData.slice(0, 30);
-  if(!data.length){ rows.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox"></i>داده‌ای برای نمایش وجود ندارد</div>'; return; }
-
+  if(!data.length){ rows.innerHTML = '<div class="empty-state">داده‌ای نیست</div>'; return; }
   const allDates = data.flatMap(d => [new Date(d.start_date), new Date(d.end_date)]).filter(d => !isNaN(d));
-  if(!allDates.length){ rows.innerHTML = '<div class="empty-state">تاریخ شروع/پایان ثبت نشده</div>'; return; }
+  if(!allDates.length){ rows.innerHTML = '<div class="empty-state">تاریخ ثبت نشده</div>'; return; }
   const minDate = new Date(Math.min(...allDates));
   const maxDate = new Date(Math.max(...allDates));
   const totalMs = maxDate - minDate || 1;
-
   rows.innerHTML = data.map(d => {
     const start = new Date(d.start_date), end = new Date(d.end_date);
     if(isNaN(start) || isNaN(end)) return '';
@@ -1482,10 +1693,8 @@ function renderGantt(){
     else if(d.status === 'در انتظار') cls += ' pending';
     return `
       <div class="gantt-row">
-        <div class="label-col"><div class="name">${d.project}</div><div class="manager">${d.manager}</div></div>
-        <div class="timeline">
-          <div class="${cls}" style="right:${100-left-width}%;width:${width}%;" title="${d.project}: ${d.progress}%">${d.progress}%</div>
-        </div>
+        <div class="label-col"><div class="name">${d.project}</div><div class="manager">${d.assignee||d.manager||'—'}</div></div>
+        <div class="timeline"><div class="${cls}" style="right:${100-left-width}%;width:${width}%;">${d.progress}%</div></div>
       </div>`;
   }).join('');
 }
@@ -1518,8 +1727,7 @@ document.getElementById('rProb').addEventListener('input', updateRiskPreview);
 document.getElementById('rImpact').addEventListener('input', updateRiskPreview);
 
 document.getElementById('saveRiskBtn').addEventListener('click', () => {
-  const sel = document.getElementById('rProject');
-  const idx = Number(sel.value);
+  const idx = Number(document.getElementById('rProject').value);
   const risk = document.getElementById('rRisk').value.trim();
   if(!risk){ alert('عنوان ریسک الزامی است'); return; }
   if(!rawData[idx]){ alert('پروژه معتبر نیست'); return; }
@@ -1557,11 +1765,10 @@ function deleteRisk(projectIdx){
 window.deleteRisk = deleteRisk;
 
 function renderRisks(){
+  const tbody = document.getElementById('riskTableBody'); if(!tbody) return;
   const risks = filteredData.map(d => ({...d, _idx: rawData.indexOf(d)})).filter(d => d.risk);
-  const tbody = document.getElementById('riskTableBody');
-  if(!tbody) return;
   if(!risks.length){
-    tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fa-solid fa-shield"></i>ریسکی ثبت نشده است</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fa-solid fa-shield"></i>ریسکی ثبت نشده</td></tr>';
   } else {
     tbody.innerHTML = risks.map(r => {
       const score = r.risk_probability * r.risk_impact;
@@ -1579,23 +1786,27 @@ function renderRisks(){
       </tr>`;
     }).join('');
   }
-
   if(charts.riskMatrix) charts.riskMatrix.destroy();
-  const matrixData = risks.map(r => ({x:r.risk_probability, y:r.risk_impact, r:8}));
-  charts.riskMatrix = new Chart(document.getElementById('riskMatrixChart'), {
-    type:'bubble',
-    data:{datasets:[{label:'ریسک‌ها', data:matrixData, backgroundColor:'rgba(248,81,73,.5)', borderColor:'#f85149', borderWidth:1}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{min:0,max:6, title:{display:true,text:'احتمال'}, grid:{color:'#21262d'}}, y:{min:0,max:6, title:{display:true,text:'تأثیر'}, grid:{color:'#21262d'}}}}
-  });
-
+  const mEl = document.getElementById('riskMatrixChart');
+  if(mEl){
+    const matrixData = risks.map(r => ({x:r.risk_probability, y:r.risk_impact, r:8}));
+    charts.riskMatrix = new Chart(mEl, {
+      type:'bubble',
+      data:{datasets:[{label:'ریسک‌ها', data:matrixData, backgroundColor:'rgba(248,81,73,.5)', borderColor:'#f85149', borderWidth:1}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{min:0,max:6, title:{display:true,text:'احتمال'}, grid:{color:'#21262d'}}, y:{min:0,max:6, title:{display:true,text:'تأثیر'}, grid:{color:'#21262d'}}}}
+    });
+  }
   if(charts.riskPie) charts.riskPie.destroy();
-  const levels = {'بالا':0, 'متوسط':0, 'کم':0};
-  risks.forEach(r => { const l = riskLevel(r.risk_probability*r.risk_impact); levels[l==='high'?'بالا':l==='medium'?'متوسط':'کم']++; });
-  charts.riskPie = new Chart(document.getElementById('riskPieChart'), {
-    type:'doughnut',
-    data:{labels:Object.keys(levels), datasets:[{data:Object.values(levels), backgroundColor:['#f85149','#d29922','#3fb950'], borderColor:'#161b22', borderWidth:2}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
-  });
+  const pEl = document.getElementById('riskPieChart');
+  if(pEl){
+    const levels = {'بالا':0, 'متوسط':0, 'کم':0};
+    risks.forEach(r => { const l = riskLevel(r.risk_probability*r.risk_impact); levels[l==='high'?'بالا':l==='medium'?'متوسط':'کم']++; });
+    charts.riskPie = new Chart(pEl, {
+      type:'doughnut',
+      data:{labels:Object.keys(levels), datasets:[{data:Object.values(levels), backgroundColor:['#f85149','#d29922','#3fb950'], borderColor:'#161b22', borderWidth:2}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
+    });
+  }
 }
 
 /* ============================================================
@@ -1654,15 +1865,14 @@ function deleteResource(name){
 window.deleteResource = deleteResource;
 
 function renderResources(){
+  const container = document.getElementById('heatmapContainer'); if(!container) return;
   if(!resources.length){
     const names = [...new Set(rawData.map(d => d.assignee).filter(Boolean))];
     resources = names.map(n => ({name:n, role:'توسعه‌دهنده', capacity:40, hours:0}));
   }
-  const container = document.getElementById('heatmapContainer');
-  if(!container) return;
   const weeks = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
   if(!resources.length){
-    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-users"></i>منبعی ثبت نشده است</div>';
+    container.innerHTML = '<div class="empty-state">منبعی ثبت نشده</div>';
   } else {
     let html = '<table><thead><tr><th>منبع</th><th>نقش</th>' + weeks.map(w => `<th>${w}</th>`).join('') + '<th>مجموع</th><th>عملیات</th></tr></thead><tbody>';
     resources.forEach(r => {
@@ -1683,13 +1893,404 @@ function renderResources(){
     html += '</tbody></table>';
     container.innerHTML = html;
   }
-
   if(charts.workload) charts.workload.destroy();
-  charts.workload = new Chart(document.getElementById('workloadChart'), {
-    type:'bar',
-    data:{labels:resources.map(r => r.name), datasets:[{label:'ساعت تخصیص‌یافته', data:resources.map(r => r.hours || 0), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+  const wEl = document.getElementById('workloadChart');
+  if(wEl){
+    charts.workload = new Chart(wEl, {
+      type:'bar',
+      data:{labels:resources.map(r => r.name), datasets:[{label:'ساعت', data:resources.map(r => r.hours || 0), backgroundColor:'rgba(88,166,255,.6)', borderColor:'#58a6ff', borderWidth:1, borderRadius:6}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+    });
+  }
+}
+
+/* ============================================================
+   USER PAGES
+============================================================ */
+function getMyTasks(){
+  if(!currentUser) return [];
+  return rawData.filter(d => d.assignee === (currentUser.displayName || currentUser.username));
+}
+
+function renderUserPages(){
+  if(!isUser()) return;
+  renderUserDashboard();
+  renderMyTasks();
+  renderMyReports();
+  renderProfile();
+  updatePendingReportsBadge();
+}
+
+function renderUserDashboard(){
+  if(!isUser()) return;
+  const my = getMyTasks();
+  const total = my.length;
+  const done = my.filter(t => t.status === 'تکمیل‌شده').length;
+  const active = my.filter(t => t.status === 'در حال اجرا').length;
+  const urgent = my.filter(t => {
+    if(t.status === 'تکمیل‌شده' || !t.deadline) return false;
+    const d = daysUntil(t.deadline);
+    return d >= 0 && d <= 3;
+  }).length;
+
+  document.getElementById('uKpiTotal').textContent = fmtNum(total);
+  document.getElementById('uKpiDone').textContent = fmtNum(done);
+  document.getElementById('uKpiDonePct').textContent = total ? Math.round(done/total*100)+'% تکمیل' : '0%';
+  document.getElementById('uKpiActive').textContent = fmtNum(active);
+  document.getElementById('uKpiUrgent').textContent = fmtNum(urgent);
+
+  // نمودار پیشرفت هفتگی
+  if(charts.userProgress) charts.userProgress.destroy();
+  const pEl = document.getElementById('userProgressChart');
+  if(pEl){
+    // بر اساس هفته‌های اخیر - شبیه‌سازی
+    const labels = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
+    const data = labels.map(() => 20 + Math.round(Math.random()*60));
+    charts.userProgress = new Chart(pEl, {
+      type:'line',
+      data:{labels, datasets:[{label:'پیشرفت (%)', data, borderColor:'#58a6ff', backgroundColor:'rgba(88,166,255,.15)', fill:true, tension:.35, pointRadius:4}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, grid:{color:'#21262d'}}, x:{grid:{display:false}}}}
+    });
+  }
+
+  // نمودار وضعیت
+  if(charts.userStatus) charts.userStatus.destroy();
+  const sEl = document.getElementById('userStatusChart');
+  if(sEl){
+    const counts = {};
+    my.forEach(t => counts[t.status] = (counts[t.status]||0)+1);
+    charts.userStatus = new Chart(sEl, {
+      type:'doughnut',
+      data:{labels:Object.keys(counts), datasets:[{data:Object.values(counts), backgroundColor:['#d29922','#58a6ff','#f85149','#3fb950'], borderColor:'#161b22', borderWidth:2}]},
+      options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{padding:10, boxWidth:12}}}, cutout:'60%'}
+    });
+  }
+
+  // تسک‌های فوری
+  const container = document.getElementById('urgentTasksContainer');
+  if(!container) return;
+  const urgentTasks = my.filter(t => t.status !== 'تکمیل‌شده').sort((a,b) => daysUntil(a.deadline) - daysUntil(b.deadline)).slice(0,3);
+  if(!urgentTasks.length){
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-face-smile"></i>تسک فوری نداری 🎉</div>';
+  } else {
+    container.innerHTML = urgentTasks.map(t => {
+      const idx = rawData.indexOf(t);
+      const days = daysUntil(t.deadline);
+      const cls = days < 0 ? 'overdue' : days <= 3 ? 'soon' : '';
+      return `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:14px;background:var(--bg3);border-radius:11px;margin-bottom:10px;gap:12px;flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-weight:700;margin-bottom:6px;">${t.project}</div>
+            <div style="font-size:11px;color:var(--muted);display:flex;gap:12px;flex-wrap:wrap;">
+              <span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span>
+              <span><i class="fa-solid fa-users"></i> ${t.team}</span>
+              <span class="${cls}" style="color:${days<0?'var(--danger)':days<=3?'var(--warning)':'var(--muted)'};">
+                <i class="fa-solid fa-calendar"></i> ${days<0?Math.abs(days)+' روز گذشته':days===0?'امروز':days+' روز مانده'}
+              </span>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="tag ${priorityClass(t.priority)}">${t.priority}</span>
+            <span class="tag">${t.progress}%</span>
+            <button class="btn primary sm" onclick="openReportModal(${idx})"><i class="fa-solid fa-pen"></i> گزارش</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+}
+
+function renderMyTasks(){
+  if(!isUser()) return;
+  const grid = document.getElementById('myTasksGrid'); if(!grid) return;
+  const filter = document.getElementById('myTaskFilter')?.value || '';
+  let my = getMyTasks();
+  if(filter) my = my.filter(t => t.status === filter);
+
+  if(!my.length){
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><i class="fa-solid fa-inbox"></i>تسکی به شما تخصیص داده نشده</div>';
+    return;
+  }
+
+  grid.innerHTML = my.map(t => {
+    const idx = rawData.indexOf(t);
+    const days = daysUntil(t.deadline);
+    const deadlineCls = days < 0 ? 'overdue' : days <= 3 ? 'soon' : '';
+    const deadlineTxt = !t.deadline ? 'بدون مهلت'
+      : days < 0 ? Math.abs(days)+' روز تأخیر'
+      : days === 0 ? 'امروز'
+      : days+' روز مانده';
+    const repCount = reports.filter(r => r.taskIdx === idx && r.username === currentUser.username).length;
+    return `
+      <div class="task-card p-${priorityClass(t.priority)}">
+        <div class="head">
+          <div class="title">${t.project}</div>
+          <span class="badge ${statusClass(t.status)}">${t.status}</span>
+        </div>
+        <div class="meta">
+          <span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span>
+          <span><i class="fa-solid fa-users"></i> ${t.team}</span>
+          <span><i class="fa-solid fa-hourglass"></i> ${t.estimated_hours||0}h برآورد</span>
+        </div>
+        <div class="progress-row">
+          <div class="progress-bar"><div class="progress-fill" style="width:${t.progress}%"></div></div>
+          <span style="font-size:11px;color:var(--muted);min-width:35px;">${t.progress}%</span>
+        </div>
+        <div class="footer">
+          <span class="deadline ${deadlineCls}">
+            <i class="fa-solid fa-calendar"></i> ${deadlineTxt}
+          </span>
+          ${repCount ? `<span class="report-count"><i class="fa-solid fa-clipboard"></i> ${repCount} گزارش</span>` : ''}
+        </div>
+        <button class="btn primary" style="width:100%;justify-content:center;margin-top:10px;" onclick="openReportModal(${idx})">
+          <i class="fa-solid fa-pen-to-square"></i> ثبت گزارش
+        </button>
+      </div>`;
+  }).join('');
+}
+
+document.getElementById('myTaskFilter')?.addEventListener('change', renderMyTasks);
+
+/* ============================================================
+   REPORT MODAL
+============================================================ */
+let pendingFiles = [];
+
+function openReportModal(taskIdx){
+  const task = rawData[taskIdx];
+  if(!task){ alert('تسک یافت نشد'); return; }
+  document.getElementById('reportTaskIdx').value = taskIdx;
+  document.getElementById('reportTaskName').textContent = task.project;
+  document.getElementById('reportStatus').value = task.status;
+  document.getElementById('reportProgress').value = task.progress;
+  document.getElementById('reportProgressVal').textContent = task.progress + '%';
+  document.getElementById('reportHours').value = 0;
+  document.getElementById('reportText').value = '';
+  document.getElementById('reportFileList').innerHTML = '';
+  pendingFiles = [];
+  openModal('reportModal');
+}
+window.openReportModal = openReportModal;
+
+document.getElementById('reportFiles').addEventListener('change', e => {
+  const files = Array.from(e.target.files || []);
+  files.forEach(f => {
+    pendingFiles.push({name:f.name, size:f.size});
   });
+  renderReportFileList();
+  e.target.value = '';
+});
+
+function renderReportFileList(){
+  const list = document.getElementById('reportFileList');
+  list.innerHTML = pendingFiles.map((f,i) => `
+    <div class="file-chip">
+      <i class="fa-solid fa-file"></i> ${f.name}
+      <button type="button" onclick="removeReportFile(${i})">×</button>
+    </div>
+  `).join('');
+}
+function removeReportFile(i){
+  pendingFiles.splice(i, 1);
+  renderReportFileList();
+}
+window.removeReportFile = removeReportFile;
+
+document.getElementById('saveReportBtn').addEventListener('click', () => {
+  const taskIdx = Number(document.getElementById('reportTaskIdx').value);
+  const text = document.getElementById('reportText').value.trim();
+  if(!text){ alert('توضیحات گزارش الزامی است'); return; }
+  if(!rawData[taskIdx]){ alert('تسک معتبر نیست'); return; }
+
+  const newStatus = document.getElementById('reportStatus').value;
+  const newProgress = Number(document.getElementById('reportProgress').value) || 0;
+  const hours = Number(document.getElementById('reportHours').value) || 0;
+
+  const report = {
+    id: 'R-' + Date.now(),
+    taskIdx,
+    taskName: rawData[taskIdx].project,
+    username: currentUser.username,
+    displayName: currentUser.displayName || currentUser.username,
+    progress: newProgress,
+    status: newStatus,
+    hours,
+    text,
+    files: pendingFiles.map(f => f.name),
+    createdAt: new Date().toISOString(),
+    reportStatus: 'pending',
+    reviewNote: ''
+  };
+  reports.push(report);
+
+  // به‌روزرسانی تسک
+  rawData[taskIdx].progress = newProgress;
+  rawData[taskIdx].status = newStatus;
+  rawData[taskIdx].actual_hours = (rawData[taskIdx].actual_hours || 0) + hours;
+  if(newStatus === 'تکمیل‌شده') rawData[taskIdx].progress = 100;
+
+  saveLocal();
+  closeModal('reportModal');
+  renderMyTasks();
+  renderUserDashboard();
+  renderMyReports();
+  renderAll();
+  renderKanban();
+  renderGantt();
+  updatePendingReportsBadge();
+  alert('گزارش با موفقیت ثبت شد و در انتظار بررسی مدیر است ✓');
+});
+
+/* ============================================================
+   MY REPORTS
+============================================================ */
+function renderMyReports(){
+  if(!isUser()) return;
+  const timeline = document.getElementById('myReportsTimeline'); if(!timeline) return;
+  const my = reports.filter(r => r.username === currentUser.username).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  if(!my.length){
+    timeline.innerHTML = '<div class="empty-state"><i class="fa-solid fa-clipboard"></i>هنوز گزارشی ثبت نکرده‌اید</div>';
+    return;
+  }
+  timeline.innerHTML = my.map(r => `
+    <div class="report-item ${r.reportStatus}">
+      <div class="report-head">
+        <div class="task-name">${r.taskName}</div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <span class="time">${fmtDateTime(r.createdAt)}</span>
+          <span class="status-badge ${r.reportStatus}">
+            ${r.reportStatus==='approved'?'✓ تأییدشده':r.reportStatus==='rejected'?'✗ ردشده':'⏳ در انتظار'}
+          </span>
+        </div>
+      </div>
+      <div class="report-text">${r.text}</div>
+      <div class="report-meta">
+        <span><i class="fa-solid fa-chart-line"></i> پیشرفت: ${r.progress}%</span>
+        <span><i class="fa-solid fa-tag"></i> وضعیت: ${r.status}</span>
+        <span><i class="fa-solid fa-clock"></i> ${r.hours}h</span>
+      </div>
+      ${r.files?.length ? `<div class="report-files">${r.files.map(f => `<span class="file-chip"><i class="fa-solid fa-file"></i> ${f}</span>`).join('')}</div>` : ''}
+      ${r.reviewNote ? `<div style="margin-top:10px;padding:10px;background:var(--bg4);border-radius:8px;font-size:12px;color:var(--muted);"><strong>یادداشت مدیر:</strong> ${r.reviewNote}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+/* ============================================================
+   ADMIN: ALL REPORTS
+============================================================ */
+function renderAllReports(){
+  if(!isAdmin()) return;
+  const filter = document.getElementById('reportFilter')?.value || '';
+  let list = [...reports].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  if(filter) list = list.filter(r => r.reportStatus === filter);
+
+  // KPI
+  const total = reports.length;
+  const pending = reports.filter(r => r.reportStatus === 'pending').length;
+  const approved = reports.filter(r => r.reportStatus === 'approved').length;
+  const rejected = reports.filter(r => r.reportStatus === 'rejected').length;
+  document.getElementById('repKpiTotal').textContent = fmtNum(total);
+  document.getElementById('repKpiPending').textContent = fmtNum(pending);
+  document.getElementById('repKpiApproved').textContent = fmtNum(approved);
+  document.getElementById('repKpiRejected').textContent = fmtNum(rejected);
+
+  const container = document.getElementById('allReportsContainer');
+  if(!list.length){
+    container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-inbox"></i>گزارشی برای نمایش وجود ندارد</div>';
+    return;
+  }
+  container.innerHTML = list.map(r => `
+    <div class="report-item ${r.reportStatus}">
+      <div class="report-head">
+        <div>
+          <div class="task-name">${r.taskName}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;">
+            <i class="fa-solid fa-user"></i> ${r.displayName} • ${fmtDateTime(r.createdAt)}
+          </div>
+        </div>
+        <span class="status-badge ${r.reportStatus}">
+          ${r.reportStatus==='approved'?'✓ تأییدشده':r.reportStatus==='rejected'?'✗ ردشده':'⏳ در انتظار'}
+        </span>
+      </div>
+      <div class="report-text">${r.text}</div>
+      <div class="report-meta">
+        <span><i class="fa-solid fa-chart-line"></i> پیشرفت: ${r.progress}%</span>
+        <span><i class="fa-solid fa-tag"></i> وضعیت: ${r.status}</span>
+        <span><i class="fa-solid fa-clock"></i> ${r.hours}h</span>
+      </div>
+      ${r.files?.length ? `<div class="report-files">${r.files.map(f => `<span class="file-chip"><i class="fa-solid fa-file"></i> ${f}</span>`).join('')}</div>` : ''}
+      <div class="report-actions">
+        ${r.reportStatus === 'pending' ? `
+          <button class="btn success sm" onclick="reviewReport('${r.id}', 'approved')"><i class="fa-solid fa-check"></i> تأیید</button>
+          <button class="btn danger sm" onclick="reviewReport('${r.id}', 'rejected')"><i class="fa-solid fa-xmark"></i> رد</button>
+        ` : r.reportStatus === 'approved' ? `
+          <button class="btn sm" onclick="reviewReport('${r.id}', 'pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
+        ` : `
+          <button class="btn warning sm" onclick="reviewReport('${r.id}', 'pending')"><i class="fa-solid fa-rotate-right"></i> بازبینی</button>
+        `}
+      </div>
+    </div>
+  `).join('');
+}
+
+function reviewReport(reportId, newStatus){
+  const r = reports.find(x => x.id === reportId);
+  if(!r) return;
+  let note = '';
+  if(newStatus === 'rejected'){
+    note = prompt('دلیل رد گزارش:', '') || '';
+  } else if(newStatus === 'approved'){
+    note = prompt('یادداشت تأیید (اختیاری):', '') || '';
+  }
+  r.reportStatus = newStatus;
+  r.reviewNote = note;
+  saveLocal();
+  renderAllReports();
+  updatePendingReportsBadge();
+}
+window.reviewReport = reviewReport;
+
+document.getElementById('reportFilter')?.addEventListener('change', renderAllReports);
+
+function updatePendingReportsBadge(){
+  const badge = document.getElementById('pendingReportsBadge');
+  if(!badge) return;
+  const pending = reports.filter(r => r.reportStatus === 'pending').length;
+  badge.textContent = pending;
+  badge.style.display = pending ? 'inline-block' : 'none';
+}
+
+/* ============================================================
+   PROFILE
+============================================================ */
+function renderProfile(){
+  if(!currentUser) return;
+  const my = getMyTasks();
+  const myReps = reports.filter(r => r.username === currentUser.username);
+  const myApproved = myReps.filter(r => r.reportStatus === 'approved');
+  const avgProgress = my.length ? Math.round(my.reduce((s,t) => s + t.progress, 0) / my.length) : 0;
+
+  document.getElementById('statTasks').textContent = my.length;
+  document.getElementById('statReports').textContent = myReps.length;
+  document.getElementById('statApproved').textContent = myApproved.length;
+  document.getElementById('statProgress').textContent = avgProgress + '%';
+
+  const actEl = document.getElementById('recentActivity');
+  const recent = [...myReps].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
+  if(!recent.length){
+    actEl.innerHTML = '<div style="text-align:center;padding:20px;">فعالیتی ثبت نشده</div>';
+  } else {
+    actEl.innerHTML = recent.map(r => `
+      <div style="padding:8px 0;border-bottom:1px solid var(--border);">
+        <div style="color:var(--text);font-weight:600;font-size:12px;margin-bottom:4px;">${r.taskName}</div>
+        <div style="font-size:10px;">
+          ${fmtDateTime(r.createdAt)} • 
+          <span style="color:${r.reportStatus==='approved'?'var(--success)':r.reportStatus==='rejected'?'var(--danger)':'var(--warning)'};">
+            ${r.reportStatus==='approved'?'تأییدشده':r.reportStatus==='rejected'?'ردشده':'در انتظار'}
+          </span>
+        </div>
+      </div>
+    `).join('');
+  }
 }
 
 /* ============================================================
@@ -1700,6 +2301,7 @@ document.querySelectorAll('.toggle').forEach(t => {
 });
 
 document.getElementById('exportBtn').addEventListener('click', () => {
+  if(!isAdmin()) return;
   const data = getTableData();
   if(!data.length){ alert('داده‌ای برای خروجی وجود ندارد'); return; }
   const csv = Papa.unparse(data);
@@ -1717,7 +2319,8 @@ document.getElementById('exportBtn').addEventListener('click', () => {
   loadLocal();
   const session = loadSession();
   if(session){
-    showApp(session);
+    currentUser = session;
+    showApp();
   } else {
     loginScreen.classList.remove('hidden');
     document.getElementById('username').focus();
