@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سیستم مدیریت پروژه حرفه‌ای</title>
+<title>سیستم مدیریت پروژه - ورود</title>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -12,26 +12,169 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+/* ============================================================
+   ROOT VARIABLES
+============================================================ */
 :root{
   --bg:#0d1117; --bg2:#161b22; --bg3:#1f2630; --bg4:#262d38;
   --border:#2d333b; --text:#e6edf3; --muted:#8b949e;
   --primary:#58a6ff; --success:#3fb950; --warning:#d29922;
   --danger:#f85149; --purple:#bc8cff; --cyan:#39c5cf;
+  --glass-bg:rgba(255,255,255,.12);
+  --glass-border:rgba(255,255,255,.25);
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,sans-serif;}
 body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
-.app{display:flex;min-height:100vh;}
+
+/* ============================================================
+   LOGIN SCREEN
+============================================================ */
+#loginScreen{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  background:#0d1117;overflow:hidden;z-index:9999;
+  transition:opacity .4s,visibility .4s;
+}
+#loginScreen.hidden{opacity:0;visibility:hidden;pointer-events:none;}
+
+.blob{
+  position:absolute;border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;
+  filter:blur(80px);opacity:.6;animation:morph 8s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+.blob-1{width:500px;height:500px;background:#1f6feb;top:-10%;right:-5%;animation-duration:10s;}
+.blob-2{width:400px;height:400px;background:#bc8cff;bottom:-10%;left:-5%;animation-duration:12s;animation-delay:-3s;}
+.blob-3{width:300px;height:300px;background:#39c5cf;top:50%;left:30%;animation-duration:14s;animation-delay:-6s;}
+
+@keyframes morph{
+  0%{border-radius:60% 40% 30% 70% / 60% 30% 70% 40%;transform:translate(0,0) rotate(0deg);}
+  100%{border-radius:30% 60% 70% 40% / 50% 60% 30% 60%;transform:translate(30px,-40px) rotate(20deg);}
+}
+
+.login-card{
+  position:relative;z-index:10;width:100%;max-width:380px;
+  padding:40px 32px;background:var(--glass-bg);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--glass-border);border-radius:24px;
+  box-shadow:0 25px 45px rgba(0,0,0,.4);
+  transition:transform .3s ease;
+}
+.login-card.shake{animation:shake .4s ease;}
+@keyframes shake{
+  0%,100%{transform:translateX(0);}
+  20%{transform:translateX(-8px);}
+  40%{transform:translateX(8px);}
+  60%{transform:translateX(-5px);}
+  80%{transform:translateX(5px);}
+}
+
+.login-logo{
+  width:70px;height:70px;margin:0 auto 18px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(88,166,255,.3),rgba(188,140,255,.3));
+  border:1px solid rgba(88,166,255,.5);border-radius:20px;
+  font-size:32px;color:#fff;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-8px);}}
+
+.login-card h1{color:#fff;font-size:22px;text-align:center;margin-bottom:6px;}
+.login-card .subtitle{color:rgba(255,255,255,.5);font-size:12px;text-align:center;margin-bottom:28px;}
+
+.field{position:relative;margin-bottom:18px;}
+.field input{
+  width:100%;padding:14px 16px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:12px;color:#fff;font-size:14px;outline:none;
+  transition:border-color .25s,background .25s;
+  direction:ltr;text-align:left;font-family:inherit;
+}
+.field input::placeholder{color:rgba(255,255,255,.35);}
+.field input:focus{border-color:var(--primary);background:rgba(88,166,255,.08);}
+.field input:disabled{opacity:.6;}
+
+.toggle-pass{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:rgba(255,255,255,.4);
+  cursor:pointer;font-size:16px;padding:5px;
+}
+
+.btn-login{
+  width:100%;padding:14px;margin-top:8px;border:none;border-radius:12px;
+  background:var(--primary);color:#0d1117;font-size:15px;font-weight:700;
+  cursor:pointer;position:relative;overflow:hidden;
+  transition:background .25s,transform .15s;font-family:inherit;
+}
+.btn-login:hover{background:#4493f8;}
+.btn-login:active{transform:scale(.98);}
+.btn-login:disabled{opacity:.7;cursor:not-allowed;}
+
+.spinner{
+  display:inline-block;width:16px;height:16px;
+  border:2px solid rgba(13,17,23,.3);border-top-color:#0d1117;
+  border-radius:50%;animation:spin .6s linear infinite;
+  vertical-align:middle;margin-right:8px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.error-msg{
+  color:var(--danger);font-size:12px;text-align:center;
+  min-height:18px;margin-top:12px;
+}
+
+.login-hint{
+  margin-top:20px;padding:12px;background:rgba(88,166,255,.08);
+  border:1px solid rgba(88,166,255,.2);border-radius:10px;
+  font-size:11px;color:rgba(255,255,255,.6);text-align:center;
+}
+.login-hint code{background:rgba(0,0,0,.3);padding:2px 6px;border-radius:4px;color:var(--primary);}
+
+/* ============================================================
+   MAIN APP
+============================================================ */
+#app{display:none;}
+#app.show{display:flex;min-height:100vh;}
 
 /* SIDEBAR */
-.sidebar{width:230px;background:var(--bg2);border-left:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;z-index:100;transition:transform .3s;}
-.sidebar-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.sidebar{
+  width:230px;background:var(--bg2);border-left:1px solid var(--border);
+  display:flex;flex-direction:column;position:fixed;top:0;right:0;bottom:0;
+  z-index:100;transition:transform .3s;
+}
+.sidebar-header{
+  padding:20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
 .sidebar-header i{font-size:22px;color:var(--primary);}
 .sidebar-header h2{font-size:15px;font-weight:700;}
 .sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto;}
-.nav-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;margin-bottom:3px;}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;
+  border-radius:10px;color:var(--muted);cursor:pointer;
+  font-size:13px;transition:.2s;margin-bottom:3px;
+}
 .nav-item:hover{background:var(--bg3);color:var(--text);}
 .nav-item.active{background:var(--primary);color:#0d1117;font-weight:600;}
 .nav-item i{width:18px;text-align:center;font-size:14px;}
+
+.sidebar-user{
+  padding:14px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.user-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:14px;flex-shrink:0;
+}
+.user-info{flex:1;overflow:hidden;}
+.user-info .name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.user-info .role{font-size:10px;color:var(--muted);}
+.logout-btn{
+  background:transparent;border:none;color:var(--muted);cursor:pointer;
+  width:32px;height:32px;border-radius:8px;font-size:14px;transition:.2s;
+}
+.logout-btn:hover{background:rgba(248,81,73,.2);color:var(--danger);}
 
 /* MAIN */
 .main{flex:1;margin-right:230px;padding:20px;min-height:100vh;}
@@ -41,13 +184,20 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .page.active{display:block;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-.page-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.page-header{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;margin-bottom:20px;
+}
 .page-header h1{font-size:20px;display:flex;align-items:center;gap:10px;}
 .page-header h1 i{color:var(--primary);}
 .page-header .actions{display:flex;gap:8px;flex-wrap:wrap;}
 
 /* BUTTONS */
-.btn{padding:9px 16px;border-radius:9px;border:1px solid var(--border);background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:7px;transition:.2s;font-family:inherit;}
+.btn{
+  padding:9px 16px;border-radius:9px;border:1px solid var(--border);
+  background:var(--bg3);color:var(--text);cursor:pointer;font-size:13px;
+  display:inline-flex;align-items:center;gap:7px;transition:.2s;font-family:inherit;
+}
 .btn:hover{background:var(--bg4);border-color:var(--primary);}
 .btn.primary{background:var(--primary);color:#0d1117;border:none;font-weight:600;}
 .btn.primary:hover{background:#4493f8;}
@@ -61,14 +211,24 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .card h3 i{color:var(--primary);}
 
 /* TIME FILTER */
-.time-filter{display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);padding:6px;border-radius:11px;border:1px solid var(--border);width:fit-content;margin-bottom:16px;}
-.time-filter button{padding:8px 18px;border-radius:8px;border:none;background:transparent;color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;font-family:inherit;}
+.time-filter{
+  display:flex;gap:6px;flex-wrap:wrap;background:var(--bg2);
+  padding:6px;border-radius:11px;border:1px solid var(--border);
+  width:fit-content;margin-bottom:16px;
+}
+.time-filter button{
+  padding:8px 18px;border-radius:8px;border:none;background:transparent;
+  color:var(--muted);cursor:pointer;font-size:13px;transition:.2s;font-family:inherit;
+}
 .time-filter button:hover{color:var(--text);background:var(--bg3);}
 .time-filter button.active{background:var(--primary);color:#0d1117;font-weight:600;}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px;}
-.kpi{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;}
+.kpi{
+  background:var(--bg2);border:1px solid var(--border);border-radius:14px;
+  padding:18px;position:relative;overflow:hidden;transition:.25s;
+}
 .kpi:hover{transform:translateY(-3px);border-color:var(--primary);}
 .kpi::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--primary);}
 .kpi.green::before{background:var(--success);}
@@ -76,7 +236,12 @@ body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 .kpi.red::before{background:var(--danger);}
 .kpi.purple::before{background:var(--purple);}
 .kpi.cyan::before{background:var(--cyan);}
-.kpi .icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(88,166,255,.15);color:var(--primary);font-size:16px;margin-bottom:10px;}
+.kpi .icon{
+  width:38px;height:38px;border-radius:10px;display:flex;
+  align-items:center;justify-content:center;
+  background:rgba(88,166,255,.15);color:var(--primary);
+  font-size:16px;margin-bottom:10px;
+}
 .kpi.green .icon{background:rgba(63,185,80,.15);color:var(--success);}
 .kpi.orange .icon{background:rgba(210,153,34,.15);color:var(--warning);}
 .kpi.red .icon{background:rgba(248,81,73,.15);color:var(--danger);}
@@ -194,26 +359,16 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   animation:slideUp .3s;
 }
 @keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-.modal-header{
-  padding:18px 22px;border-bottom:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;
-}
+.modal-header{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .modal-header h3{font-size:16px;display:flex;align-items:center;gap:10px;}
 .modal-header h3 i{color:var(--primary);}
-.modal-close{
-  background:transparent;border:none;color:var(--muted);cursor:pointer;
-  width:32px;height:32px;border-radius:8px;font-size:16px;transition:.2s;
-}
+.modal-close{background:transparent;border:none;color:var(--muted);cursor:pointer;width:32px;height:32px;border-radius:8px;font-size:16px;transition:.2s;}
 .modal-close:hover{background:var(--bg3);color:var(--danger);}
 .modal-body{padding:20px 22px;}
-.modal-footer{
-  padding:16px 22px;border-top:1px solid var(--border);
-  display:flex;justify-content:flex-end;gap:10px;
-}
+.modal-footer{padding:16px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;}
 
 /* FORM */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.form-grid.full{grid-template-columns:1fr;}
 .form-group{display:flex;flex-direction:column;gap:6px;}
 .form-group label{font-size:12px;color:var(--muted);font-weight:600;}
 .form-group label .req{color:var(--danger);}
@@ -223,10 +378,8 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   font-family:inherit;transition:.2s;width:100%;
 }
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--primary);}
-.form-group textarea{resize:vertical;min-height:60px;}
 .form-hint{font-size:10px;color:var(--muted);}
 
-/* EMPTY */
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
 .empty-state i{font-size:36px;display:block;margin-bottom:10px;opacity:.5;}
 
@@ -251,9 +404,44 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 </head>
 <body>
 
-<div class="app">
+<!-- ============================================================
+     LOGIN SCREEN
+============================================================ -->
+<div id="loginScreen">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
-  <!-- SIDEBAR -->
+  <div class="login-card" id="loginCard">
+    <div class="login-logo"><i class="fa-solid fa-diagram-project"></i></div>
+    <h1>ورود به سیستم</h1>
+    <p class="subtitle">با حساب دامنه خود وارد شوید</p>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="field">
+        <input type="text" id="username" placeholder="نام کاربری (DOMAIN\user)" required autocomplete="username">
+      </div>
+      <div class="field">
+        <input type="password" id="password" placeholder="رمز عبور" required autocomplete="current-password">
+        <button type="button" class="toggle-pass" id="togglePass"><i class="fa-solid fa-eye"></i></button>
+      </div>
+
+      <button type="submit" class="btn-login" id="loginBtn">ورود</button>
+      <div class="error-msg" id="errorMsg"></div>
+    </form>
+
+    <div class="login-hint">
+      🎯 <strong>حالت دمو:</strong> با هر نام کاربری و رمزی وارد شوید<br>
+      یا حساب تست: <code>admin</code> / <code>admin</code>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN APP
+============================================================ -->
+<div id="app">
+
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <i class="fa-solid fa-diagram-project"></i>
@@ -268,13 +456,22 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <div class="nav-item" data-page="resources"><i class="fa-solid fa-users"></i> منابع</div>
       <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i> تنظیمات</div>
     </nav>
+    <div class="sidebar-user">
+      <div class="user-avatar" id="userAvatar">A</div>
+      <div class="user-info">
+        <div class="name" id="userName">کاربر</div>
+        <div class="role" id="userRole">مدیر سیستم</div>
+      </div>
+      <button class="logout-btn" id="logoutBtn" title="خروج">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
     <button class="menu-toggle" id="menuToggle"><i class="fa-solid fa-bars"></i></button>
 
-    <!-- ============ DASHBOARD ============ -->
+    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="page-header">
         <h1><i class="fa-solid fa-gauge"></i> داشبورد کلی</h1>
@@ -312,13 +509,11 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============ PROJECTS ============ -->
+    <!-- PROJECTS -->
     <div class="page" id="page-projects">
       <div class="page-header">
         <h1><i class="fa-solid fa-folder"></i> پروژه‌ها</h1>
-        <div class="actions">
-          <button class="btn primary" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button>
-        </div>
+        <div class="actions"><button class="btn primary" id="addProjectBtn"><i class="fa-solid fa-plus"></i> پروژه جدید</button></div>
       </div>
       <div class="card">
         <div class="table-controls">
@@ -341,7 +536,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============ KANBAN ============ -->
+    <!-- KANBAN -->
     <div class="page" id="page-kanban">
       <div class="page-header">
         <h1><i class="fa-solid fa-table-columns"></i> تخته کانبان وظایف</h1>
@@ -350,7 +545,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <div class="kanban" id="kanbanBoard"></div>
     </div>
 
-    <!-- ============ GANTT ============ -->
+    <!-- GANTT -->
     <div class="page" id="page-gantt">
       <div class="page-header"><h1><i class="fa-solid fa-chart-gantt"></i> نمودار گانت</h1></div>
       <div class="card">
@@ -366,7 +561,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============ RISKS ============ -->
+    <!-- RISKS -->
     <div class="page" id="page-risks">
       <div class="page-header">
         <h1><i class="fa-solid fa-triangle-exclamation"></i> مدیریت ریسک‌ها</h1>
@@ -386,7 +581,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============ RESOURCES ============ -->
+    <!-- RESOURCES -->
     <div class="page" id="page-resources">
       <div class="page-header">
         <h1><i class="fa-solid fa-users"></i> مدیریت منابع و ظرفیت</h1>
@@ -402,7 +597,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       </div>
     </div>
 
-    <!-- ============ SETTINGS ============ -->
+    <!-- SETTINGS -->
     <div class="page" id="page-settings">
       <div class="page-header"><h1><i class="fa-solid fa-gear"></i> تنظیمات</h1></div>
       <div class="charts-2x">
@@ -438,9 +633,7 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </main>
 </div>
 
-<!-- ================================
-     MODAL: PROJECT
-================================ -->
+<!-- MODALS -->
 <div class="modal-overlay" id="projectModal">
   <div class="modal">
     <div class="modal-header">
@@ -450,29 +643,17 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <div class="modal-body">
       <input type="hidden" id="pEditIdx" value="-1">
       <div class="form-grid">
-        <div class="form-group"><label>نام پروژه <span class="req">*</span></label><input type="text" id="pProject" placeholder="مثلاً سایت فروشگاهی"></div>
-        <div class="form-group"><label>مدیر پروژه <span class="req">*</span></label><input type="text" id="pManager" placeholder="مثلاً احمدی"></div>
-        <div class="form-group"><label>تیم</label>
-          <select id="pTeam">
-            <option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option>
-            <option>دواپس</option><option>طراحی</option><option>تست</option>
-          </select>
-        </div>
-        <div class="form-group"><label>وضعیت</label>
-          <select id="pStatus">
-            <option>در انتظار</option><option>در حال اجرا</option>
-            <option>تأخیردار</option><option>تکمیل‌شده</option>
-          </select>
-        </div>
-        <div class="form-group"><label>اولویت</label>
-          <select id="pPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select>
-        </div>
+        <div class="form-group"><label>نام پروژه <span class="req">*</span></label><input type="text" id="pProject"></div>
+        <div class="form-group"><label>مدیر پروژه <span class="req">*</span></label><input type="text" id="pManager"></div>
+        <div class="form-group"><label>تیم</label><select id="pTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select></div>
+        <div class="form-group"><label>وضعیت</label><select id="pStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select></div>
+        <div class="form-group"><label>اولویت</label><select id="pPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select></div>
         <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="pProgress" min="0" max="100" value="0"></div>
         <div class="form-group"><label>بودجه (تومان)</label><input type="number" id="pBudget" value="0"></div>
         <div class="form-group"><label>هزینه (تومان)</label><input type="number" id="pCost" value="0"></div>
         <div class="form-group"><label>تاریخ شروع</label><input type="date" id="pStart"></div>
         <div class="form-group"><label>تاریخ پایان</label><input type="date" id="pEnd"></div>
-        <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee" placeholder="نام مسئول"></div>
+        <div class="form-group"><label>مسئول</label><input type="text" id="pAssignee"></div>
         <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="pEstHours" value="0"></div>
       </div>
     </div>
@@ -483,9 +664,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
-<!-- ================================
-     MODAL: TASK
-================================ -->
 <div class="modal-overlay" id="taskModal">
   <div class="modal">
     <div class="modal-header">
@@ -495,17 +673,11 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <div class="modal-body">
       <input type="hidden" id="tEditIdx" value="-1">
       <div class="form-grid">
-        <div class="form-group"><label>عنوان تسک <span class="req">*</span></label><input type="text" id="tProject" placeholder="نام تسک/پروژه"></div>
-        <div class="form-group"><label>مدیر</label><input type="text" id="tManager" placeholder="مدیر"></div>
-        <div class="form-group"><label>تیم</label>
-          <select id="tTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select>
-        </div>
-        <div class="form-group"><label>وضعیت (ستون کانبان)</label>
-          <select id="tStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select>
-        </div>
-        <div class="form-group"><label>اولویت</label>
-          <select id="tPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select>
-        </div>
+        <div class="form-group"><label>عنوان تسک <span class="req">*</span></label><input type="text" id="tProject"></div>
+        <div class="form-group"><label>مدیر</label><input type="text" id="tManager"></div>
+        <div class="form-group"><label>تیم</label><select id="tTeam"><option>فرانت‌اند</option><option>بک‌اند</option><option>موبایل</option><option>دواپس</option><option>طراحی</option><option>تست</option></select></div>
+        <div class="form-group"><label>وضعیت</label><select id="tStatus"><option>در انتظار</option><option>در حال اجرا</option><option>تأخیردار</option><option>تکمیل‌شده</option></select></div>
+        <div class="form-group"><label>اولویت</label><select id="tPriority"><option>کم</option><option>متوسط</option><option>بالا</option></select></div>
         <div class="form-group"><label>پیشرفت (%)</label><input type="number" id="tProgress" min="0" max="100" value="0"></div>
         <div class="form-group"><label>مسئول</label><input type="text" id="tAssignee"></div>
         <div class="form-group"><label>ساعت برآوردی</label><input type="number" id="tEst" value="0"></div>
@@ -518,9 +690,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
-<!-- ================================
-     MODAL: RISK
-================================ -->
 <div class="modal-overlay" id="riskModal">
   <div class="modal">
     <div class="modal-header">
@@ -528,19 +697,12 @@ table.data-table tbody tr:hover{background:var(--bg3);}
       <button class="modal-close" data-close="riskModal"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="modal-body">
-      <input type="hidden" id="rEditIdx" value="-1">
       <div class="form-grid">
-        <div class="form-group"><label>پروژه مرتبط <span class="req">*</span></label>
-          <select id="rProject"></select>
-        </div>
-        <div class="form-group"><label>عنوان ریسک <span class="req">*</span></label><input type="text" id="rRisk" placeholder="مثلاً کمبود منابع"></div>
+        <div class="form-group"><label>پروژه مرتبط <span class="req">*</span></label><select id="rProject"></select></div>
+        <div class="form-group"><label>عنوان ریسک <span class="req">*</span></label><input type="text" id="rRisk"></div>
         <div class="form-group"><label>احتمال (۱-۵)</label><input type="number" id="rProb" min="1" max="5" value="3"></div>
         <div class="form-group"><label>تأثیر (۱-۵)</label><input type="number" id="rImpact" min="1" max="5" value="3"></div>
-        <div class="form-group full" style="grid-column:1/-1;">
-          <label>امتیاز ریسک (خودکار)</label>
-          <div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div>
-          <div class="form-hint">امتیاز = احتمال × تأثیر (۱-۵ کم، ۶-۱۴ متوسط، ۱۵-۲۵ بالا)</div>
-        </div>
+        <div class="form-group" style="grid-column:1/-1;"><label>امتیاز ریسک (خودکار)</label><div id="rScorePreview" style="padding:12px;background:var(--bg3);border-radius:9px;text-align:center;font-weight:700;font-size:18px;">9</div></div>
       </div>
     </div>
     <div class="modal-footer">
@@ -550,9 +712,6 @@ table.data-table tbody tr:hover{background:var(--bg3);}
   </div>
 </div>
 
-<!-- ================================
-     MODAL: RESOURCE
-================================ -->
 <div class="modal-overlay" id="resourceModal">
   <div class="modal">
     <div class="modal-header">
@@ -562,10 +721,8 @@ table.data-table tbody tr:hover{background:var(--bg3);}
     <div class="modal-body">
       <input type="hidden" id="resEditName" value="">
       <div class="form-grid">
-        <div class="form-group"><label>نام منبع <span class="req">*</span></label><input type="text" id="resName" placeholder="نام عضو تیم"></div>
-        <div class="form-group"><label>نقش</label>
-          <select id="resRole"><option>توسعه‌دهنده</option><option>طراح</option><option>مدیر پروژه</option><option>تستر</option><option>دواپس</option></select>
-        </div>
+        <div class="form-group"><label>نام منبع <span class="req">*</span></label><input type="text" id="resName"></div>
+        <div class="form-group"><label>نقش</label><select id="resRole"><option>توسعه‌دهنده</option><option>طراح</option><option>مدیر پروژه</option><option>تستر</option><option>دواپس</option></select></div>
         <div class="form-group"><label>ظرفیت هفتگی (ساعت)</label><input type="number" id="resCapacity" value="40"></div>
         <div class="form-group"><label>ساعت تخصیص‌یافته</label><input type="number" id="resHours" value="0"></div>
       </div>
@@ -578,6 +735,145 @@ table.data-table tbody tr:hover{background:var(--bg3);}
 </div>
 
 <script>
+/* ============================================================
+   AUTH MODULE
+============================================================ */
+
+// حالت دمو: اگر بک‌اند در دسترس نباشد، ورود محلی انجام می‌شود
+const DEMO_MODE = true; // در محیط واقعی false کنید
+
+async function loginAPI(username, password){
+  if(DEMO_MODE){
+    // شبیه‌سازی تأخیر شبکه
+    await new Promise(r => setTimeout(r, 800));
+    // در حالت دمو: هر نام کاربری/رمزی قبول است، اما admin/admin توصیه می‌شود
+    if(!username || !password) throw new Error('نام کاربری و رمز عبور الزامی است');
+    return { success:true, username, displayName: username, role:'مدیر سیستم' };
+  }
+
+  // حالت واقعی: ارسال به بک‌اند
+  const res = await fetch('/api/login', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    credentials:'include',
+    body: JSON.stringify({ username, password })
+  });
+  const data = await res.json();
+  if(!res.ok) throw new Error(data.message || 'ورود ناموفق');
+  return data;
+}
+
+async function logoutAPI(){
+  if(DEMO_MODE){
+    await new Promise(r => setTimeout(r, 300));
+    return;
+  }
+  try{
+    await fetch('/api/logout', { method:'POST', credentials:'include' });
+  }catch(e){}
+}
+
+function saveSession(user){
+  try{
+    sessionStorage.setItem('pm_user', JSON.stringify(user));
+  }catch(e){}
+}
+
+function loadSession(){
+  try{
+    const raw = sessionStorage.getItem('pm_user');
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+
+function clearSession(){
+  try{ sessionStorage.removeItem('pm_user'); }catch(e){}
+}
+
+/* ============================================================
+   LOGIN UI
+============================================================ */
+const loginScreen = document.getElementById('loginScreen');
+const loginForm   = document.getElementById('loginForm');
+const loginBtn    = document.getElementById('loginBtn');
+const errorMsg    = document.getElementById('errorMsg');
+const loginCard   = document.getElementById('loginCard');
+const passInput   = document.getElementById('password');
+const togglePass  = document.getElementById('togglePass');
+
+togglePass.addEventListener('click', () => {
+  const isPass = passInput.type === 'password';
+  passInput.type = isPass ? 'text' : 'password';
+  togglePass.innerHTML = isPass
+    ? '<i class="fa-solid fa-eye-slash"></i>'
+    : '<i class="fa-solid fa-eye"></i>';
+});
+
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errorMsg.textContent = '';
+  loginBtn.disabled = true;
+  loginBtn.innerHTML = 'در حال ورود <span class="spinner"></span>';
+
+  try{
+    const username = document.getElementById('username').value.trim();
+    const password = passInput.value;
+
+    const user = await loginAPI(username, password);
+    saveSession(user);
+    showApp(user);
+  }catch(err){
+    errorMsg.textContent = err.message || 'خطا در ورود';
+    loginCard.classList.add('shake');
+    setTimeout(() => loginCard.classList.remove('shake'), 400);
+  }finally{
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'ورود';
+  }
+});
+
+/* ============================================================
+   APP SHOW / HIDE
+============================================================ */
+const app = document.getElementById('app');
+
+function showApp(user){
+  // پر کردن اطلاعات کاربر در سایدبار
+  document.getElementById('userName').textContent = user.displayName || user.username;
+  document.getElementById('userRole').textContent = user.role || 'کاربر';
+  document.getElementById('userAvatar').textContent =
+    (user.displayName || user.username || 'U').charAt(0).toUpperCase();
+
+  loginScreen.classList.add('hidden');
+  app.classList.add('show');
+
+  // اگر داده‌ای در localStorage نیست، داده نمونه بارگذاری شود
+  if(!localStorage.getItem('pm_data')){
+    rawData = SAMPLE_DATA.map(d => ({...d}));
+    initResourcesIfEmpty();
+    saveLocal();
+  }
+
+  // رندر اولیه
+  setTimeout(() => {
+    updateTeamFilter();
+    applyTimeFilter();
+    renderAll();
+    renderKanban(); renderGantt(); renderRisks(); renderResources();
+  }, 100);
+}
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  if(!confirm('از حساب خود خارج می‌شوید؟')) return;
+  await logoutAPI();
+  clearSession();
+  app.classList.remove('show');
+  loginScreen.classList.remove('hidden');
+  // پاک کردن فرم
+  loginForm.reset();
+  errorMsg.textContent = '';
+});
+
 /* ============================================================
    SAMPLE DATA
 ============================================================ */
@@ -659,7 +955,6 @@ const today = () => new Date().toISOString().split('T')[0];
 ============================================================ */
 function openModal(id){ document.getElementById(id).classList.add('show'); }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
-
 document.querySelectorAll('[data-close]').forEach(btn => {
   btn.addEventListener('click', () => closeModal(btn.dataset.close));
 });
@@ -1011,8 +1306,7 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
   if(!manager){ alert('مدیر پروژه الزامی است'); return; }
 
   const obj = {
-    date: today(),
-    project, manager,
+    date: today(), project, manager,
     team: document.getElementById('pTeam').value,
     status: document.getElementById('pStatus').value,
     priority: document.getElementById('pPriority').value,
@@ -1038,7 +1332,7 @@ document.getElementById('saveProjectBtn').addEventListener('click', () => {
 });
 
 /* ============================================================
-   TASK: ADD/EDIT/DELETE
+   TASK
 ============================================================ */
 document.getElementById('addTaskBtn').addEventListener('click', () => {
   document.getElementById('taskModalTitle').textContent = 'تسک جدید';
@@ -1055,8 +1349,7 @@ document.getElementById('saveTaskBtn').addEventListener('click', () => {
   const project = document.getElementById('tProject').value.trim();
   if(!project){ alert('عنوان تسک الزامی است'); return; }
   const obj = {
-    date: today(),
-    project,
+    date: today(), project,
     manager: document.getElementById('tManager').value.trim(),
     team: document.getElementById('tTeam').value,
     status: document.getElementById('tStatus').value,
@@ -1112,6 +1405,7 @@ const KANBAN_COLS = [
 ];
 function renderKanban(){
   const board = document.getElementById('kanbanBoard');
+  if(!board) return;
   board.innerHTML = KANBAN_COLS.map(col => {
     const tasks = filteredData.filter(d => d.status === col.key);
     return `
@@ -1126,8 +1420,8 @@ function renderKanban(){
             return `
             <div class="kanban-card" draggable="true" data-idx="${idx}">
               <div class="card-actions">
-                <button onclick="editTask(${idx})" title="ویرایش"><i class="fa-solid fa-pen"></i></button>
-                <button class="del" onclick="deleteTask(${idx})" title="حذف"><i class="fa-solid fa-trash"></i></button>
+                <button onclick="editTask(${idx})"><i class="fa-solid fa-pen"></i></button>
+                <button class="del" onclick="deleteTask(${idx})"><i class="fa-solid fa-trash"></i></button>
               </div>
               <div class="title">${t.project}</div>
               <div class="meta"><span><i class="fa-solid fa-user"></i> ${t.manager||'—'}</span><span><i class="fa-solid fa-users"></i> ${t.team}</span></div>
@@ -1163,6 +1457,7 @@ function renderKanban(){
 ============================================================ */
 function renderGantt(){
   const timeline = document.getElementById('ganttTimeline');
+  if(!timeline) return;
   const months = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
   timeline.innerHTML = months.map(m => `<span>${m}</span>`).join('');
 
@@ -1200,7 +1495,6 @@ function renderGantt(){
 ============================================================ */
 document.getElementById('addRiskBtn').addEventListener('click', () => {
   document.getElementById('riskModalTitle').textContent = 'ریسک جدید';
-  document.getElementById('rEditIdx').value = -1;
   document.getElementById('rRisk').value = '';
   document.getElementById('rProb').value = 3;
   document.getElementById('rImpact').value = 3;
@@ -1240,7 +1534,6 @@ document.getElementById('saveRiskBtn').addEventListener('click', () => {
 function editRisk(projectIdx){
   const d = rawData[projectIdx]; if(!d) return;
   document.getElementById('riskModalTitle').textContent = 'ویرایش ریسک';
-  document.getElementById('rEditIdx').value = projectIdx;
   const sel = document.getElementById('rProject');
   sel.innerHTML = rawData.map((x,i) => `<option value="${i}" ${i===projectIdx?'selected':''}>${x.project}</option>`).join('');
   document.getElementById('rRisk').value = d.risk || '';
@@ -1264,8 +1557,9 @@ function deleteRisk(projectIdx){
 window.deleteRisk = deleteRisk;
 
 function renderRisks(){
-  const risks = filteredData.map((d,i) => ({...d, _idx: rawData.indexOf(d)})).filter(d => d.risk);
+  const risks = filteredData.map(d => ({...d, _idx: rawData.indexOf(d)})).filter(d => d.risk);
   const tbody = document.getElementById('riskTableBody');
+  if(!tbody) return;
   if(!risks.length){
     tbody.innerHTML = '<tr><td colspan="8" class="empty-state"><i class="fa-solid fa-shield"></i>ریسکی ثبت نشده است</td></tr>';
   } else {
@@ -1360,23 +1654,19 @@ function deleteResource(name){
 window.deleteResource = deleteResource;
 
 function renderResources(){
-  // اگر منابع خالی است، از داده‌ها استخراج کن
   if(!resources.length){
     const names = [...new Set(rawData.map(d => d.assignee).filter(Boolean))];
     resources = names.map(n => ({name:n, role:'توسعه‌دهنده', capacity:40, hours:0}));
   }
-
   const container = document.getElementById('heatmapContainer');
+  if(!container) return;
   const weeks = ['هفته ۱','هفته ۲','هفته ۳','هفته ۴'];
-
   if(!resources.length){
     container.innerHTML = '<div class="empty-state"><i class="fa-solid fa-users"></i>منبعی ثبت نشده است</div>';
   } else {
     let html = '<table><thead><tr><th>منبع</th><th>نقش</th>' + weeks.map(w => `<th>${w}</th>`).join('') + '<th>مجموع</th><th>عملیات</th></tr></thead><tbody>';
     resources.forEach(r => {
-      html += `<tr>
-        <td class="resource-name">${r.name}</td>
-        <td style="font-size:10px;color:var(--muted);">${r.role||'—'}</td>`;
+      html += `<tr><td class="resource-name">${r.name}</td><td style="font-size:10px;color:var(--muted);">${r.role||'—'}</td>`;
       const avg = Math.round((r.hours || 0) / 4);
       for(let i=0;i<4;i++){
         const hrs = avg + (Math.random()*16-8);
@@ -1403,15 +1693,12 @@ function renderResources(){
 }
 
 /* ============================================================
-   TOGGLES
+   TOGGLES + EXPORT
 ============================================================ */
 document.querySelectorAll('.toggle').forEach(t => {
   t.addEventListener('click', () => t.classList.toggle('on'));
 });
 
-/* ============================================================
-   EXPORT
-============================================================ */
 document.getElementById('exportBtn').addEventListener('click', () => {
   const data = getTableData();
   if(!data.length){ alert('داده‌ای برای خروجی وجود ندارد'); return; }
@@ -1427,16 +1714,14 @@ document.getElementById('exportBtn').addEventListener('click', () => {
    INIT
 ============================================================ */
 (function init(){
-  const hasLocal = loadLocal();
-  if(!hasLocal){
-    rawData = SAMPLE_DATA.map(d => ({...d}));
-    initResourcesIfEmpty();
-    saveLocal();
+  loadLocal();
+  const session = loadSession();
+  if(session){
+    showApp(session);
+  } else {
+    loginScreen.classList.remove('hidden');
+    document.getElementById('username').focus();
   }
-  updateTeamFilter();
-  applyTimeFilter();
-  renderAll();
-  renderKanban(); renderGantt(); renderRisks(); renderResources();
 })();
 </script>
 </body>
